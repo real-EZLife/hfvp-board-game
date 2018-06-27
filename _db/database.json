@@ -1,0 +1,31 @@
+[{
+    "username": "test",
+    "displayedName": "test",
+    "email": "email@email.com",
+    "pwd": "0000",
+    "role": "invite"
+}, {
+    "username": "youpayou",
+    "displayedName": "Zorlimar",
+    "email": "youri-26@hotmail.fr",
+    "pwd": "blabla",
+    "role": "admin"
+}, {
+    "username": "sdfsf",
+    "displayedname": "dsfsfs",
+    "email": "dfsfs@dsqdq.com",
+    "pwd": "blabla",
+    "role": "invite"
+}, {
+    "username": "sdfsf",
+    "displayedname": "dsfsfs",
+    "email": "dfsfs@dsqdq.com",
+    "pwd": "blabla",
+    "role": "invite"
+}, {
+    "username": "sdfsf",
+    "displayedname": "dsfsfs",
+    "email": "dfsfs@dsqdq.com",
+    "pwd": "blabla",
+    "role": "invite"
+}]
