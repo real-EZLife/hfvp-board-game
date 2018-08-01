@@ -1,0 +1,40 @@
+[{
+    "name": "Baron",
+    "img": "D:\\www\\HFVSP\/assets\/images\/9835500_640x640.jpg",
+    "desc": "Le Baron de SpellThorne",
+    "manaCost": 4,
+    "type": "creature",
+    "special": false,
+    "atk": 3,
+    "hp": 7
+},{
+    "name": "Baron",
+    "img": "D:\\www\\HFVSP\/assets\/images\/9835500_640x640.jpg",
+    "desc": "Le Baron de SpellThorne",
+    "manaCost": 4,
+    "type": "spell",
+    "special": false,
+    "atk": 3,
+    "hp": 7
+},{
+    "name": "Baron",
+    "img": "D:\\www\\HFVSP\/assets\/images\/9835500_640x640.jpg",
+    "desc": "Le Baron de SpellThorne",
+    "manaCost": 4,
+    "type": "creature",
+    "special": "shield",
+    "atk": 3,
+    "hp": 7
+},{
+    "name": "Baron",
+    "img": "D:\\www\\HFVSP\/assets\/images\/9835500_640x640.jpg",
+    "desc": "Le Baron de SpellThorne",
+    "manaCost": 4,
+    "type": "special",
+    "special": false,
+    "atk": 3,
+    "hp": 7
+}
+
+
+]

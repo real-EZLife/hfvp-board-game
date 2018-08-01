@@ -1,31 +1,29 @@
 [{
-    "username": "test",
-    "displayedName": "test",
-    "email": "email@email.com",
-    "pwd": "0000",
-    "role": "invite"
-}, {
     "username": "youpayou",
-    "displayedName": "Zorlimar",
-    "email": "youri-26@hotmail.fr",
-    "pwd": "blabla",
-    "role": "admin"
-}, {
-    "username": "sdfsf",
-    "displayedname": "dsfsfs",
-    "email": "dfsfs@dsqdq.com",
-    "pwd": "blabla",
+    "displayedUserName": "Zorlimar",
+    "userEmail": "youri-26@hotmail.fr",
+    "userPassword": "blablabla",
+    "userID": "0",
     "role": "invite"
 }, {
-    "username": "sdfsf",
-    "displayedname": "dsfsfs",
-    "email": "dfsfs@dsqdq.com",
-    "pwd": "blabla",
+    "username": "aeaea",
+    "displayedUserName": "azeaeeeee",
+    "userEmail": "sffs@dqdq.fr",
+    "userPassword": "blablabla",
+    "userID": "1",
     "role": "invite"
 }, {
-    "username": "sdfsf",
-    "displayedname": "dsfsfs",
-    "email": "dfsfs@dsqdq.com",
-    "pwd": "blabla",
+    "username": "ezaeaeaaa",
+    "displayedUserName": "fqsdqdqdv",
+    "userEmail": "dsqdqq@gsfdgfsdf.fr",
+    "userPassword": "azertyuiop",
+    "userID": "2",
+    "role": "invite"
+}, {
+    "username": "payou",
+    "displayedUserName": "Zorli",
+    "userEmail": "gdfgd@qdqd.fr",
+    "userPassword": "$2y$10$L2kOyaB9ueipj1hfJ58LWeY7bKwm9uvZzlow\/.CJW9isjPzJdpjXy",
+    "userID": "3",
     "role": "invite"
 }]
