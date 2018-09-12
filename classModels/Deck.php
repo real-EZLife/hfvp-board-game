@@ -3,7 +3,7 @@
 
 
     class Deck {
-        function Deck( Array $deckFormat ) {
+        function Deck( Array $deckFormat = [] ) {
             $this->format = $deckFormat;
         }
         private $deckList = [];
@@ -34,6 +34,9 @@
                     break;
                 }
             }
+        }
+        public function setDeckListFromArray( Array $array ) : void {
+            $this->deckList = $array;
         }
         public function removeDrawnCards( $n ) : void {
             for( $i = 0; $i < $n; $i++ ) {
@@ -95,4 +98,3 @@
     // }
     // $playerDeck = fillDeck($playerDeck, $formalDeckComp);
     // shuffle($playerDeck);
-?>

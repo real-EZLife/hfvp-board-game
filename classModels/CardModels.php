@@ -152,6 +152,11 @@
         public function getEffect() : string {
             return $this->effect;
         }
+        public function getCardInfo() : array {
+            $card = parent::getCardInfo();
+            $card = array_merge($card, array('effect' => $this->getEffect() ));
+            return $card;
+        }
     }
     /**
      * Special est une classe hérité de la class Card
@@ -199,4 +204,3 @@
             return $card;
         }
     }
-?>

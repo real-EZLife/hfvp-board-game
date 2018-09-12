@@ -1,14 +1,14 @@
 <?php
-    session_start();
 
     /** 
      * Loading Dependencies
-     * 
-    */
-    require_once(dirname(__DIR__) . '/conf/defines.php');
-    
+     */
+    // session_destroy();
     require_once(ROOT_PATH . 'game/init.php');
     require_once(ROOT_PATH . 'game/turn.php');
+    // require_once(ROOT_PATH . 'game/players/actions.php');
+    require_once(ROOT_PATH . '_db/dataBase.php');
+    $gameSavePath = ROOT_PATH . '_db/game.json';
 
     $formalDeckComp = [
         ['type' => 'creature', 'nb' => 12],
@@ -20,105 +20,113 @@
 
     $user1 = new User( 'Obnoxious', 'Zorlimar', 'youri-26@hotmail.fr', 'azertyuiop', 1, 'admin' );
     $user2 = new User( 'RainbowPoney', 'Mistyk309', 'youri-26@hotmail.fr', 'azertyuiop', 1, 'admin' );
+    
+    
+    
+    
+    // while(1) {
+        //     $theGame->startGameTurn();
+        //         $theGame->playerAStartTurn();
+        //         $theGame->playerAEndTurn();
+        //         $theGame->playerBStartTurn();
+        //         $theGame->playerBEndTurn();
+        //     writeDBFile( $gameSavePath, $theGame->exportLobby() );
+        
+        //     if($theGame->getGameTurns() >= 10) break;
+        // }
+        // var_dump($theGame);
+    $theGame;
 
-    if(!isset($_SESSION['hfvp']['gameTest'])) {
-        $_SESSION['hfvp']['gameTest'] = [];
-    }
-    if(!isset($_SESSION['hfvp']['gameTest']['whosTurn']))  {
-        $_SESSION['hfvp']['gameTest']['whosTurn'] = false;
-    }
+    if(isset($_POST)) {
+        if(isset($_POST, $_POST['newGame']) ) {
+            // var_dump(count(readDBFile($gameSavePath)));
+            if(!isset($_SESSION['hfvp']['game'], $_SESSION['hfvp']['game']['id'])) {
+                $_SESSION['hfvp']['game'] = [];
+                if( readDBFile($gameSavePath) !== null && count(readDBFile($gameSavePath)) ) {
+                    $_SESSION['hfvp']['game']['id'] = count(readDBFile($gameSavePath)) ;
+                }else {
+                    $_SESSION['hfvp']['game']['id'] = 0;
+                }
+                $player1 = createNewPlayer( $user1, $formalDeckComp );
+                $player2 = createNewPlayer( $user2, $formalDeckComp );
+                $theGame = createNewLobby($player1, $player2); 
+                
 
-        $player1 = createNewPlayer( $user1, $formalDeckComp );
-        $player2 = createNewPlayer( $user2, $formalDeckComp );
-        initPlayerVars($player1);
-        initPlayerVars($player2);
-        $theGame = createNewLobby($player1, $player2);
-        $theGame->decideWhoStarts();
+                if($theGame->getGameTurns() === 0) {
 
+                    initPlayerVars($theGame->getPlayerA());
+                    initPlayerVars($theGame->getPlayerB());
+                    $theGame->decideWhoStarts();
 
-    if($theGame->getWhosTurn() === 1) {
-        $theGame->playerAStartTurn();
-    }else {
-        $theGame->playerBStartTurn();
-    }
-    require_once(ROOT_PATH . '_db/dataBase.php');
-
-
-    $gameSavePath = ROOT_PATH . '_db/game.json';
-    writeDBFile( $gameSavePath );
-
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>In Game || Epic Assembly</title>
-</head>
-<body>
-    <?php 
-        if( isset($_POST['endTurn'])) {
-            if($theGame->getWhosTurn() === 1) {
-                $theGame->playerAEndTurn();
-                $theGame->playerBStartTurn();
-            }else {
-                $theGame->playerBEndTurn();
-                $theGame->playerAStartTurn();
+                }
+                if( readDBFile($gameSavePath) !== null && count(readDBFile($gameSavePath)) > 0) {
+                    var_dump(count(readDBFile($gameSavePath)));
+                    writeDBFile( $gameSavePath, array_merge(readDBFile($gameSavePath), [$theGame->exportLobby()]));
+                }else {
+                    writeDBFile( $gameSavePath, [$theGame->exportLobby()] );
+                }
             }
         }
+        if(isset($_SESSION['hfvp']['game'], $_SESSION['hfvp']['game']['id'])) {
+            require(ROOT_PATH . 'game/restoreDatas.php');
+            $gameID = $_SESSION['hfvp']['game']['id'];
 
 
-    ?>
-    <form action="" method="post">
-        <div class="field">
-            <input name="endTurn" type="submit" value="Fin du Tour">
-        </div>
-    </form>
-    <?php 
-        if( isset($theGame) ) {
-            echo " <h2> Player 1: " . $theGame->getPlayerA()->getPlayerName() . " </h2> ";
-            foreach($theGame->getPlayerA()->getPlayerHand() as $cards) {
-                foreach($cards as $pos => $card) {
-                    echo "<ul>";
-                    foreach($card->getCardInfo() as $key => $info) {
-                        if( $info !== false )
-                            echo "<li> $key : $info </li>";
-                    }
-                    echo "</ul>";
-                };
+            if(readDBFile($gameSavePath)[$gameID] === null) {
+             
+                session_destroy();
+                header('Location: http://localhost/www/HFVSP/');
+                
             }
-            echo " <h3> Player 1's Board: </h3>";
-            foreach($theGame->getBoard()->getSideA() as $pos => $card) {
-                echo "<ul>";
-                foreach($card->getCardInfo() as $key => $info) {
-                    if( $info !== false )
-                        echo "<li> $key : $info </li>";
+
+            $storedGameLobby = readDBFile($gameSavePath)[$gameID];
+
+            
+            
+            $theGame = restoreLobby($storedGameLobby, $user1, $user2);
+            var_dump($theGame->getGameTurns());
+            // if($theGame->getGameTurns() === 0) {
+
+            // }
+            
+            // startGameTurn($theGame);
+
+            if( isset($_POST) && $theGame->getWhosTurn() === 1 ) {
+                
+                var_dump($_POST);
+
+                if( isset($_POST['start_turn1']) ) {
+                    echo 'P1 starts';
+                    $theGame->playerAStartTurn();
                 }
-                echo "</ul>";
-            }
-            echo "<h2> Player 2: " . $theGame->getPlayerB()->getPlayerName() . "</h2>";
-            foreach($theGame->getPlayerB()->getPlayerHand() as $cards) {
-                foreach($cards as $pos => $card) {
-                    echo "<ul>";
-                    foreach($card->getCardInfo() as $key => $info) {
-                        if( $info !== false )
-                            echo "<li> $key : $info </li>";
-                    }
-                    echo "</ul>";
-                };
-            }
-            echo " <h3> Player 2's Board: </h3>";
-            foreach($theGame->getBoard()->getSideB() as $pos => $card) {
-                // var_dump($theGame->getBoard()->getSideB());
-                echo "<ul>";
-                foreach($card->getCardInfo() as $key => $info) {
-                    if( $info !== false )
-                        echo "<li> $key : $info </li>";
+                if( isset($_POST['end_turn1']) ) {
+                    echo 'P1 ends';
+                    $theGame->playerAEndTurn();
                 }
-                echo "</ul>";
+                
+                // var_dump($theGame->getWhosTurn());
+                
+                
+            }else {
+
+                
+                if( isset($_POST['start_turn2']) ) {
+                    echo 'P2 starts';
+                    $theGame->playerBStartTurn();
+                }
+                if( isset($_POST['end_turn2']) ) {
+                    echo 'P2 ends';
+                    $theGame->playerBEndTurn();
+                } 
             }
-        } 
-    ?>
-</body>
-</html>
+            // var_dump(readDBFile($gameSavePath)[$gameID]);
+            // readDBFile($gameSavePath)[$gameID] = phpToJson($theGame->exportLobby());
+
+            var_dump($_POST);
+            updateDBFile($gameID, $gameSavePath, $theGame->exportLobby());
+        }
+    }
+        // if(isset($_POST, $_POST['endturn']))
+    // }
+    
+?>

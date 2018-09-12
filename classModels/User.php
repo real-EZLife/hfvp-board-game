@@ -1,4 +1,17 @@
 <?php
+
+    /**
+     * class User 
+     * @param string $username
+     * @param string $userDisplayedName
+     * @param string $userEmail
+     * @param string $userPassword
+     * @param string $userID
+     * @param string $userRole default 'invite
+     * 
+     * 
+     * @return object User
+     */
     class User {
         function User(  String $username, String $userDisplayedName, 
                         String $userEmail, String $userPassword, Int $userID, String $userRole = 'invite' ) {
@@ -17,7 +30,7 @@
         private $userID;
         private $userRole;
 
-
+        //Getters
         public function getUsername() : String {
             return $this->username;
         }
@@ -36,6 +49,7 @@
         public function getUserRole() : String {
             return $this->userRole;
         }
+        //Setters
         public function setUsername( String $value ) : void {
             $this->username = $value;
         }
@@ -54,12 +68,17 @@
         public function setUserRole( String $value ) : void {
             $this->userRole = $value;
         }
+        /**
+         * getUserObj return an Object $user that contains all info about the User instance (except the pwd)
+         * 
+         * @return object $user
+         */
         public function getUserObj() {
             $user = new stdClass();
             $user->username = $this->getUsername();
             $user->displayedUserName = $this->getDisplayedUserName();
             $user->userEmail = $this->getUserEmail();
-            $user->userPassword = $this->getUserPassword();
+            // $user->userPassword = $this->getUserPassword();
             $user->userID = $this->getUserID();
             $user->role = $this->getUserRole();
             
@@ -67,7 +86,3 @@
             return $user;
         }
     }
-
-
-
-?>

@@ -1,4 +1,7 @@
 <?php 
+    /**
+     * class Board contains all informations about the board status
+     */
     class Board {
         function Board() {
 
@@ -21,6 +24,18 @@
         public function getSideBCount() : int {
             return count($this->boardSideB);
         }
+        public function getSideACemetery() : array {
+            return $this->boardCemeterySideA;
+        }
+        public function getSideBCemetary() : array {
+            return $this->boardCemeterySideB;
+        }
+        public function getSideACemeteryCount() : int {
+            return count($this->boardCemeterySideA);
+        }
+        public function getSideBCemeteryCount() : int {
+            return count($this->boardCemeterySideB);
+        }
         //Setters
         public function setSideA( Array $value ) : void {
             $this->boardSideA = $value;
@@ -28,18 +43,41 @@
         public function setSideB( Array $value ) : void {
             $this->boardSideB = $value;
         }
+        public function setSideACemetery( Array $value ) : void {
+            $this->boardCemeterySideA = $value;
+        }
+        public function setSideBCemetery( Array $value ) : void {
+            $this->boardCemeterySideB = $value;
+        }
         //Functions linked to players actions
+
+        /**
+         * removeCardFromSideA remove Card object from array $boardSideA, e.g. object Creature->hp is <= 0
+         * @param int $pos position of the card to remove 
+         * 
+         * @return void
+         */
         public function removeCardFromSideA( Int $pos ) : void {
-            $this->$boardCemeterySideA[] = $this->boardSideA[$pos];
-            array_splice($this->boardSideA, $pos, $pos + 1);
+            if($this->boardSideA[$pos]) {
+                $this->$boardCemeterySideA[] = $this->boardSideA[$pos];
+                array_splice($this->boardSideA, $pos, $pos + 1);
+            }else {
+                $err = "Card at position $pos doesn't exist $boardSideA";
+            }
         }
         public function removeAllCardsFromSideA() : void {
-            $this->$boardCemeterySideA[] = $this->boardSideA;
-            array_splice($this->boardSideA, 0, count($this->boardSideA));
+            if(count($this->boardSideA) > 0) {
+                $this->$boardCemeterySideA[] = $this->boardSideA;
+                array_splice($this->boardSideA, 0, count($this->boardSideA));
+            }
         }
         public function removeCardFromSideB( Int $pos ) : void {
-            $this->$boardCemeterySideB[] = $this->boardSideB[$pos];
-            array_splice($this->boardSideB, $pos, $pos + 1);
+            if($this->boardSideB[$pos]) {
+                $this->$boardCemeterySideB[] = $this->boardSideB[$pos];
+                array_splice($this->boardSideB, $pos, $pos + 1);
+            }else {
+                $err = "Card at position $pos doesn't exist in $boardSideB";
+            }
         }
         public function removeAllCardsFromSideB() : void {
             $this->$boardCemeterySideB[] = $this->boardSideB;
@@ -50,6 +88,16 @@
         }
         public function addCardToSideB( Object $card, Int $pos ) : void {
             array_splice($this->boardSideB, $pos, 0, [$card]);
+        }
+        public function exportBoard() : object {
+            $boardObject = new stdClass();
+
+            $boardObject->boardSideA = $this->getSideA();
+            $boardObject->boardSideB = $this->getSideB();
+            $boardObject->boardCemeterySideA = $this->getSideACemetery();
+            $boardObject->boardCemeterySideB = $this->getSideBCemetary();
+
+            return $boardObject;
         }
     }
 

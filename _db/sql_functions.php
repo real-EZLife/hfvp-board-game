@@ -1,4 +1,7 @@
 <?php
+/**
+*   Fonctions à refactoriser en utilisant la librairie PDO pour plus de flexibilité.
+*/
     include_once(dirname(__DIR__) . '/conf/defines.php');
     
 

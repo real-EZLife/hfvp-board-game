@@ -12,5 +12,19 @@ function writeDBFile( String $file, $data ) : void {
 function readDBFile( String $file ) {
     return jsonToPhp(file_get_contents( $file ));
 }
+function updateDBFile( Int $recordID, String $file, Object $data ) {
 
-?>
+    
+    $dbData = readDBFile( $file );
+    $updatedData = $data;
+
+    $dbData[$recordID] = $updatedData;
+
+
+    writeDBFile( $file, $dbData );
+    
+    //  
+
+    // var_dump($updatedData);
+
+}

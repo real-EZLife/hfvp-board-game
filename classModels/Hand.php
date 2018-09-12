@@ -16,15 +16,22 @@
         public function removeCard( Int $pos ) : void {
             array_splice($this->cardsList, $pos, $pos + 1);
         }
-        public function getCardCount() : int{
-            return count( $this->$cardsList );
+        public function setHandFromArray( Array $array ) : void {
+            $this->cardsList = $array;
+        }
+        public function getCardCount() : int {
+            if( $this->cardsList !== null ) {
+                return count( $this->cardsList );
+            }else {
+                return 0;
+            }
         }
         public function getCard( Int $pos ) : Object {
             $card = $this->cardsList[$pos];
             return $card;
         }
         public function getCardsList() : array {
-            $hand[] = $this->cardsList;
+            $hand = $this->cardsList;
             return $hand;
         }
     }
@@ -55,4 +62,3 @@
     // var_dump($playerHand);
     
     // var_dump($playerDeck);
-?>
