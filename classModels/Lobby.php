@@ -22,7 +22,7 @@
             * $playerA obj Player
             * $playerB obj Player
         */
-        private $whosTurn = 0;
+        private $whosTurn = 0; //enum: 0, 1, 2
         private $elapsedTurns = 0;
         private $gameStatus = '';
         private $board;
@@ -158,6 +158,15 @@
             $this->gameStatus = $value;
         }
         //Lobby related functions 
+        /**
+         * startGameTurn
+         * 
+         * 
+         * Work in progress to track the number of turns in a game
+         * Lobby->elapsedTurns += 1;
+         * 
+         * @return void
+        */
         public function startGameTurn() {
             $this->elapsedTurns += 1;
         }
@@ -172,10 +181,12 @@
         }
         //Player A related functions
         public function playerAStartTurn() : void {
+            //see startPlayerTurn in ./turn.php
             startPlayerTurn( $this->playerA );
         }
         public function playerAEndTurn() : void {
             $this->whosTurn = 2;
+            //see endPlayerTurn in ./turn.php
             endPlayerTurn( $this->playerA );
         }
         public function playerADrawCards( Int $n ) : void {

@@ -49,6 +49,7 @@
             $player->addOneTotalMana();
             //Copy $player->totalMana value in $player->currentMana
             $player->setCurrentMana( $player->getTotalMana() );
+            //finally set $player->turnStatus = true so he can start his turn
             $player->setPlayerTurnStatus( true );
         }else {
             $err = $player->getPlayerName() . ' turn has already started.';
@@ -57,7 +58,9 @@
     }
 
     function endPlayerTurn( Player $player ) {
+        //Check that $player->turnStatus is indeed true
         if( $player->getPlayerTurnStatus() === true ) {
+            //set $player->turnStatus to false ending his turn
             $player->setPlayerTurnStatus( false );
         }else {
             $err = 'Not ' . $player->getPlayerName() . ' turn.';
