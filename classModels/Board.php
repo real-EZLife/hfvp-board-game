@@ -6,21 +6,57 @@
         function Board() {
 
         }
+        /**
+         * 
+         * $boardSideA ARRAY
+         * $boardSideB ARRAY
+         * $boardCemeterySideA ARRAY
+         * $boardCemeterySideB ARRAY
+         * 
+        */
         private $boardSideA = [];
         private $boardSideB = [];
         private $boardCemeterySideA = [];
         private $boardCemeterySideB = [];
         
         //Getters
+        /**
+         * getSideA
+         * 
+         * return an array of all cards on the Player 1 side of the Board
+         * 
+         * 
+         */
         public function getSideA() : array {
             return $this->boardSideA;
         }
+        /**
+         * getSideB
+         * 
+         * return an array of all cards on the Player 1 side of the Board
+         * 
+         * 
+         */
         public function getSideB() : array {
             return $this->boardSideB;
         }
+        /**
+         * getSideACount
+         * 
+         * return an array of all cards on the Player 1 side of the Board
+         * 
+         * 
+        */
         public function getSideACount() : int {
             return count($this->boardSideA);
         }
+        /**
+         * getSideBCount
+         * 
+         * return an array of all cards on the Player 1 side of the Board
+         * 
+         * 
+        */
         public function getSideBCount() : int {
             return count($this->boardSideB);
         }

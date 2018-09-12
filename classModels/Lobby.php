@@ -1,5 +1,12 @@
 <?php
-
+    /**
+     * class Player
+     * @param object User $user
+     * @param object Deck $deck
+     * @param object Hand $hand
+     * 
+     * @return Lobby
+    */
     class Lobby {
         function Lobby ( Board $board, Player $playerA, Player $playerB ) {
             $this->board = $board;
@@ -22,45 +29,131 @@
         private $playerA;
         private $playerB;
 
-
-
-
         //Getters
-
+        /**
+         * getPlayerA
+         * 
+         * Lobby->playerA
+         * 
+         * @return Player
+        */
         public function getPlayerA() : Player {
             return $this->playerA;
         }
+        /**
+         * getPlayerB
+         * 
+         * Lobby->playerB
+         * 
+         * @return Player
+        */
         public function getPlayerB() : Player {
             return $this->playerB;
         }
+        /**
+         * getBoard
+         * 
+         * Lobby->board
+         * 
+         * @return Board
+        */
         public function getBoard() : Board {
             return $this->board;
         }
+        /**
+         * getWhosTurn
+         * 
+         * Lobby->whosTurn
+         * 
+         * @return INT
+        */
         public function getWhosTurn() : int {
             return $this->whosTurn;
         }
+        /**
+         * getTotalMana
+         * 
+         * Lobby->elapsedTurns;
+         * 
+         * @return INT
+        */
         public function getGameTurns() : int {
             return $this->elapsedTurns;
         }
+        /**
+         * getGameStatus
+         * 
+         * Lobby->gameStatus;
+         * 
+         * @return STRING
+        */
         public function getGameStatus() : string {
             return $this->gameStatus;
         }
         //Setters
+        /**
+         * setPlayerA
+         * 
+         * Lobby->playerA = $value
+         * 
+         * @param Player $value
+         * @return void
+        */
         public function setPlayerA( Player $value ) : void {
             $this->playerA = $value;
         }
+        /**
+         * setPlayerB
+         * 
+         * Lobby->playerB = $value
+         * 
+         * @param Player $value
+         * @return void
+        */
         public function setPlayerB( Player $value ) : void {
             $this->playerB = $value;
         }
+        /**
+         * setBoard
+         * 
+         * Lobby->board = $value
+         * 
+         * @param Board $value
+         * @return void
+        */
         public function setBoard( Board $value ) : void {
             $this->board = $value;
         }
+        /**
+         * setWhosTurn
+         * 
+         * Lobby->whosTurn = $value
+         * 
+         * @param INT $value
+         * @return void
+        */
         public function setWhosTurn( Int $value ) : void {
             $this->whosTurn = $value;
         }
+        /**
+         * setGameTurns
+         * 
+         * Lobby->elapsedTurns = $value
+         * 
+         * @param INT $value
+         * @return void
+        */
         public function setGameTurns( Int $value ) : void {
             $this->elapsedTurns = $value;
         }
+        /**
+         * setPlayerA
+         * 
+         * Lobby->playerA = $value
+         * 
+         * @param String $value
+         * @return void
+        */
         public function setGameStatus( String $value ) : void {
             $this->gameStatus = $value;
         }

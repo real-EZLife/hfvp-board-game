@@ -1,6 +1,7 @@
 <?php
     //PDV Maximum toujours à 20
     define('BASEHP', 20);
+    define('MAXIMUMMANA', 10);
 
     /**
      * class Player
@@ -8,17 +9,17 @@
      * @param object Deck $deck
      * @param object Hand $hand
      * 
-     * @return object Player
-     */
+     * @return Player
+    */
     class Player {
         function Player( User $user, $deck, $hand ) {
-            //Attribue un objet deck crée préalablement à la nouvelle instance de Player
+            //Attribue un objet deck, crée préalablement, à la nouvelle instance de Player
             $this->deck = $deck;
-            //Attribue un objet main crée préalablement à la nouvelle instance de Player
+            //Attribue un objet main, crée préalablement, à la nouvelle instance de Player
             $this->hand = $hand;
-            //Le nom de la nouvemme instance de Player découle de l'utilisateur
+            //Le nom de la nouvelle instance de Player découle de l'utilisateur
             $this->playername = $user->getDisplayedUserName();
-            //initialise le pool de point de vie
+            //initialise le pool de point de vie du joueur
             $this->hp = BASEHP;
         }
         /**
@@ -141,9 +142,8 @@
         }
         //Player Getters
         /**
-         * setPlayerHand
+         * getCurrentMana
          * 
-         * @param void
          * @return INT
         */
         public function getCurrentMana() : int {
@@ -152,7 +152,6 @@
         /**
          * getTotalMana
          * 
-         * @param void
          * @return INT
         */
         public function getTotalMana() : int {
@@ -161,7 +160,6 @@
         /**
          * getPlayerName
          * 
-         * @param void
          * @return STRING
         */
         public function getPlayerName() : string {
@@ -170,7 +168,6 @@
         /**
          * getHp
          * 
-         * @param void
          * @return INT
         */
         public function getHp() : int {
@@ -179,7 +176,6 @@
         /**
          * getTurns
          * 
-         * @param void
          * @return INT
         */
         public function getTurns() : int {
@@ -188,7 +184,6 @@
         /**
          * getAliveStatus
          * 
-         * @param void
          * @return BOOL
         */
         public function getAliveStatus() : bool {
@@ -197,7 +192,6 @@
         /**
          * getPlayerTurnStatus
          * 
-         * @param void
          * @return BOOL
         */
         public function getPlayerTurnStatus() : bool {
@@ -206,7 +200,6 @@
         /**
          * getFaction
          * 
-         * @param void
          * @return STRING
         */
         public function getFaction() : string {
@@ -215,7 +208,6 @@
         /**
          * getPlayerDeck
          * 
-         * @param void
          * @return ARRAY
         */
         public function getPlayerDeck() : array {
@@ -223,6 +215,7 @@
         }
         /**
          * getPlayerHandCard
+         * 
          * Return the Card object in Player->hand Hand at $pos INT
          * 
          * @param INT $pos
@@ -233,6 +226,7 @@
         }
         /**
          * getPlayerHand
+         * 
          * Return Player->hand as an Array of Card objects
          * 
          * @param INT $pos
@@ -243,6 +237,7 @@
         }
         /**
          * getHandLength
+         * 
          * Return the number of Cards in Player->hand
          * 
          * @param void
@@ -255,6 +250,7 @@
         //Every Functions That Concern the Player's Hand
         /**
          * drawCard
+         * 
          * Get $n cards from Player->Deck and append them to Player->Hand.
          * 
          * 
@@ -335,38 +331,73 @@
         public function getDeckLenght() : int {
             return $this->deck->getCardCount();
         }
+        /**
+         * takeDamage
+         * 
+         * Reduce Player->hp value by $n then run Player->checkHpPool();
+         * 
+         * @param INT $n
+         * @return void
+        */
         public function takeDamage( Int $n ) : void {
             $this->hp -= $n;
             $this->checkHpPool();
         }
+        /**
+         * CheckHpPool
+         * 
+         * Compare Player->hp to 0 and modify Player->isAlive value accordingly
+         * 
+         * @param INT $n
+         * @return void
+        */
         public function checkHpPool() : void {
             if( $this->hp <= 0 ) {
                 $this->isAlive = false;
             }
         }
+        /**
+         * addOneTotalMana
+         * 
+         * Check Player->totalMana value is lesser than MAXIMUMMANA value and update Player->totalmana accordingly
+         * 
+         * @return void
+        */
         public function addOneTotalMana() : void {
-            if( $this->totalMana < 10 ) {
+            if( $this->totalMana < MAXIMUMMANA) {
                 $this->totalMana += 1;
             }
         }
-
-
+        /**
+         * exportPlayer
+         * 
+         * Return a new object containing current Player instance properties
+         * 
+         * @return OBJECT
+        */
         public function exportPlayer() : object {
+            //create a new php object which will contain Player instance properties
             $playerObject = new stdClass();
 
+            //initialize two array, hand and deck, which will contain Player->hand and Player->deck respectively
             $hand = []; $deck = [];
 
-            if( count($this->getPlayerHand()) > 0 ) {
+            //check that Player->hand isn't empty
+            if( $this->getHandLength() > 0 ) {
+                //loop through Player->hand and extract each card it holds accordingly
                 foreach($this->getPlayerHand() as $pos => $card) {
                     $hand[$pos] = $card->getCardInfo();
                 }
             }
-            if( count($this->getPlayerDeck()) > 0 ) {
+            //check that Player->deck isn't empty
+            if( count($this->getDeckLenght()) > 0 ) {
+                //loop through Player->deck and extract each card it holds accordingly
                 foreach($this->getPlayerDeck() as $pos => $card) {
                     $deck[$pos] = $card->getCardInfo();
                 }
             }
 
+            //Create object properies for all the current Player instance
             $playerObject->playername = $this->getPlayerName();
             $playerObject->hp = $this->getHp();
             $playerObject->totalMana = $this->getTotalMana();

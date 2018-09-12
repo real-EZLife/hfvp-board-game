@@ -34,17 +34,25 @@
     }
 
     function startPlayerTurn( Player $player ) {
+        //Check that $player->turnStatus is indeed false
         if( $player->getPlayerTurnStatus() === false ) {
+            //Add 1 to $player->turns
             $player->setTurns( $player->getTurns() + 1 );
+            //Check $player->turns value
             if( $player->getTurns() === 1 ) {
+                //On his first turn $player draw his initial amount of card from $player->deck
                 $player->initialDraw();
             }else {
+                //$player starts his turn by drawing 1 card from $player->deck
                 $player->drawCard(1);
             }
             $player->addOneTotalMana();
+            //Copy $player->totalMana value in $player->currentMana
             $player->setCurrentMana( $player->getTotalMana() );
             $player->setPlayerTurnStatus( true );
         }else {
+            $err = $player->getPlayerName() . ' turn has already started.';
+            print_r($err);
         }
     }
 
@@ -53,5 +61,6 @@
             $player->setPlayerTurnStatus( false );
         }else {
             $err = 'Not ' . $player->getPlayerName() . ' turn.';
+            print_r($err);
         }
     }
