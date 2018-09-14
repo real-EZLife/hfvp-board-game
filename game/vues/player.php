@@ -15,7 +15,7 @@
             Nom de Joueur:
             <? $player->getPlayerName() ?>
         </div>
-        <ul class "hero--stats">
+        <ul class="hero--stats">
             <li>Nombre de cartes en main: 
                 <? $hero->getHandLength() ?>
             </li>

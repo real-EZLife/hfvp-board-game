@@ -7,26 +7,39 @@
      * 
      * @return Lobby
     */
+    /**
+     * @property Board
+    */
     class Lobby {
         function Lobby ( Board $board, Player $playerA, Player $playerB ) {
+            
             $this->board = $board;
             $this->playerA = $playerA;
             $this->playerB = $playerB;
         }
-        
         /**
-            * $whosTurn INT 0 if not initialized, 1 if it's playerA turn or 2 if it's playerB turn
-            * $elapsedTurns INT
-            * $gameStatus STRING
-            * $board obj Board
-            * $playerA obj Player
-            * $playerB obj Player
+         * @var int
         */
         private $whosTurn = 0; //enum: 0, 1, 2
+        /**
+         * @var int
+        */
         private $elapsedTurns = 0;
+        /**
+         * @var string
+        */
         private $gameStatus = '';
+        /**
+         * @var Board
+        */
         private $board;
+        /**
+         * @var Player
+        */
         private $playerA;
+        /**
+         * @var Player
+        */
         private $playerB;
 
         //Getters
@@ -65,7 +78,7 @@
          * 
          * Lobby->whosTurn
          * 
-         * @return INT
+         * @return int
         */
         public function getWhosTurn() : int {
             return $this->whosTurn;
@@ -75,7 +88,7 @@
          * 
          * Lobby->elapsedTurns;
          * 
-         * @return INT
+         * @return int
         */
         public function getGameTurns() : int {
             return $this->elapsedTurns;
@@ -85,7 +98,7 @@
          * 
          * Lobby->gameStatus;
          * 
-         * @return STRING
+         * @return string
         */
         public function getGameStatus() : string {
             return $this->gameStatus;
@@ -129,7 +142,7 @@
          * 
          * Lobby->whosTurn = $value
          * 
-         * @param INT $value
+         * @param int $value
          * @return void
         */
         public function setWhosTurn( Int $value ) : void {
@@ -140,7 +153,7 @@
          * 
          * Lobby->elapsedTurns = $value
          * 
-         * @param INT $value
+         * @param int $value
          * @return void
         */
         public function setGameTurns( Int $value ) : void {
@@ -190,17 +203,21 @@
             endPlayerTurn( $this->playerA );
         }
         public function playerADrawCards( Int $n ) : void {
+            
+            //Check Player A $turnStatus
             if( $this->playerA->getPlayerTurnStatus() === true ) {
+                //
                 $this->playerA->drawCard($n);
             }
+
         }
         public function playerAPlayCard( Int $pos ) : void {
             //Check Player A $turnStatus
             if( $this->playerA->getPlayerTurnStatus() === true ) {
                 $card = $this->playerA->getPlayerHandCard( $pos );
                 if( $card->getManaCost() <= $this->playerA->getCurrentMana() ) {
-                    $pos = $this->board->getSideACount();
-                    $this->board->addCardToSideA( $card, $pos );
+                    $boardPos = $this->board->getSideACount();
+                    $this->board->addCardToSideA( $card, $boardPos );
                     $this->playerA->removeHandCard( $pos );
                 }
             }
@@ -227,10 +244,10 @@
         public function playerBPlayCard( Int $pos ) : void {
             if( $this->playerB->getPlayerTurnStatus() === true ) {
                 $card = $this->playerB->getPlayerHandCard( $pos );
-                // var_dump($card);
+                //Check the current mana available
                 if( $card->getManaCost() <= $this->playerB->getCurrentMana() ) {
-                    $pos = $this->board->getSideACount();
-                    $this->board->addCardToSideB( $card, $pos );
+                    $boardPos = $this->board->getSideACount();
+                    $this->board->addCardToSideB( $card, $boardPos );
                     $this->playerB->removeHandCard( $pos );
                 }
             }
@@ -238,7 +255,6 @@
         public function playerBCardAttack( Object $player ) {
             if( $this->playerB->getPlayerTurnStatus() === true ) {
             
-
             }
         }
         public function playerWin( Object $player ) {
@@ -247,7 +263,11 @@
         public function playerLose( Object $player ) {
             
         }
-        public function exportLobby() {
+        public function exportLobby() : object {
+            
+            /**
+             * @property bool
+             */
             $lobbyObject = new stdClass();
 
 

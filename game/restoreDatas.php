@@ -5,18 +5,7 @@
     require_once(ROOT_PATH . 'classModels/Board.php');
     require_once(ROOT_PATH . 'classModels/Lobby.php');
 
-
-    function restoreBoard( Object $board ) : Board {
-        $restoredBoard = new Board();
-
-        $restoredBoard->setSideA($board->boardSideA);
-        $restoredBoard->setSideB($board->boardSideB);
-        $restoredBoard->setSideACemetery($board->boardCemeterySideA);
-        $restoredBoard->setSideBCemetery($board->boardCemeterySideB);
-
-        return $restoredBoard;
-    }
-    function restoreCardList( String $type, Array $cardList ) : Object {
+    function restoreCardList( String $type, Array $cardList ) {
         
         $type = strtolower($type);
         
@@ -55,11 +44,29 @@
                 return $hand;
 
                 break;
+            case 'board':
+
+                $board = $restoredCardList;
+
+                return $board;
+
+                break;
             default: 
 
-                print_r( 'invalid cardList $type passed' );
+                print_r( 'invalid cardList param $type passed' );
                 break;
         }
+    }
+    function restoreBoard( Object $board ) : Board {
+        
+        $restoredBoard = new Board();
+
+        $restoredBoard->setSideA(restoreCardList('board', $board->boardSideA));
+        $restoredBoard->setSideB(restoreCardList('board', $board->boardSideB));
+        $restoredBoard->setSideACemetery(restoreCardList('board', $board->boardCemeterySideA));
+        $restoredBoard->setSideBCemetery(restoreCardList('board', $board->boardCemeterySideB));
+
+        return $restoredBoard;
     }
     function restorePlayer ( Object $user, Object $player ) : Player {
         

@@ -9,7 +9,6 @@
     // require_once(ROOT_PATH . 'game/players/actions.php');
     require_once(ROOT_PATH . '_db/dataBase.php');
     $gameSavePath = ROOT_PATH . '_db/game.json';
-
     $formalDeckComp = [
         ['type' => 'creature', 'nb' => 12],
         ['type' => 'spell', 'nb' => 3],
@@ -75,7 +74,7 @@
             if(readDBFile($gameSavePath)[$gameID] === null) {
              
                 session_destroy();
-                header('Location: http://localhost/www/HFVSP/');
+                header('Location: ./');
                 
             }
 
@@ -93,7 +92,7 @@
 
             if( isset($_POST) && $theGame->getWhosTurn() === 1 ) {
                 
-                var_dump($_POST);
+                // var_dump($_POST);
 
                 if( isset($_POST['start_turn1']) ) {
                     echo 'P1 starts';
@@ -102,6 +101,15 @@
                 if( isset($_POST['end_turn1']) ) {
                     echo 'P1 ends';
                     $theGame->playerAEndTurn();
+                }
+                if( isset($_POST['play_card']) ) {
+                    if(isset($_POST['selected_card']) && is_numeric($_POST['selected_card'])) {
+                        
+                        echo 'P1 play card';
+                        $theGame->playerAPlayCard( stringToNumber($_POST['selected_card']) );
+
+                    }
+                    // $theGame->playerAEndTurn();
                 }
                 
                 // var_dump($theGame->getWhosTurn());
@@ -117,12 +125,22 @@
                 if( isset($_POST['end_turn2']) ) {
                     echo 'P2 ends';
                     $theGame->playerBEndTurn();
-                } 
+                }
+                if( isset($_POST['play_card']) ) {
+                    if(isset($_POST['selected_card']) && is_numeric($_POST['selected_card'])) {
+                        
+                        echo 'P2 play card';
+                        $theGame->playerBPlayCard( stringToNumber($_POST['selected_card']) );
+
+                    }
+                    // $theGame->playerAEndTurn();
+                }
             }
             // var_dump(readDBFile($gameSavePath)[$gameID]);
             // readDBFile($gameSavePath)[$gameID] = phpToJson($theGame->exportLobby());
 
             var_dump($_POST);
+            var_dump($theGame->getBoard());
             updateDBFile($gameID, $gameSavePath, $theGame->exportLobby());
         }
     }

@@ -2,11 +2,10 @@
 
     session_start();
 
-    require_once(dirname(__DIR__) . '/HFVSP/conf/defines.php');
+    require_once(dirname(__DIR__) . '/hfvp-board-game/conf/defines.php');
+    require_once(ROOT_PATH . 'helpers/conversion.php');
 
     require('game/game.php');
-
-    // var_dump($theGame);
 ?>
 
 
@@ -51,13 +50,23 @@
                                 <input type='submit' name='start_turn1' value='Début du tour'>
                             </form>
                     <?php else : ?>
+                        <?php if(count($theGame->getPlayerA()->getPlayerHand()) > 0) : ?>
                             <form action='' method='post'>
-                                <select name='selected_card'></select>
+                                <select name='selected_card'>
+                                    <?php foreach($theGame->getPlayerA()->getPlayerHand() as $pos => $card) : ?>
+                                        <option value=<?php echo $pos ?> >
+                                            <?php echo $card->getName() ?>
+                                        </option>
+                                    <?php endforeach ?>
+                                </select>
                                 <input type='submit' name='play_card' value='Jouer Carte'>
-                            </form>    
-                            <form action='' method='post'>
-                                <input type='submit' name='end_turn1' value='Fin du tour'>
                             </form>
+                        <?php else : ?>
+                            <span></span>
+                        <?php endif ?>
+                        <form action='' method='post'>
+                            <input type='submit' name='end_turn1' value='Fin du tour'>
+                        </form>
                     <?php endif ?>
                     
                 <?php else : ?>
@@ -85,10 +94,20 @@
                                 <input type='submit' name='start_turn2' value='Début du tour'>
                             </form>
                     <?php else : ?>
-                            <form action='' method='post'>
-                                <select name='selected_card'></select>
-                                <input type='submit' name='play_card' value='Jouer Carte'>
-                            </form>    
+                            <?php if(count($theGame->getPlayerB()->getPlayerHand()) > 0) : ?>
+                                <form action='' method='post'>
+                                    <select name='selected_card'>
+                                        <?php foreach($theGame->getPlayerB()->getPlayerHand() as $pos => $card) : ?>
+                                            <option value=<?php echo $pos ?> >
+                                                <?php echo $card->getName() ?>
+                                            </option>
+                                        <?php endforeach ?>
+                                    </select>
+                                    <input type='submit' name='play_card' value='Jouer Carte'>
+                                </form>    
+                            <?php else : ?>
+                                <span></span>
+                            <?php endif ?>
                             <form action='' method='post'>
                                 <input type='submit' name='end_turn2' value='Fin du tour'>
                             </form>

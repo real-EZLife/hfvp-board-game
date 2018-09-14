@@ -1,6 +1,7 @@
 <?php
     //PDV Maximum toujours à 20
     define('BASEHP', 20);
+    //PDV Maximum toujours à 20
     define('MAXIMUMMANA', 10);
 
     /**
@@ -12,7 +13,7 @@
      * @return Player
     */
     class Player {
-        function Player( User $user, $deck, $hand ) {
+        function Player( User $user, Deck $deck, Hand $hand ) {
             //Attribue un objet deck, crée préalablement, à la nouvelle instance de Player
             $this->deck = $deck;
             //Attribue un objet main, crée préalablement, à la nouvelle instance de Player
@@ -23,32 +24,50 @@
             $this->hp = BASEHP;
         }
         /**
-         * $playername INT 
-         * $hp INT
-         * $totalMana INT
-         * $currentMana INT
-         * $turns INT
-         * $isAlive BOOL
-         * $isPlayerTurn BOOL 
-         * $faction STRING
-         * $hand obj Hand
-         * $deck obj Deck
+         * @var string
         */
         private $playername = '';
+        /**
+         * @var int
+        */
         private $hp;
+        /**
+         * @var int
+        */
         private $totalMana = 0;
+        /**
+         * @var int
+        */
         private $currentMana = 0;
+        /**
+         * @var int
+        */
         private $turns = 0;
+        /**
+         * @var bool
+        */
         private $isAlive = true;
+        /**
+         * @var bool
+        */
         private $isPlayerTurn = false;
+        /**
+         * @var string
+        */
         private $faction = 'not defined';
+        /**
+         * @var Card[]
+        */
         private $hand;
+        /**
+         * @var Card[]
+        */
         private $deck;
         //Player Setters
         /**
          * setCurrentMana 
          * 
-         * @param INT
+         * @param int
          * @return void
         */
         public function setCurrentMana( Int $value ) : void {
@@ -57,7 +76,7 @@
         /**
          * setTotalMana
          * 
-         * @param INT
+         * @param int
          * @return void
         */
         public function setTotalMana( Int $value ) : void {
@@ -66,7 +85,7 @@
         /**
          * setPlayerName
          * 
-         * @param STRING
+         * @param string
          * @return void
         */
         public function setPlayerName( String $value ) : void {
@@ -75,7 +94,7 @@
         /**
          * setHp
          * 
-         * @param INT
+         * @param int
          * @return void
         */
         public function setHp( Int $value ) : void {
@@ -89,7 +108,7 @@
         /**
          * setTurns
          * 
-         * @param INT
+         * @param int
          * @return void
         */
         public function setTurns( Int $value ) : void {
@@ -98,7 +117,7 @@
         /**
          * setAliveStatus
          * 
-         * @param BOOL
+         * @param bool
          * @return void
         */
         public function setAliveStatus( Bool $value ) : void {
@@ -107,7 +126,7 @@
         /**
          * setPlayerTurnStatus
          * 
-         * @param BOOL
+         * @param bool
          * @return void
         */
         public function setPlayerTurnStatus( Bool $value ) : void {
@@ -116,7 +135,7 @@
         /**
          * setFaction
          * 
-         * @param STRING
+         * @param string
          * @return void
         */
         public function setFaction( String $value ) : void {
@@ -144,7 +163,9 @@
         /**
          * getCurrentMana
          * 
-         * @return INT
+         * return Player->currentMana
+         * 
+         * @return int
         */
         public function getCurrentMana() : int {
             return $this->currentMana;
@@ -152,7 +173,9 @@
         /**
          * getTotalMana
          * 
-         * @return INT
+         * return Player->totalMana
+         * 
+         * @return int
         */
         public function getTotalMana() : int {
             return $this->totalMana;
@@ -160,7 +183,7 @@
         /**
          * getPlayerName
          * 
-         * @return STRING
+         * @return string
         */
         public function getPlayerName() : string {
             return $this->playername;
@@ -168,7 +191,7 @@
         /**
          * getHp
          * 
-         * @return INT
+         * @return int
         */
         public function getHp() : int {
             return $this->hp;
@@ -176,7 +199,7 @@
         /**
          * getTurns
          * 
-         * @return INT
+         * @return int
         */
         public function getTurns() : int {
             return $this->turns;
@@ -184,7 +207,7 @@
         /**
          * getAliveStatus
          * 
-         * @return BOOL
+         * @return bool
         */
         public function getAliveStatus() : bool {
             return $this->isAlive;
@@ -192,7 +215,7 @@
         /**
          * getPlayerTurnStatus
          * 
-         * @return BOOL
+         * @return bool
         */
         public function getPlayerTurnStatus() : bool {
             return $this->isPlayerTurn;
@@ -200,7 +223,7 @@
         /**
          * getFaction
          * 
-         * @return STRING
+         * @return string
         */
         public function getFaction() : string {
             return $this->faction;
@@ -208,7 +231,7 @@
         /**
          * getPlayerDeck
          * 
-         * @return ARRAY
+         * @return array
         */
         public function getPlayerDeck() : array {
             return $this->deck->getDeckList();
@@ -216,9 +239,9 @@
         /**
          * getPlayerHandCard
          * 
-         * Return the Card object in Player->hand Hand at $pos INT
+         * Return the Card object in Player->hand Hand at $pos int
          * 
-         * @param INT $pos
+         * @param int $pos
          * @return Card
         */
         public function getPlayerHandCard( Int $pos ) : Card {
@@ -227,10 +250,10 @@
         /**
          * getPlayerHand
          * 
-         * Return Player->hand as an Array of Card objects
+         * Return Player->hand as an array of Card objects
          * 
-         * @param INT $pos
-         * @return Array of Card
+         * @param int $pos
+         * @return array of Card
         */
         public function getPlayerHand() : array {
             return $this->hand->getCardsList();
@@ -241,20 +264,21 @@
          * Return the number of Cards in Player->hand
          * 
          * @param void
-         * @return INT
+         * @return int
         */
         public function getHandLength() : int {
             return $this->hand->getCardCount();
         }
         
         //Every Functions That Concern the Player's Hand
+
         /**
          * drawCard
          * 
-         * Get $n cards from Player->Deck and append them to Player->Hand.
+         * Get $n cards from Player->Deck and add them to Player->Hand.
          * 
          * 
-         * @param INT $n number of cards to draw from Player->deck 
+         * @param int $n number of cards to draw from Player->deck 
          * @return void
         */
         public function drawCard( $n ) : void {
@@ -302,7 +326,7 @@
          * 
          * Remove one card from the Player->hand at position $pos
          * 
-         * @param INT $pos 
+         * @param int $pos 
          * @return void
         */
         public function removeHandCard( Int $pos ) : void {
@@ -326,7 +350,7 @@
          * 
          * Return the current number of Cards in Player->deck
          * 
-         * @return INT
+         * @return int
         */
         public function getDeckLenght() : int {
             return $this->deck->getCardCount();
@@ -336,7 +360,7 @@
          * 
          * Reduce Player->hp value by $n then run Player->checkHpPool();
          * 
-         * @param INT $n
+         * @param int $n
          * @return void
         */
         public function takeDamage( Int $n ) : void {
@@ -348,7 +372,7 @@
          * 
          * Compare Player->hp to 0 and modify Player->isAlive value accordingly
          * 
-         * @param INT $n
+         * @param int $n
          * @return void
         */
         public function checkHpPool() : void {
@@ -373,7 +397,7 @@
          * 
          * Return a new object containing current Player instance properties
          * 
-         * @return OBJECT
+         * @return object
         */
         public function exportPlayer() : object {
             //create a new php object which will contain Player instance properties
@@ -390,7 +414,7 @@
                 }
             }
             //check that Player->deck isn't empty
-            if( count($this->getDeckLenght()) > 0 ) {
+            if( $this->getDeckLenght() > 0 ) {
                 //loop through Player->deck and extract each card it holds accordingly
                 foreach($this->getPlayerDeck() as $pos => $card) {
                     $deck[$pos] = $card->getCardInfo();
@@ -398,6 +422,9 @@
             }
 
             //Create object properies for all the current Player instance
+            /**
+             * @var string
+             */
             $playerObject->playername = $this->getPlayerName();
             $playerObject->hp = $this->getHp();
             $playerObject->totalMana = $this->getTotalMana();

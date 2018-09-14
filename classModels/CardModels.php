@@ -1,15 +1,7 @@
 <?php
     /**
      * Card est une classe permettant de créer un modèle de Carte
-     * @param STRING $cardDesc
-     * @param STRING $cardName
-     * @param STRING $cardDesc
-     * @param STRING $cardImg
-     * @param INT $cardManaCost
-     * @param STRING $cardType
-     * @param MIXED $cardSpecial, false if not set string otherwise
-     * @return Card
-     */
+    */
     class Card {
         function Card(  String $cardName = 'defaultTitle', String $cardImg = './defaultImg.jpeg', String $cardDesc = 'defaultDesc', Int $cardManaCost = 0, 
                         String $cardType = '', $cardSpecial = false) {
@@ -22,64 +14,80 @@
             $this->special = $cardSpecial;
         }
         /**
-            * $cardName STRING
-            * $cardDesc STRING
-            * $cardImg STRING
-            * $cardManaCost INT
-            * $cardType STRING
-            * $cardSpecial MIXED, false if not set string otherwise
+         * Holds the card name
+         * @var string
         */
         private $name;
+        /**
+         * Holds the card image path
+         * @var string
+        */
         private $img;
+        /**
+         * Holds the card description
+         * @var string
+        */
         private $desc;
+        /**
+         * Holds the card mana cost
+         * @var int
+        */
         private $manaCost;
+        /**
+         * Holds the card type
+         * @var string
+        */
         private $type;
+        /**
+         * Holds the card special type
+         * @var string
+        */
         private $special;
         /**
          * getSpecial
          * 
          * @return mixed false, if not set string otherwise
-         */
+        */
         public function getSpecial() {
             return $this->special;
         }
         /**
          * getName
          * 
-         * @return STRING
-         */
+         * @return int
+        */
         public function getName() : string {
             return $this->name;
         }
         /**
          * getImg
          * 
-         * @return STRING
-         */
+         * @return int
+        */
         public function getImg() : string {
             return $this->img;
         }
         /**
          * getDesc
          * 
-         * @return STRING
-         */
+         * @return int
+        */
         public function getDesc() : string {
             return $this->desc;
         }
         /**
          * getManaCost
          * 
-         * @return INT
-         */
+         * @return int
+        */
         public function getManaCost() : int {
             return $this->manaCost;
         }
         /**
          * getType
          * 
-         * @return STRING
-         */
+         * @return int
+        */
         public function getType() : string {
             return $this->type;
         }
@@ -88,8 +96,8 @@
          * 
          * return all the Card properties as an assoc. array
          * 
-         * @param STRING
-         * @return ARRAY
+         * @param int
+         * @return array
         */
         public function getCardInfo() : array {
             $card = [
@@ -107,41 +115,41 @@
          * 
          * @param mixed pass a string with special keyword or false
          * @return void
-         */
+        */
         public function setSpecial($value) : void {
             $this->special = $value;
         }
         /**
          * setName
          * 
-         * @param STRING
+         * @param int
          * @return void
-         */
+        */
         public function setName(string $value) : void {
             $this->name = $value;
         }
         /**
          * setImg
          * 
-         * @param STRING
+         * @param int
          * @return void
-         */
+        */
         public function setImg(string $value) : void {
             $this->img = $value;
         }
         /**
          * setDesc
          * 
-         * @param STRING
+         * @param int
          * @return void
-         */
+        */
         public function setDesc(string $value) : void {
             $this->desc = $value;
         }
         /**
          * setManaCost
          * 
-         * @param INT
+         * @param int
          * @return void
         */
         public function setManaCost(int $value) : void {
@@ -150,7 +158,7 @@
         /**
          * setType
          * 
-         * @param STRING
+         * @param int
          * @return void
         */
         public function setType(string $value) : void {
@@ -161,10 +169,10 @@
     /**
      * Creature est une classe hérité de la class Card
      * 
-     * @param INT $cardAtk
-     * @param INT $cardHp
+     * @param int $cardAtk
+     * @param int $cardHp
      * @return Creature
-     */
+    */
     class Creature extends Card {
         function Creature(  String $cardName = 'defaultTitle', String $cardImg = './defaultImg.jpeg', String $cardDesc = 'defaultDesc', 
                             Int $cardManaCost = 0, $cardSpecial = false, Int $cardAtk = 0, Int $cardHp = 0  ) {
@@ -174,12 +182,22 @@
             $this->hp = $cardHp;
         }
         /**
-            * $atk INT
-            * $hp INT
-            * $canAttack BOOL
-         */
+         * Holds card atk value
+         * 
+         * @var int
+        */
         private $atk;
+        /**
+         * Holds card hp value
+         * 
+         * @var int
+        */
         private $hp;
+        /**
+         * Holds card attack status
+         * 
+         * @var bool
+        */
         private $canAttack = false;
         /**
          * changeAttackState
@@ -195,7 +213,7 @@
         /**
          * setAtk
          * 
-         * @param INT
+         * @param int
          * @return void
         */
         public function setAtk( int $value) : void {
@@ -204,7 +222,7 @@
         /**
          * setHp
          * 
-         * @param INT
+         * @param int
          * @return void
         */
         public function setHp( int $value) : void {
@@ -213,7 +231,7 @@
         /**
          * setHp
          * 
-         * @param BOOL
+         * @param bool
          * @return void
         */
         public function setCanAttack( bool $value) : void {
@@ -223,7 +241,7 @@
         /**
          * getAtk
          * 
-         * @return INT
+         * @return int
         */
         public function getAtk() : int {
             return $this->atk;
@@ -231,7 +249,7 @@
         /**
          * getHp
          * 
-         * @return INT
+         * @return int
         */
         public function getHp() : int {
             return $this->hp;
@@ -239,7 +257,7 @@
         /**
          * getCanAttack
          * 
-         * @return BOOL
+         * @return bool
         */
         public function getCanAttack() : bool {
             return $this->canAttack;
@@ -249,11 +267,11 @@
          * 
          * return all the Creature properties as an assoc. array
          * 
-         * @param STRING
-         * @return ARRAY
+         * @param int
+         * @return array
         */
         public function getCardInfo() : array {
-            //extends Card->getCardInfo() function adding atk and hp identifier to the array
+            //extends Card->getCardInfo() function adding atk and hp identifiers to the array
             $card = parent::getCardInfo();
             $card = array_merge($card, array('atk' => $this->getAtk(), 'hp' => $this->getHp() ));
             return $card;
@@ -261,7 +279,7 @@
     }
     /**
      * Shield est une classe hérité de la class Creature
-     * @param STRING $cardSpecial = 'shield'
+     * @param int $cardSpecial = 'shield'
      * @return Shield
      */
     class Shield extends Creature {
@@ -272,7 +290,7 @@
     }
     /**
      * Spell est une classe hérité de la class Card
-     * @param STRING $cardEffect
+     * @param int $cardEffect
      * @return Spell
      */
     class Spell extends Card {
@@ -281,6 +299,11 @@
             parent::Card( $cardName, $cardImg, $cardDesc, $cardManaCost, $cardType = 'spell' );
             $this->effect = $cardEffect;
         }
+        /**
+         * Holds Spell effect keyword
+         * 
+         * @var string
+         */
         private $effect;
         //Setters
         /**
@@ -288,7 +311,7 @@
          * 
          * set the Spell effect from a keyword
          * 
-         * @param STRING $value 
+         * @param int $value 
          * @return void
         */
         public function setEffect( String $value ) : void {
@@ -300,7 +323,7 @@
          * 
          * get the effect keyword of a Spell card 
          * 
-         * @param STRING $value 
+         * @param string $value 
          * @return void
         */
         public function getEffect() : string {
@@ -311,7 +334,7 @@
          * 
          * return all the Spell properties as an assoc. array
          * 
-         * @return ARRAY
+         * @return array
         */
         public function getCardInfo() : array {
             $card = parent::getCardInfo();
@@ -352,7 +375,7 @@
         /**
          * setAtk
          * 
-         * @param INT
+         * @param int
          * @return void
         */
         public function setAtk( int $value) : void {
@@ -361,7 +384,7 @@
         /**
          * setHp
          * 
-         * @param INT
+         * @param int
          * @return void
         */
         public function setHp( int $value) : void {
@@ -370,7 +393,7 @@
         /**
          * setEffect
          * 
-         * @param STRING
+         * @param int
          * @return void
         */
         public function setEffect( String $value ) : void {
@@ -380,7 +403,7 @@
         /**
          * getAtk
          * 
-         * @return INT
+         * @return int
         */
         public function getAtk() : int {
             return $this->atk;
@@ -388,7 +411,7 @@
         /**
          * getHp
          * 
-         * @return INT
+         * @return int
         */
         public function getHp() : int {
             return $this->hp;
@@ -406,7 +429,7 @@
          * 
          * return all the Special card properties as an assoc. array
          * 
-         * @return ARRAY
+         * @return array
         */
         public function getCardInfo() : array {
             $card = parent::getCardInfo();

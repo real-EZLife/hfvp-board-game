@@ -7,16 +7,20 @@
 
         }
         /**
-         * 
-         * $boardSideA ARRAY
-         * $boardSideB ARRAY
-         * $boardCemeterySideA ARRAY
-         * $boardCemeterySideB ARRAY
-         * 
+         * @var array
         */
         private $boardSideA = [];
+        /**
+         * @var array
+        */
         private $boardSideB = [];
+        /**
+         * @var array
+        */
         private $boardCemeterySideA = [];
+        /**
+         * @var array
+        */
         private $boardCemeterySideB = [];
         
         //Getters
@@ -24,8 +28,9 @@
          * getSideA
          * 
          * return an array of all cards on the Player 1 side of the Board
+         * Board->boardSideA
          * 
-         * 
+         * @return ARRAY
          */
         public function getSideA() : array {
             return $this->boardSideA;
@@ -33,9 +38,10 @@
         /**
          * getSideB
          * 
-         * return an array of all cards on the Player 1 side of the Board
+         * return an array of all cards on the Player 2 side of the Board
+         * Board->boardSideB
          * 
-         * 
+         * @return ARRAY
          */
         public function getSideB() : array {
             return $this->boardSideB;
@@ -43,9 +49,9 @@
         /**
          * getSideACount
          * 
-         * return an array of all cards on the Player 1 side of the Board
+         * return the number of card currently on the Board->boardSideA
          * 
-         * 
+         * @return INT
         */
         public function getSideACount() : int {
             return count($this->boardSideA);
@@ -53,9 +59,9 @@
         /**
          * getSideBCount
          * 
-         * return an array of all cards on the Player 1 side of the Board
+         * return the number of card currently on the Board->boardSideB
          * 
-         * 
+         * @return INT
         */
         public function getSideBCount() : int {
             return count($this->boardSideB);
@@ -126,12 +132,27 @@
             array_splice($this->boardSideB, $pos, 0, [$card]);
         }
         public function exportBoard() : object {
+            
             $boardObject = new stdClass();
 
-            $boardObject->boardSideA = $this->getSideA();
-            $boardObject->boardSideB = $this->getSideB();
-            $boardObject->boardCemeterySideA = $this->getSideACemetery();
-            $boardObject->boardCemeterySideB = $this->getSideBCemetary();
+            function exportBoardSide( array $boardSide ) : array {
+                
+                $exportBoard = [];
+                //check that $boardSide isn't empty
+                if( count( $boardSide ) > 0 ) {
+                    //loop through Board->boardSide* and extract each card it holds accordingly
+                    foreach( $boardSide as $pos => $card) {
+                        $exportBoard[$pos] = $card->getCardInfo();
+                    }
+                }
+                return $exportBoard;
+            }
+
+            //store everything in $boardObject
+            $boardObject->boardSideA = exportBoardSide($this->boardSideA);
+            $boardObject->boardSideB = exportBoardSide($this->boardSideB);
+            $boardObject->boardCemeterySideA = exportBoardSide($this->boardCemeterySideA);
+            $boardObject->boardCemeterySideB = exportBoardSide($this->boardCemeterySideB);
 
             return $boardObject;
         }

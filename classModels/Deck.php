@@ -1,12 +1,20 @@
 <?php
     require_once('CardModels.php');
 
-
+    /**
+     * Deck class is used to create a new Deck instance
+     */
     class Deck {
         function Deck( Array $deckFormat = [] ) {
             $this->format = $deckFormat;
         }
+        /**
+         * @var Card[]
+        */
         private $deckList = [];
+        /**
+         * @var array
+         */
         private $format = [];
 
         public function setDeckList() : void {
@@ -35,14 +43,29 @@
                 }
             }
         }
+        /**
+         * pass an array of Card instances to store
+         * 
+         * @param Card[]
+         * @return void
+        */
         public function setDeckListFromArray( Array $array ) : void {
             $this->deckList = $array;
         }
-        public function removeDrawnCards( $n ) : void {
+        /**
+         * remove a card from the deck instance
+         * 
+         * @param int
+         */
+        public function removeDrawnCards( int $n ) : void {
             for( $i = 0; $i < $n; $i++ ) {
                 array_splice($this->deckList, 0, 1);
             }
         }
+        /**
+         * return the number of cards in deck
+         * @return int
+         */
         public function getCardCount() : int {
             return count( $this->deckList );
         }
@@ -54,47 +77,3 @@
             return $deck;
         }
     }
-
-
-
-    // $playerDeck = [];
-    
-
-    // function fillDeck(Array $deck, Array $deckType) {
-        
-    //     foreach( $deckType as $value ) {
-    //         switch( $value['type'] ) {
-    //             case 'creature':
-    //             for($i = 0; $i < $value['nb']; $i++) {
-    //                 $deck[] = new Creature();
-    //             }
-    //             break;
-    //             case 'spell':
-    //             for($i = 0; $i < $value['nb']; $i++) {
-    //                 $deck[] = new Spell();
-    //             }
-    //             break;
-    //             case 'shield':
-    //             for($i = 0; $i < $value['nb']; $i++) {
-    //                 $deck[] = new Shield();
-    //             }
-    //             break;
-    //             case 'special':
-    //             for($i = 0; $i < $value['nb']; $i++) {
-    //                 $deck[] = new Special();
-    //             }
-    //             break;
-    //         }
-    //     }
-    //     return $deck;
-    // }
-    
-    // function listDeck(Array $deck) : Array {
-    //     $deckCards = [];
-    //     foreach($deck as $pos => $card) {
-    //         $deckCards[] = $card->getCardInfo();
-    //     }
-    //     return $deckCards;
-    // }
-    // $playerDeck = fillDeck($playerDeck, $formalDeckComp);
-    // shuffle($playerDeck);

@@ -1,0 +1,206 @@
+/* ***************************************
+            COMMON
+*************************************** */
+.main-page {
+    width: 100%;
+    height: 100vh;
+    background: rgb(177, 177, 177);
+}
+.center {
+    max-width: 1200px;
+    margin: 0 auto; 
+}
+* {
+    color: rgb(53, 53, 53);
+}
+fieldset {
+    background: rgb(216,216,216);
+    border-radius: 0 2rem 2rem 0;
+    padding: .5rem 2rem 2rem 2rem;
+}
+.legend {
+    text-align: center;
+    /* border: 1px groove rgba(56, 56, 56, 0.5); */
+    background: rgb(216,216,216);
+    border-radius: .45rem .45rem 0 0;
+    padding: 6px 37px 10px 37px;
+}
+.text-lvl1 {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 2.2rem;
+    text-align: center;
+}
+.text-lvl2 {
+    text-transform: capitalize;
+    font-weight: 400;
+    font-size: 1.8rem;
+    text-align: center;
+}
+h2 {
+    background: grey;
+}
+.text-lvl3 {
+    font-weight: 400;
+    font-size: 1.2rem; 
+}
+.container {
+    display: flex;
+    padding: 2rem;
+}
+/* ***************************************
+            HEADER
+*************************************** */
+.header {
+    background: grey;
+    padding: 10px;
+}
+/* ***************************************
+    SIDEBAR & FORM  CONTAINER
+*************************************** */
+.box-cards {
+    width: 100%;
+}
+    /* ***************************************
+                SIDEBAR
+    *************************************** */
+    .sidebar {
+        max-width: 20rem;
+        border-radius: 2rem 0 0 2rem ;
+    }
+        /* ***************************************
+                MENU
+        *************************************** */
+        .menu {
+            padding-top: 2rem; 
+            padding-bottom: 2rem;   
+            border-top: 2px groove rgba(128, 128, 128, 0.2);
+            border-bottom: 2px groove rgba(128, 128, 128, 0.2);
+        }
+        .menu a {
+            display: block;
+            padding: 2%;
+            text-decoration: none;
+            background: rgb(216,216,216);
+        }
+
+        .menu a:hover {
+            background: rgb(177, 177, 177);
+        }
+        /* ***************************************
+                LES NEWS DU MAGES
+        *************************************** */
+        .info-text {
+            text-align: right;
+            padding-top: 1rem;
+            margin: 0;
+        }
+         /* ***************************************
+                IMAGE DU MAGE
+        *************************************** */
+        .i-mage {
+            width: 60%;
+            padding-bottom: 2rem;
+        }
+        .i-mage img {
+            max-width: 100%;
+        }
+        .news  {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px groove rgba(128, 128, 128, 0.2);
+        }
+        .sidebar p {
+            margin: 0;
+        }
+        /* ***************************************
+                DECONNEXION
+        *************************************** */
+        .deconnected {
+            background: rgb(177, 177, 177);
+            border: 1px groove rgb(216,216,216);
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border-bottom: 2px groove rgba(128, 128, 128, 0.2);
+        }
+        .deconnected:hover {  
+            background: grey;
+        }
+
+    /* ***************************************
+                FORMULAIRE ADD-CARDS
+    *************************************** */
+    .add-card {
+        width: 100%;
+    }
+    .inside-form {
+        padding: 20px;
+        background: grey;  
+    }
+    form {
+        text-align: right;
+    }
+    .field {
+        padding: 2px;
+    }
+    .field label {
+        margin-right: 10px;
+    }
+    .row-1 {
+        padding: 2rem 1rem;
+        border-bottom: 2px groove rgba(128, 128, 128, 0.2);
+    }
+    .row-2 {
+        display: flex;
+        justify-content: space-between;
+        padding: 2rem 1rem;
+    }
+    .row-2 .field {
+        width: 50%;
+    }
+    .col-1 {
+        width: 30%;
+        background: #ced4da;
+    }
+    input {
+        width: 80%;
+        border: 1px solid grey;  ;
+        border-radius: .25rem;
+        padding: 5px;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    input:focus {
+        width: 80%;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        border: 1px solid #bbc3cb;
+        border-radius: .25rem;
+    }
+    .field-submit input {
+        border: 1px groove rgb(216,216,216);
+        width: 145px;
+        height: 45px;
+    }
+    .field-submit input:hover {
+        background: rgb(177, 177, 177);
+        line-height: 1.5;
+    } 
+/* ***************************************
+            TABLE
+*************************************** */
+table {
+    width: 100%;
+    background: grey;
+    border-collapse: collapse;
+}
+tr {
+    text-align: center;
+    font-size: 1.2rem;
+    }
+td {
+    /* border: 1px groove rgb(216,216,216); */
+} 
