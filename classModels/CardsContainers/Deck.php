@@ -47,7 +47,7 @@
             }
         }
         /**
-         * pass an array of Card instances to store
+         * pass an array of Card or Card child instances to store
          * 
          * @param Card[]
          * @return self
