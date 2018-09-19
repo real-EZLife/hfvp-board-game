@@ -3,7 +3,7 @@
      * class Board contains all informations about the board status
      */
     class Board {
-        function Board() {
+        public function __construct() {
 
         }
         /**

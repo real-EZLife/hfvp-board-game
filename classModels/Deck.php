@@ -5,7 +5,7 @@
      * Deck class is used to create a new Deck instance
      */
     class Deck {
-        function Deck( Array $deckFormat = [] ) {
+        public function __construct( Array $deckFormat = [] ) {
             $this->format = $deckFormat;
         }
         /**
@@ -56,7 +56,7 @@
          * remove a card from the deck instance
          * 
          * @param int
-         */
+        */
         public function removeDrawnCards( int $n ) : void {
             for( $i = 0; $i < $n; $i++ ) {
                 array_splice($this->deckList, 0, 1);
@@ -64,14 +64,25 @@
         }
         /**
          * return the number of cards in deck
+         * 
          * @return int
-         */
+        */
         public function getCardCount() : int {
             return count( $this->deckList );
         }
+        /**
+         * randomize the order of $Deck->deckList contained elements
+         * 
+         * @return void
+         */
         public function shuffleDeck() : void {
             shuffle( $this->deckList );
         }
+        /**
+         * return the instance $Deck->deckList
+         * 
+         * @return array
+        */
         public function getDeckList() : array {
             $deck = $this->deckList;
             return $deck;

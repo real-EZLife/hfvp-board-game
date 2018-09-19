@@ -13,7 +13,7 @@
      * @return Player
     */
     class Player {
-        function Player( User $user, Deck $deck, Hand $hand ) {
+        public function __construct( User $user, Deck $deck, Hand $hand ) {
             //Attribue un objet deck, crée préalablement, à la nouvelle instance de Player
             $this->deck = $deck;
             //Attribue un objet main, crée préalablement, à la nouvelle instance de Player

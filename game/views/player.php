@@ -13,28 +13,28 @@
     <div class="hero">
         <div class="player--name">
             Nom de Joueur:
-            <? $player->getPlayerName() ?>
+            <?= $player->getPlayerName() ?>
         </div>
         <ul class="hero--stats">
             <li>Nombre de cartes en main: 
-                <? $hero->getHandLength() ?>
+                <?= $hero->getHandLength() ?>
             </li>
             <li>Nombre de cartes en deck: 
-                <? $hero->getDeckLength() ?>
+                <?= $hero->getDeckLength() ?>
             </li>
             <li>Mana:
-                <? $hero->getCurrentMana() ?> / <? $hero->getTotalMana() ?>
+                <?= $hero->getCurrentMana() ?> / <?= $hero->getTotalMana() ?>
             </li>
             <li>Vos cartes en main: 
-                <? if($hero->getDeckLength() > 0) : ?>
+                <?php if($hero->getDeckLength() > 0) : ?>
                     <ul class="hero--cardlist">
-                        <? foreach($hero->getHeroHand() as $card) : ?>
+                        <?php foreach($hero->getHeroHand() as $card) : ?>
                             <li class="hero--card">
-                                <? $card->cardName ?>
+                                <?= $card->cardName ?>
                             </li>
-                        <? endforeach ?>
+                        <?php endforeach ?>
                     </ul>
-                <? endif ?>
+                <?php endif ?>
             </li>
         </ul>
     </div>

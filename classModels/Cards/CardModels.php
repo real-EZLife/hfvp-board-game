@@ -3,7 +3,7 @@
      * Card est une classe permettant de créer un modèle de Carte
     */
     class Card {
-        function Card(  String $cardName = 'defaultTitle', String $cardImg = './defaultImg.jpeg', String $cardDesc = 'defaultDesc', Int $cardManaCost = 0, 
+        public function __construct(  String $cardName = 'defaultTitle', String $cardImg = './defaultImg.jpeg', String $cardDesc = 'defaultDesc', Int $cardManaCost = 0, 
                         String $cardType = '', $cardSpecial = false) {
                             
             $this->name = $cardName;
@@ -174,10 +174,10 @@
      * @return Creature
     */
     class Creature extends Card {
-        function Creature(  String $cardName = 'defaultTitle', String $cardImg = './defaultImg.jpeg', String $cardDesc = 'defaultDesc', 
+        public function __construct(  String $cardName = 'defaultTitle', String $cardImg = './defaultImg.jpeg', String $cardDesc = 'defaultDesc', 
                             Int $cardManaCost = 0, $cardSpecial = false, Int $cardAtk = 0, Int $cardHp = 0  ) {
 
-            parent::Card( $cardName, $cardImg, $cardDesc, $cardManaCost, $cardType = 'creature', $cardSpecial );
+            parent::__construct( $cardName, $cardImg, $cardDesc, $cardManaCost, $cardType = 'creature', $cardSpecial );
             $this->atk = $cardAtk;
             $this->hp = $cardHp;
         }
@@ -283,9 +283,9 @@
      * @return Shield
      */
     class Shield extends Creature {
-        function Shield(    String $cardName = 'defaultTitle', String $cardImg = './defaultImg.jpeg', String $cardDesc = 'defaultDesc', 
+        public function __construct(    String $cardName = 'defaultTitle', String $cardImg = './defaultImg.jpeg', String $cardDesc = 'defaultDesc', 
                             Int $cardManaCost = 0, int $cardAtk = 0, int $cardHp = 0 ) {
-            parent::Creature( $cardName, $cardImg, $cardDesc, $cardManaCost, $cardSpecial = 'shield', $cardAtk, $cardHp );
+            parent::__construct( $cardName, $cardImg, $cardDesc, $cardManaCost, $cardSpecial = 'shield', $cardAtk, $cardHp );
         }
     }
     /**
@@ -294,9 +294,9 @@
      * @return Spell
      */
     class Spell extends Card {
-        function Spell( String $cardName = 'defaultTitle', String $cardImg = './defaultImg.jpeg', String $cardDesc = 'defaultDesc', 
+        public function __construct( String $cardName = 'defaultTitle', String $cardImg = './defaultImg.jpeg', String $cardDesc = 'defaultDesc', 
                         Int $cardManaCost = 0, String $cardEffect = 'none' ) {
-            parent::Card( $cardName, $cardImg, $cardDesc, $cardManaCost, $cardType = 'spell' );
+            parent::__construct( $cardName, $cardImg, $cardDesc, $cardManaCost, $cardType = 'spell' );
             $this->effect = $cardEffect;
         }
         /**
@@ -349,9 +349,9 @@
      * @return object
      */
     class Special extends Card {
-        function Special(   String $cardName = 'defaultTitle', String $cardImg = './defaultImg.jpeg', String $cardDesc = 'defaultDesc', 
+        public function __construct(   String $cardName = 'defaultTitle', String $cardImg = './defaultImg.jpeg', String $cardDesc = 'defaultDesc', 
                             Int $cardManaCost = 0, Int $cardAtk = 0, Int $cardHp = 0, String $cardEffect = 'none' ) {
-            parent::Card( $cardName, $cardImg, $cardDesc, $cardManaCost, $cardType = 'special'  );
+            parent::__construct( $cardName, $cardImg, $cardDesc, $cardManaCost, $cardType = 'special'  );
             $this->effect = $cardEffect;
             $this->atk = $cardAtk;
             $this->hp = $cardHp;

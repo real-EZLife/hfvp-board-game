@@ -1,19 +1,6 @@
 <?php
-
-    /**
-     * class User 
-     * @param string $username
-     * @param string $userDisplayedName
-     * @param string $userEmail
-     * @param string $userPassword
-     * @param string $userID
-     * @param string $userRole default 'invite
-     * 
-     * 
-     * @return object User
-     */
     class User {
-        function User(  String $username, String $userDisplayedName, 
+        public function __construct( String $username, String $userDisplayedName, 
                         String $userEmail, String $userPassword, Int $userID, String $userRole = 'guest' ) {
             $this->username = $username;
             $this->userDisplayedName = $userDisplayedName;
@@ -24,27 +11,42 @@
 
         }
         /**
-         * $username STRING
-         * $userDisplayedName STRING
-         * $userEmail STRING
-         * $userPassword STRING
-         * $userID STRING
-         * $userRole STRING
+         * @var string $username
         */
         private $username;
+        /**
+         * @var string $userDiplayedName
+        */
         private $userDisplayedName;
+        /**
+         * @var string $userEmail
+        */
         private $userEmail;
+        /**
+         * @var string $userPassword
+        */
         private $userPassword;
+        /**
+         * @var int $userID
+        */
         private $userID;
+        /**
+         * @var int $userRole default: guest
+        */
         private $userRole;
 
         //User Getters
+        public function __get($property) {
+            if (property_exists($this, $property)) {
+                return $this->$property;
+            }
+        }
         /**
          * getUsername
          * 
          * return User->username;
          * 
-         * @return STRING
+         * @return string
         */
         public function getUsername() : String {
             return $this->username;
@@ -54,7 +56,7 @@
          * 
          * return User->userDisplayedName;
          * 
-         * @return STRING
+         * @return string
         */
         public function getDisplayedUserName() : String {
             return $this->userDisplayedName;
@@ -64,7 +66,7 @@
          * 
          * return User->userEmail;
          * 
-         * @return STRING
+         * @return string
         */
         public function getUserEmail() : String {
             return $this->userEmail;
@@ -74,7 +76,7 @@
          * 
          * return User->userPassword;
          * 
-         * @return STRING
+         * @return string
         */
         public function getUserPassword() : String {
             return $this->userPassword;
@@ -84,9 +86,9 @@
          * 
          * return User->userID;
          * 
-         * @return INT
+         * @return int
         */
-        public function getUserID() : INT {
+        public function getUserID() : Int {
             return $this->userID;
         }
         /**
@@ -94,18 +96,24 @@
          * 
          * return User->userRole;
          * 
-         * @return STRING
+         * @return string
         */
         public function getUserRole() : String {
             return $this->userRole;
         }
         //User Setters
+        public function __set($property, $value) {
+            if (property_exists($this, $property)) {
+                $this->$property = $value;
+            }
+            return $this;
+        }
         /**
          * setUsername 
          * 
          * User->username = $value
          * 
-         * @param STRING
+         * @param string
          * @return void
         */
         public function setUsername( String $value ) : void {
@@ -116,7 +124,7 @@
          * 
          * User->displayedUserName = $value
          * 
-         * @param STRING
+         * @param string
          * @return void
         */
         public function setDisplayedUserName( String $value ) : void {
@@ -127,7 +135,7 @@
          * 
          * User->userEmail = $value
          * 
-         * @param STRING
+         * @param string
          * @return void
         */
         public function setUserEmail( String $value ) : void {
@@ -138,7 +146,7 @@
          * 
          * User->userPassword = $value
          * 
-         * @param INT
+         * @param int
          * @return void
         */
         public function setUserPassword( String $value ) : void {
@@ -149,7 +157,7 @@
          * 
          * User->userID = $value
          * 
-         * @param INT
+         * @param int
          * @return void
         */
         public function setUserID( Int $value ) : void {
@@ -160,7 +168,7 @@
          * 
          * $this->userRole = $value
          * 
-         * @param INT
+         * @param int
          * @return void
         */
         public function setUserRole( String $value ) : void {
@@ -173,7 +181,7 @@
          * 
          * @return object $user
         */
-        public function getUserObj() : object {
+        public function getUserObj() : Object {
 
             $user = new stdClass();
             $user->username = $this->getUsername();

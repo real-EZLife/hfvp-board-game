@@ -11,7 +11,7 @@
      * @property Board
     */
     class Lobby {
-        function Lobby ( Board $board, Player $playerA, Player $playerB ) {
+        public function __construct( Board $board, Player $playerA, Player $playerB ) {
             
             $this->board = $board;
             $this->playerA = $playerA;
