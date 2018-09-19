@@ -18,6 +18,11 @@
             $this->playerB = $playerB;
         }
         /**
+         * Enum: 0, 1, 2
+         * 0 when not started
+         * 1 on P1 turn
+         * 2 on P2 turn
+         * 
          * @var int
         */
         private $whosTurn = 0; //enum: 0, 1, 2
@@ -41,8 +46,15 @@
          * @var Player
         */
         private $playerB;
-
-        //Getters
+        /**
+         * 
+         * ------------------
+         * 
+         * GETTERS
+         * 
+         * ------------------
+         * 
+        */
         /**
          * getPlayerA
          * 
@@ -103,7 +115,16 @@
         public function getGameStatus() : string {
             return $this->gameStatus;
         }
-        //Setters
+        
+        /**
+         * 
+         * ------------------
+         * 
+         * SETTERS
+         * 
+         * ------------------
+         * 
+        */
         /**
          * setPlayerA
          * 
@@ -164,7 +185,7 @@
          * 
          * Lobby->playerA = $value
          * 
-         * @param String $value
+         * @param string $value
          * @return void
         */
         public function setGameStatus( String $value ) : void {
@@ -265,11 +286,7 @@
         }
         public function exportLobby() : object {
             
-            /**
-             * @property bool
-             */
             $lobbyObject = new stdClass();
-
 
             $lobbyObject->gameStatus = $this->getGameStatus();
             $lobbyObject->whosTurn = $this->getWhosTurn();
@@ -278,8 +295,6 @@
             $lobbyObject->playerA = $this->playerA->exportPlayer();
             $lobbyObject->playerB = $this->playerB->exportPlayer();
             
-            // var_dump($this->playerA->getPlayerDeck());
-
             return $lobbyObject;
         }
     }

@@ -6,6 +6,7 @@
     define('ROOT_PATH', dirname(__DIR__) . '/');
 
     require_once( ROOT_PATH . '_db/dataBase.php' );
+    //émule la bdd via un fichier
     $DBPath = ROOT_PATH . '_db/cards.json';
     
     $cards = readDBFile($DBPath);

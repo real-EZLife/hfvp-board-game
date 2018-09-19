@@ -3,9 +3,6 @@
      * class Board contains all informations about the board status
      */
     class Board {
-        public function __construct() {
-
-        }
         /**
          * @var array
         */
@@ -69,7 +66,7 @@
         public function getSideACemetery() : array {
             return $this->boardCemeterySideA;
         }
-        public function getSideBCemetary() : array {
+        public function getSideBCemetery() : array {
             return $this->boardCemeterySideB;
         }
         public function getSideACemeteryCount() : int {
@@ -79,17 +76,21 @@
             return count($this->boardCemeterySideB);
         }
         //Setters
-        public function setSideA( Array $value ) : void {
+        public function setSideA( Array $value ) : self {
             $this->boardSideA = $value;
+            return $this;
         }
-        public function setSideB( Array $value ) : void {
+        public function setSideB( Array $value ) : self {
             $this->boardSideB = $value;
+            return $this;
         }
-        public function setSideACemetery( Array $value ) : void {
+        public function setSideACemetery( Array $value ) : self {
             $this->boardCemeterySideA = $value;
+            return $this;
         }
-        public function setSideBCemetery( Array $value ) : void {
+        public function setSideBCemetery( Array $value ) : self {
             $this->boardCemeterySideB = $value;
+            return $this;
         }
         //Functions linked to players actions
 
@@ -149,19 +150,11 @@
             }
 
             //store everything in $boardObject
-            $boardObject->boardSideA = exportBoardSide($this->boardSideA);
-            $boardObject->boardSideB = exportBoardSide($this->boardSideB);
-            $boardObject->boardCemeterySideA = exportBoardSide($this->boardCemeterySideA);
-            $boardObject->boardCemeterySideB = exportBoardSide($this->boardCemeterySideB);
+            $boardObject->boardSideA = exportBoardSide($this->getSideA());
+            $boardObject->boardSideB = exportBoardSide($this->getSideB());
+            $boardObject->boardCemeterySideA = exportBoardSide($this->getSideACemetery());
+            $boardObject->boardCemeterySideB = exportBoardSide($this->getSideBCemetery());
 
             return $boardObject;
         }
     }
-
-    // $board = new Board();
-    // $board->setSideA( array( 'Troll', 'Orc', 'Malandrin', 'BonHomme', 'Gobelin' ) );
-    // $board->removeCardFromSideA( 4 );
-    // $board->addCardToSideA( 2, 'Ogre' );
-    // $board->addCardToSideB( 2, 'Ogre' );
-    // var_dump($board);
-

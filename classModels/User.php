@@ -35,7 +35,15 @@
         */
         private $userRole;
 
-        //User Getters
+        /**
+         * 
+         * ------------------
+         * 
+         * GETTERS
+         * 
+         * ------------------
+         * 
+        */
         public function __get($property) {
             if (property_exists($this, $property)) {
                 return $this->$property;
@@ -101,7 +109,15 @@
         public function getUserRole() : String {
             return $this->userRole;
         }
-        //User Setters
+        /**
+         * 
+         * ------------------
+         * 
+         * SETTERS
+         * 
+         * ------------------
+         * 
+        */
         public function __set($property, $value) {
             if (property_exists($this, $property)) {
                 $this->$property = $value;

@@ -1,9 +1,4 @@
 <?php
-    //PDV Maximum toujours à 20
-    define('BASEHP', 20);
-    //PDV Maximum toujours à 20
-    define('MAXIMUMMANA', 10);
-
     /**
      * class Player
      * @param object User $user
@@ -21,8 +16,10 @@
             //Le nom de la nouvelle instance de Player découle de l'utilisateur
             $this->playername = $user->getDisplayedUserName();
             //initialise le pool de point de vie du joueur
-            $this->hp = BASEHP;
+            $this->hp = self::BASEHP;
         }
+        const BASEHP = 20;
+        const MAXIMUMMANA = 10;
         /**
          * @var string
         */
@@ -56,11 +53,11 @@
         */
         private $faction = 'not defined';
         /**
-         * @var Card[]
+         * @var Hand
         */
         private $hand;
         /**
-         * @var Card[]
+         * @var Deck
         */
         private $deck;
         //Player Setters
@@ -68,96 +65,106 @@
          * setCurrentMana 
          * 
          * @param int
-         * @return void
+         * @return self
         */
-        public function setCurrentMana( Int $value ) : void {
+        public function setCurrentMana( Int $value ) : self {
             $this->currentMana = $value;
+            return $this;
         }
         /**
          * setTotalMana
          * 
          * @param int
-         * @return void
+         * @return self
         */
-        public function setTotalMana( Int $value ) : void {
+        public function setTotalMana( Int $value ) : self {
             $this->totalMana = $value;
+            return $this;
         }
         /**
          * setPlayerName
          * 
          * @param string
-         * @return void
+         * @return self
         */
-        public function setPlayerName( String $value ) : void {
+        public function setPlayerName( String $value ) : self {
             $this->playername = $value;
+            return $this;
         }
         /**
          * setHp
          * 
          * @param int
-         * @return void
+         * @return self
         */
-        public function setHp( Int $value ) : void {
-            //$hp must always be <= BASEHP
-            if( $value + $this->hp >= BASEHP ) {
-                $this->hp = BASEHP;
+        public function setHp( Int $value ) : self {
+            //$hp must always be <= self::BASEHP
+            if( $value + $this->hp >= self::BASEHP ) {
+                $this->hp = self::BASEHP;
             }else {
                 $this->hp = $value;
             }
+            return $this;
         }
         /**
          * setTurns
          * 
          * @param int
-         * @return void
+         * @return self
         */
-        public function setTurns( Int $value ) : void {
+        public function setTurns( Int $value ) : self {
             $this->turns = $value;
+            return $this;
         }
         /**
          * setAliveStatus
          * 
          * @param bool
-         * @return void
+         * @return self
         */
-        public function setAliveStatus( Bool $value ) : void {
+        public function setAliveStatus( Bool $value ) : self {
             $this->isAlive = $value;
+            return $this;
         }
         /**
          * setPlayerTurnStatus
          * 
          * @param bool
-         * @return void
+         * @return self
         */
-        public function setPlayerTurnStatus( Bool $value ) : void {
+        public function setPlayerTurnStatus( Bool $value ) : self {
             $this->isPlayerTurn = $value;
+            return $this;
         }
         /**
          * setFaction
          * 
          * @param string
-         * @return void
+         * @return self
         */
-        public function setFaction( String $value ) : void {
+        public function setFaction( String $value ) : self {
             $this->faction = $value;
+            return $this;
         }
         /**
          * setPlayerDeck
          * 
          * @param Deck
-         * @return void
+         * @return self
         */
-        public function setPlayerDeck( Deck $value ) : void {
+        public function setPlayerDeck( Deck $value ) : self {
             $this->deck = $value;
+            return $this;
         }
         /**
          * setPlayerHand
          * 
          * @param Hand
-         * @return void
+         * @return self
         */
-        public function setPlayerHand( Hand $value ) : void {
+        public function setPlayerHand( Hand $value ) : self {
             $this->hand = $value;
+            return $this;
         }
         //Player Getters
         /**
@@ -383,12 +390,12 @@
         /**
          * addOneTotalMana
          * 
-         * Check Player->totalMana value is lesser than MAXIMUMMANA value and update Player->totalmana accordingly
+         * Check Player->totalMana value is lesser than self::MAXIMUMMANA value and update Player->totalmana accordingly
          * 
          * @return void
         */
         public function addOneTotalMana() : void {
-            if( $this->totalMana < MAXIMUMMANA) {
+            if( $this->totalMana < self::MAXIMUMMANA) {
                 $this->totalMana += 1;
             }
         }

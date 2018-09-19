@@ -1,5 +1,8 @@
 <?php
-    require_once('CardModels.php');
+    require_once(ROOT_PATH . 'classModels/Cards/Creature.php');
+    require_once(ROOT_PATH . 'classModels/Cards/Creature/Shield.php');
+    require_once(ROOT_PATH . 'classModels/Cards/Spell.php');
+    require_once(ROOT_PATH . 'classModels/Cards/Special.php');
 
     /**
      * Deck class is used to create a new Deck instance
@@ -47,10 +50,11 @@
          * pass an array of Card instances to store
          * 
          * @param Card[]
-         * @return void
+         * @return self
         */
-        public function setDeckListFromArray( Array $array ) : void {
+        public function setDeckListFromArray( Array $array ) : self {
             $this->deckList = $array;
+            return $this;
         }
         /**
          * remove a card from the deck instance
