@@ -147,13 +147,13 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/set_admin.css">
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/set_admin.css">
     <title>Cards Manager</title>
 </head>
 <body>
@@ -176,7 +176,7 @@
                     <p class="info-text text-lvl3">
                         Pour des news toutes fraîches, yaka voir le mage... oupa
                         <div class="i-mage">
-                            <img src="assets/images/mageoupapuissant.png" alt="">
+                            <img src="../assets/images/mageoupapuissant.png" alt="">
                         </div>
                     </p>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla, quo cumque. Reiciendis possimus similique incidunt unde consequatur nihil, non eligendi!</p>
@@ -198,28 +198,28 @@
                             </div>
                             <div class="field">
                                 <label class="text-lvl3" for="name">Nom de la Carte</label>
-                                <input id="name" name="name" type="text">
+                                <input id="name" name="name" type="text" aria-label="Nom de la carte">
                             </div>
                             <div class="field">
                                 <label class="text-lvl3" for="manaCost">Coût en Mana</label>
-                                <input id="manaCost" name="cost" type="number">
+                                <input id="manaCost" name="cost" type="number" aria-label="coût en mana" >
                             </div>
                             <div class="field">
                                 <label class="text-lvl3" for="desc">Description</label>
-                                <input id="desc" name="desc" type="text">
+                                <input id="desc" name="desc" type="text" aria-label="Description">
                             </div>
                         
                             <div class="field">
                                 <label class="text-lvl3" for="atk">Valeur d'attaque</label>
-                                <input id="atk" name="atk" type="number">
+                                <input id="atk" name="atk" type="number" aria-label="Valeur d'attaque">
                             </div>
                             <div class="field">
                                 <label class="text-lvl3" for="hp">Points de vie</label>
-                                <input id="hp" name="hp" type="number">
+                                <input id="hp" name="hp" type="number" aria-label="Point de vie">
                             </div>
                             <div class="field">
                                 <label class="text-lvl3" for="effect">Effet de sort</label>
-                                <input id="effect" name="effect" type="text" disabled>
+                                <input id="effect" name="effect" type="text" aria-label="Effet de sort" disabled>
                             </div>
                         </div>
                         <div class="row-2">
