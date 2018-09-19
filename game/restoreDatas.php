@@ -1,8 +1,8 @@
 <?php
     require_once(ROOT_PATH . 'classModels/Player.php');
-    require_once(ROOT_PATH . 'classModels/Hand.php');
-    require_once(ROOT_PATH . 'classModels/Deck.php');
-    require_once(ROOT_PATH . 'classModels/Board.php');
+    require_once(ROOT_PATH . 'classModels/CardsContainers/Hand.php');
+    require_once(ROOT_PATH . 'classModels/CardsContainers/Deck.php');
+    require_once(ROOT_PATH . 'classModels/CardsContainers/Board.php');
     require_once(ROOT_PATH . 'classModels/Lobby.php');
 
     function restoreCardList( String $type, Array $cardList ) {
