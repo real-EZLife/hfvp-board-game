@@ -7,16 +7,19 @@
 /**
  * CRUD User
  */
+
+require('D:\www\HFVSP-GIT\hfvp-board-game\conf\db_conf.php');
+
 class UserModel
 {
     private $db;
     private $req;
 
 
-    public function __construct()
+    public function __construct(PDO $db)
     {
         try {
-            $this->db = new PDO('mysql:host=localhot;dbname=espace_administration;charset=utf8mb4', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            $this->db = $db;
         } catch (PDOException $e) {
             throw new Exception($e->getMessage(), $e->getCode(), $e);
         }
@@ -39,12 +42,14 @@ class UserModel
     public function create(User $user)
     {
         try {
-            if (($this->req = $this->db->prepare('INSERT INTO `user`(`login`, `pwd`, `lastname`, `firstname`, `role`) VALUES (:login, :pwd, :lastname, :firstname, :role)')) !== false) {
-                if ($this->req->bindValue('login', $user->get_login())
-                    && $this->req->bindValue('pwd', $user->get_pwd())
-                    && $this->req->bindValue('lastname', $user->get_lastname())
-                    && $this->req->bindValue('firstname', $user->get_firstname())
-                    && $this->req->bindValue('role', $user->get_role(), PDO::PARAM_INT)) {
+            if (($this->req = $this->db->prepare(
+                'INSERT INTO `user`(`user_pseudo`, `user_password`, `user_name`, `user_surname`, `user_email`) 
+                VALUES (:user_pseudo, :user_password, :user_name, :user_surname, :user_email)')) !== false) {
+                if ($this->req->bindValue('user_pseudo', $user->get_login())
+                    && $this->req->bindValue('user_password', $user->get_pwd())
+                    && $this->req->bindValue('user_name', $user->get_name())
+                    && $this->req->bindValue('user_surname', $user->get_lastname())
+                    && $this->req->bindValue('user_email', $user->get_email())) {
                     if ($this->req->execute()) {
                         $id = $this->db->lastInsertId();
                         return $id;
@@ -60,7 +65,7 @@ class UserModel
     public function readAll()
     {
         try {
-            if (($this->req = $this->db->query('SELECT `id`, `login`, `lastname`, `firstname`, `role` FROM `user`')) !== false) {
+            if (($this->req = $this->db->query('SELECT * FROM `user`')) !== false) {
                 while (($datas = $this->req->fetch(PDO::FETCH_ASSOC)) !== false) {
                     $users[] = new User($datas);
                 }
@@ -73,11 +78,11 @@ class UserModel
         }
     }
 
-    public function read(int $id)
+    public function read(string $login)
     {
         try {
-            if (($this->req = $this->db->prepare('SELECT `id`, `login`, `lastname`, `firstname`, `role` FROM `user` WHERE `id`=?')) !== false) {
-                if ($this->req->bindValue(1, $id, PDO::PARAM_INT)) {
+            if (($this->req = $this->db->prepare('SELECT * FROM `user` WHERE `user_pseudo`=?')) !== false) {
+                if ($this->req->bindValue(1, (string) $login, PDO::PARAM_STR)) {
                     if ($this->req->execute()) {
                         $datas = $this->req->fetch(PDO::FETCH_ASSOC);
                         return new User($datas);
@@ -94,12 +99,12 @@ class UserModel
     public function update(User $user)
     {
         try {
-            if (($this->req = $this->db->prepare('UPDATE `user` SET `login`=:login, `lastname`=:lastname, `firstname`=:firstname, `role`=:role WHERE `id`=:id')) !== false) {
-                if ($this->req->bindValue('login', $user->get_login())
-                    && $this->req->bindValue('lastname', $user->get_lastname())
-                    && $this->req->bindValue('firstname', $user->get_firstname())
-                    && $this->req->bindValue('role', $user->get_role(), PDO::PARAM_INT)
-                    && $this->req->bindValue('id', $user->get_id(), PDO::PARAM_INT)) {
+            if (($this->req = $this->db->prepare('UPDATE `user` SET `user_email`=:user_email, `user_name`=:user_name, `user_surname`=:user_surname, `role_id`=:role_id WHERE `user_pseudo`=:user_pseudo')) !== false) {
+                if ($this->req->bindValue('user_email', $user->get_email())
+                    && $this->req->bindValue('user_name', $user->get_lastname())
+                    && $this->req->bindValue('user_surname', $user->get_firstname())
+                    && $this->req->bindValue('role_id', $user->get_role(), PDO::PARAM_INT)
+                    && $this->req->bindValue('user_pseudo', $user->get_id(), PDO::PARAM_INT)) {
                     if ($this->req->execute()) {
                         $nbRow = $this->req->rowCount();
                         return $nbRow;
@@ -131,3 +136,15 @@ class UserModel
         }
     }
 }
+require_once('user.php');
+$usr = new User([
+    'login' => 'Tommy34',
+    'pwd' => '12345',
+    'name' => 'Chris',
+    'surname' => 'Rou',
+    'email' => 'chrisRou@gmail.com',
+]);
+$usrm = new UserModel($epic_db);
+//`user_pseudo`, `user_password`, `user_name`, `user_surname`, `user_email`) 
+var_dump($usrm->read('epicdesign'));
+
