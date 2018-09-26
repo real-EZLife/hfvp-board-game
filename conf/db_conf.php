@@ -1,12 +1,22 @@
 <?php
     //Configuration de l'acces BDD
 
-    $dbConf = new stdClass();
-    $dbConf->dbUrl = 'localhost';
-    $dbConf->dbName = 'objectif3w_epicassembly';
-    $dbConf->dbUser = 'epic_assembly';
-    $dbConf->dbPwd = '-EK,[YK4IQc*';
-    $dbConf->dbCharset = 'utf8mb4';
-    $dbConf->dsn = 'mysql:host=' . $this->dbUrl . 'dbname=' . $this->dbName . 'charset=' . $this->dbCharset;
+    class dbConf {
+        private $dbUrl = '127.0.0.1';
+        private $dbName = 'objectif3w_epicassembly';
+        private $dbUser = 'epic_assembly';
+        private $dbPwd = '-EK,[YK4IQc*';
+        private $dbCharset = 'utf8mb4';
+        public function getDB() {
+            try {
+                $epic_db = new PDO('mysql:host=' . $this->dbUrl . ';dbname=' . $this->dbName . ';charset=' . $this->dbCharset, $this->dbUser, $this->dbPwd);
+                return $epic_db;
+            }catch(PDOException $e) {
+                var_dump($e->getMessage());
+            }
+        }
+    }
 
-    $epic_db = new PDO($dbConf->dsn, $dbConf->dbUser, $dbConf->dbPwd);
+    $db = new dbConf();
+    $epic_db = $db->getDB();
+
