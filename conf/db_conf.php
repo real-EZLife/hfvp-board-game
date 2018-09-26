@@ -3,6 +3,10 @@
 
     $dbConf = new stdClass();
     $dbConf->dbUrl = 'localhost';
-    $dbConf->dbUser = 'root';
-    $dbConf->dbPwd = '';
-    $dbConf->dbName = 'hfvp';
+    $dbConf->dbName = 'epic_assembly';
+    $dbConf->dbUser = 'epic_assembly';
+    $dbConf->dbPwd = '-EK,[YK4IQc*';
+    $dbConf->dbCharset = 'utf8mb4';
+    $dbConf->dsn = 'mysql:host=' . $this->dbUrl . 'dbname=' . $this->dbName . 'charset=' . $this->dbCharset;
+
+    $epic_db = new PDO($dbConf->dsn, $dbConf->dbUser, $dbConf->dbPwd);
