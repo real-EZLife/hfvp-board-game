@@ -13,13 +13,9 @@ class UserModel
     private $req;
 
 
-    public function __construct()
+    public function __construct(PDO $db)
     {
-        try {
-            $this->db = new PDO('mysql:host=localhot;dbname=espace_administration;charset=utf8mb4', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-        } catch (PDOException $e) {
-            throw new Exception($e->getMessage(), $e->getCode(), $e);
-        }
+        $this->db = $db;
     }
 
     public function __destruct()
