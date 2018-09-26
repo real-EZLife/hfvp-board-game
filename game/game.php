@@ -21,19 +21,6 @@
     $user2 = new User( 'RainbowPoney', 'Mistyk309', 'youri-26@hotmail.fr', 'azertyuiop', 1, 'admin' );
     
     
-    
-    
-    // while(1) {
-        //     $theGame->startGameTurn();
-        //         $theGame->playerAStartTurn();
-        //         $theGame->playerAEndTurn();
-        //         $theGame->playerBStartTurn();
-        //         $theGame->playerBEndTurn();
-        //     writeDBFile( $gameSavePath, $theGame->exportLobby() );
-        
-        //     if($theGame->getGameTurns() >= 10) break;
-        // }
-        // var_dump($theGame);
     $theGame;
 
     if(isset($_POST)) {
@@ -60,9 +47,9 @@
                 }
                 if( readDBFile($gameSavePath) !== null && count(readDBFile($gameSavePath)) > 0) {
                     var_dump(count(readDBFile($gameSavePath)));
-                    writeDBFile( $gameSavePath, array_merge(readDBFile($gameSavePath), [$theGame->exportLobby()]));
+                    writeDBFile( $gameSavePath, array_merge(readDBFile($gameSavePath), [$theGame->export()]));
                 }else {
-                    writeDBFile( $gameSavePath, [$theGame->exportLobby()] );
+                    writeDBFile( $gameSavePath, [$theGame->export()] );
                 }
             }
         }
@@ -84,15 +71,9 @@
             
             $theGame = restoreLobby($storedGameLobby, $user1, $user2);
             var_dump($theGame->getGameTurns());
-            // if($theGame->getGameTurns() === 0) {
-
-            // }
-            
-            // startGameTurn($theGame);
 
             if( isset($_POST) && $theGame->getWhosTurn() === 1 ) {
                 
-                // var_dump($_POST);
 
                 if( isset($_POST['start_turn1']) ) {
                     echo 'P1 starts';
@@ -109,10 +90,7 @@
                         $theGame->playerAPlayCard( stringToNumber($_POST['selected_card']) );
 
                     }
-                    // $theGame->playerAEndTurn();
                 }
-                
-                // var_dump($theGame->getWhosTurn());
                 
                 
             }else {
@@ -133,18 +111,12 @@
                         $theGame->playerBPlayCard( stringToNumber($_POST['selected_card']) );
 
                     }
-                    // $theGame->playerAEndTurn();
                 }
             }
-            // var_dump(readDBFile($gameSavePath)[$gameID]);
-            // readDBFile($gameSavePath)[$gameID] = phpToJson($theGame->exportLobby());
 
             var_dump($_POST);
             var_dump($theGame->getBoard());
-            updateDBFile($gameID, $gameSavePath, $theGame->exportLobby());
+            updateDBFile($gameID, $gameSavePath, $theGame->export());
         }
     }
-        // if(isset($_POST, $_POST['endturn']))
-    // }
-    
 ?>

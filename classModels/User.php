@@ -2,12 +2,12 @@
     class User {
         public function __construct( String $username, String $userDisplayedName, 
                         String $userEmail, String $userPassword, Int $userID, String $userRole = 'guest' ) {
-            $this->username = $username;
-            $this->userDisplayedName = $userDisplayedName;
-            $this->userEmail = $userEmail;
-            $this->userPassword = $userPassword;
-            $this->userID = $userID;
-            $this->userRole = $userRole;
+            $this->name = $name;
+            $this->displayname = $DisplayedName;
+            $this->Email = $Email;
+            $this->Password = $Password;
+            $this->ID = $ID;
+            $this->Role = $Role;
 
         }
         /**

@@ -34,7 +34,7 @@
     function createNewLobby( Object $playerInstanceA, Object $playerInstanceB ) : object {
         require_once(ROOT_PATH . 'classModels/Lobby.php');
         require_once(ROOT_PATH . 'classModels/Board.php');
-        //generate a Board object to generate the game instance
+        //generate a new Board object instance, mandatory to create a Lobby Object
         $newBoard = new Board();
         $newLobby = new Lobby( $newBoard, $playerInstanceA, $playerInstanceB );
 

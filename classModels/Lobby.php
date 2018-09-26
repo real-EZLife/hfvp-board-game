@@ -284,7 +284,7 @@
         public function playerLose( Object $player ) {
             
         }
-        public function exportLobby() : object {
+        public function export() : object {
             
             $lobbyObject = new stdClass();
 
@@ -296,5 +296,20 @@
             $lobbyObject->playerB = $this->playerB->exportPlayer();
             
             return $lobbyObject;
+        }
+        /**
+         * for this to work $keys must be camelCased this way PlayerA for setPlayerA
+         *
+         * @param array $data
+         * @return void
+         */
+        public function hydrate(array $data) {
+            foreach( $data as $key => $value) {
+                $methodName = 'set' . $key;
+                if(method_exists($this->$methodName)) {
+                    $this->$methodName($value);
+                }
+            }
+            return $this;
         }
     }
