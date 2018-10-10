@@ -50,17 +50,23 @@ class UserModel {
      * 
      * @throws Exception if an error occured
      * 
-     * @return integer The last inserted ID
+     * @return bool The last inserted is true or false
      */
-    public function create(string $email, string $name, string $surname, string $pseudo, string $password) : int
+    public function create(string $email, string $name, string $surname, string $pseudo, string $password) : bool
     {
         try {
-            if (($req = $this->getDB()->prepare('INSERT INTO `user` (`user_pseudo`,`user_email`, `user_name`, `user_surname`,`user_password`, ) VALUES (?,?,?,?,?)')) !== false) {
-                if ($req->bindValue(1, $pseudo) && $req->bindValue(2, $email) && $req->bindValue(3, $name) && $req->bindValue(4, $surname) && $req->bindValue(5, $password)) {
+            if (($req = $this->getDb()->prepare('INSERT INTO `user` (`user_pseudo`,`user_email`, `user_name`, `user_surname`,`user_password`) 
+                                                 VALUES (?,?,?,?,?)')) !== false) 
+            {
+                if ($req->bindValue(1, $pseudo, PDO::PARAM_STR) &&
+                    $req->bindValue(2, $email, PDO::PARAM_STR) &&
+                    $req->bindValue(3, $name, PDO::PARAM_STR) &&
+                    $req->bindValue(4, $surname, PDO::PARAM_STR) &&
+                    $req->bindValue(5, $password, PDO::PARAM_STR))
+                {
                     if ($req->execute()) {
-                        $res = $this->_pdo->lastInsertId();
                         $req->closeCursor();
-                        return $res;
+                        return true;
                     }
                 }
             }
@@ -80,17 +86,17 @@ class UserModel {
      * 
      * @return array The data of one or more player
      */
-    public function read(int $pseudo = null) : array
+    public function read(string $pseudo = null) : array
     {
         try {
             if (is_null($pseudo)) {
-                if (($req = $this->getDB()->query('SELECT * FROM `user` ORDER BY `user_pseudo` ASC')) !== false) {
+                if (($req = $this->getDb()->query('SELECT * FROM `user` ORDER BY `user_pseudo` ASC')) !== false) {
                     $res = $req->fetchAll(PDO::FETCH_ASSOC);
                     $req->closeCursor();
                     return $res;
                 }
             } else {
-                if (($req = $this->getDB()->prepare('SELECT * FROM `user` WHERE `user_pseudo`=?')) !== false) {
+                if (($req = $this->getDb()->prepare('SELECT * FROM `user` WHERE `user_pseudo`=?')) !== false) {
                     if ($req->bindValue(1, $pseudo)) {
                         if ($req->execute()) {
                             $res = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -120,19 +126,35 @@ class UserModel {
      * 
      * @return integer The number of rows affected
      */
-    public function update(string $email, string $name, string $surname, string $password, string $pseudo) : int
+    public function update(string $pseudo, string $email = '', string $name ='', string $surname = '', string $password = '') : int
     {
         try {
-            if (($req = $this->getDB()->prepare('UPDATE `user` SET `user_email`=?, `user_name`=?, `user_surname`=?, `user_password`=? WHERE `user_pseudo`=?')) !== false) {
-                if ($req->bindValue(1, $email) && $req->bindValue(2, $name) && $req->bindValue(3, $surname) && $req->bindValue(4, $password) && $req->bindValue(5, $pseudo)) {
-                    if ($req->execute()) {
-                        $res = $req->rowCount();
-                        $req->closeCursor();
-                        return $res;
+            //recupère les champs 
+            // regadrer ce que renvoie ma fonction
+            if(($user = read($pseudo)) != null) {
+
+                if (($req = $this->getDb()->prepare('UPDATE `user` SET `user_email`=:email, `user_name`=:name, `user_surname`=:surname, `user_password`=:pwd WHERE `user_pseudo`=:pseudo')) !== false) {
+                    
+                    if (!empty($email)) {
+                        $req->bindValue(1, $email);
+                    }
+                    if (!empty($name)) {
+                        $query .= '`, user_name`=' . $name;
+                    }
+                    if ($req->bindValue(1, $email) && 
+                        $req->bindValue(2, $name) && 
+                        $req->bindValue(3, $surname) && 
+                        $req->bindValue(4, $password) && 
+                        $req->bindValue(5, $pseudo)) 
+                    {
+                        if ($req->execute()) {
+                            $res = $req->rowCount();
+                            $req->closeCursor();
+                            return $res;
+                        }
                     }
                 }
             }
-
             return false;
         } catch (PDOException $e) {
             throw new Exception('Can not update in the database', 14, $e);
@@ -151,7 +173,7 @@ class UserModel {
     public function delete(string $pseudo) : int
     {
         try {
-            if (($req = $this->getDB()->prepare('DELETE FROM `user` WHERE `user_pseudo`=?')) !== false) {
+            if (($req = $this->getDb()->prepare('DELETE FROM `user` WHERE `user_pseudo`=?')) !== false) {
                 if ($req->bindValue(1, $pseudo)) {
                     if ($req->execute()) {
                         $res = $req->rowCount();
@@ -176,7 +198,7 @@ class UserModel {
     public function signin(string $login)
     {
         try {
-            if (($req = $this->getDB()->prepare('SELECT * FROM `user` WHERE `user_email`=:login OR `user_pseudo`=:login')) !== false) {
+            if (($req = $this->getDb()->prepare('SELECT * FROM `user` WHERE `user_email`=:login OR `user_pseudo`=:login')) !== false) {
                 if ($req->bindValue('login', $login)) {
                     if ($req->execute()) {
                         $res = $req->fetch(PDO::FETCH_ASSOC);
@@ -193,3 +215,21 @@ class UserModel {
     }
 
 }
+
+/**
+ * TEST DES METHODES
+ */
+
+require_once('D:\www\HFVSP-GIT\hfvp-board-game\conf\db_conf.php');
+$test = new UserModel($epic_db);
+
+// $t = $test->read('testPseudo4'); /* TEST OK pour montrer un user de la bdd*/
+// $t = $test->read(); /* TEST OK pour montrer tous les user de la bdd*/
+// $t = $test->signin('testPseudo4'); /* TEST OK */
+// $t = $test->create('test.test@test.com','test','TEST','testPseudo4','1234'); /* TEST OK */
+// $t = $test->delete('testPseudo2'); /* TEST OK */
+$t = $test->update('testPseudo','christophe','roussin');
+
+var_dump($t);
+
+// var_dump(func_get_args());

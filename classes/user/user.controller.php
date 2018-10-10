@@ -20,13 +20,13 @@ class UserController
 
     public function show()
     {
-        include('classes/user/index.php');
+        include(ROOT_PATH . 'classes/user/index.php');
     }
 
     private function connect()
     {
         try {
-            $this->_model = new UserModel('mysql', 'localhost', 'streetfighter', 'root', '');
+            $this->_model = new UserModel($epic_db);
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), 0, $e);
         }
@@ -39,8 +39,8 @@ class UserController
      */
     public function logout()
     {
-        if (isset($_SESSION['hfvsp'])) {
-            unset($_SESSION['hfvsp']);
+        if (isset($_SESSION['hfvsp']['user'])) {
+            unset($_SESSION['hfvsp']['user']);
         }
         header('Location:.');
         exit;
@@ -57,7 +57,7 @@ class UserController
         if (($data = $this->_model->signin(htmlentities($_POST['login']))) !== false) {
             $player = new Player($data);
 
-            $_SESSION['hfvsp']['player'] = serialize($player);
+            $_SESSION['hfvsp']['user'] = serialize($player);
             header('Location:.?c=home');
             exit;
 
@@ -81,8 +81,8 @@ class UserController
             $player = new User($data);
             $player->setId($id);
 
-            $_SESSION['hfvsp']['player'] = serialize($player);
-            header('Location:.?c=game');
+            $_SESSION['hfvsp']['user'] = serialize($player);
+            header('Location:.?c=signup');
             exit;
         } else {
             $message = 'Problème de connexion avec la base de données. Nous vous présentons nos excuses. Veuillez réessayer ultérieurement';
