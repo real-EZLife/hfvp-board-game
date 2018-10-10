@@ -1,6 +1,17 @@
 <?php
+
 /**
- * / ! \ A TESTER
+ * Manages the data for the user
+ * 
+ * @license MIT // https://fr.wikipedia.org/wiki/Licence_MIT
+ * 
+ * @since 1.0.0
+ * 
+ * @category PHP
+ * @package heroic fantaisy vs politic
+ * @subpackage user
+ * @copyright 2018 EZlife - all rights reserved
+ * @author Christophe Roussin<adrsse mail pro>
  */
 class User
 {
