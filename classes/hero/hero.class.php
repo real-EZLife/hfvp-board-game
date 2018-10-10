@@ -10,20 +10,23 @@
                 }
         }
         private function hydrate(array $array) {
+                var_dump($array);
                 if(!is_null($array)) {
                         foreach($array as $key => $value) {
-                        $methodName = 'set';
-                        $key = str_replace('hero_', '', $key);
-                        $key = str_replace('_fk', '', $key);
-                        $key = ucfirst($key);
-                        $methodName = $methodName . $key;
-                        if(method_exists($this, $methodName))
-                                $this->$methodName($value);
+                                $methodName = 'set';
+                                $key = str_replace('hero_', '', $key);
+                                $key = str_replace('_fk', '', $key);
+                                $key = ucfirst($key);
+                                $methodName = $methodName . $key;
+                                var_dump($methodName);
+                                if(method_exists($this, $methodName))
+                                        $this->$methodName($value);
                         }
                         return $this;
                 }
                 return false;
         }
+        const MAX_MANA = 10;
         private $id;
         /**
          * hero current life pool
@@ -73,6 +76,10 @@
          * @var Hand
         */
         private $hand;
+
+        public function getHero() : array {
+                return get_object_vars($this);
+        }
 
         /**
          * Get the value of id
@@ -258,8 +265,14 @@
 
                 return $this;
         }
+
+        /**
+         * Get hero current available mana
+         *
+         * @return  int
+         */ 
+        public function getMana()
+        {
+                return $this->mana;
+        }
     }
-
-    $h = new Hero([]);
-
-    var_dump($h);
