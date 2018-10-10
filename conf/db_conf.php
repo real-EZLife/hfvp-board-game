@@ -16,7 +16,6 @@
             }
         }
     }
-
+    
     $db = new dbConf();
     $epic_db = $db->getDB();
-
