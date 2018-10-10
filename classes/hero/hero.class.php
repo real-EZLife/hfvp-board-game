@@ -1,7 +1,28 @@
 <?php
     class Hero {
-        public function __construct() {
-
+        public function __construct(array $caracts, Deck $deck = null, Hand $hand = null) {
+                $this->hydrate($caracts);
+                if(!is_null($deck) && get_class($deck) == 'Deck') {
+                        $this->setDeck($deck);
+                }
+                if(!is_null($hand) && get_class($hand) == 'Hand') {
+                        $this->setHand($hand);
+                }
+        }
+        private function hydrate(array $array) {
+                if(!is_null($array)) {
+                        foreach($array as $key => $value) {
+                        $methodName = 'set';
+                        $key = str_replace('hero_', '', $key);
+                        $key = str_replace('_fk', '', $key);
+                        $key = ucfirst($key);
+                        $methodName = $methodName . $key;
+                        if(method_exists($this, $methodName))
+                                $this->$methodName($value);
+                        }
+                        return $this;
+                }
+                return false;
         }
         private $id;
         /**
@@ -238,3 +259,7 @@
                 return $this;
         }
     }
+
+    $h = new Hero([]);
+
+    var_dump($h);
