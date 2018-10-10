@@ -51,9 +51,9 @@ CREATE TABLE `card`(
     `card_fx` VARCHAR (75) NOT NULL,
     `card_special` BOOL NOT NULL,
     `card_img` LONGTEXT NOT NULL,
-    `fac_id` INT,
+    `card_fac_id` INT,
     PRIMARY KEY (`card_id`),
-    CONSTRAINT `card_faction_fk` FOREIGN KEY (`fac_id`) REFERENCES `faction`(`fac_id`)
+    CONSTRAINT `card_faction_fk` FOREIGN KEY (`card_fac_id`) REFERENCES `faction`(`fac_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -90,9 +90,9 @@ CREATE TABLE `user`(
     `user_email` VARCHAR (255) NOT NULL,
     `user_password` VARCHAR (255) NOT NULL,
     `user_signup_date` Date NOT NULL,
-    `role_id` INT NOT NULL,
+    `user_role_id` INT NOT NULL,
     PRIMARY KEY (`user_pseudo`),
-    CONSTRAINT `user_role_fk` FOREIGN KEY (`role_id`) REFERENCES `role`(`role_id`)
+    CONSTRAINT `user_role_fk` FOREIGN KEY (`user_role_id`) REFERENCES `role`(`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -116,9 +116,9 @@ CREATE TABLE `hero`(
     `hero_name` VARCHAR (50) NOT NULL,
     `hero_mana` INT NOT NULL,
     `hero_lp` INT NOT NULL,
-    `fac_id` INT NOT NULL,
+    `hero_fac_id` INT NOT NULL,
     PRIMARY KEY (`hero_id`),
-    CONSTRAINT `hero_faction_fk` FOREIGN KEY (`fac_id`) REFERENCES `faction`(`fac_id`)
+    CONSTRAINT `hero_faction_fk` FOREIGN KEY (`hero_fac_id`) REFERENCES `faction`(`fac_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -129,7 +129,7 @@ CREATE TABLE `hero`(
 CREATE TABLE `temp_hero`(
     `temp_hero_id` INT AUTO_INCREMENT NOT NULL,
     `temp_hero_mana` INT NOT NULL,
-    `temp_her_lp` INT NOT NULL,
+    `temp_hero_lp` INT NOT NULL,
     `moment` DATETIME NOT NULL,
     `user_pseudo` VARCHAR (75) NOT NULL,
     `gam_id` INT NOT NULL,
