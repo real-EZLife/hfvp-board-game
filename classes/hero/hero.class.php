@@ -21,7 +21,7 @@
          *
          * @var int 
         */
-        private $Lp;
+        private $maxlp;
         /**
          * hero current available mana
          *
@@ -83,7 +83,7 @@
          *
          * @return  int
          */ 
-        public function getMaxLp() {
+        public function getMaxlp() {
                 return $this->maxLp;
         }
 
@@ -121,5 +121,120 @@
          */ 
         public function getHand() {
                 return $this->hand;
+        }
+
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id) {
+                $this->id = $id;
+
+                return $this;
+        }
+
+        /**
+         * Set hero current life pool
+         *
+         * @param  int  $lp  hero current life pool
+         *
+         * @return  self
+         */ 
+        public function setLp(int $lp) {
+                $this->lp = $lp;
+
+                return $this;
+        }
+
+        /**
+         * Set hero name
+         *
+         * @param  string  $name  hero name
+         *
+         * @return  self
+         */ 
+        public function setName(string $name) {
+                $this->name = $name;
+
+                return $this;
+        }
+
+        /**
+         * Set hero maximum life pool
+         *
+         * @param  int  $maxlp  hero maximum life pool
+         *
+         * @return  self
+         */ 
+        public function setMaxlp(int $maxlp) {
+                $this->maxlp = $maxlp;
+
+                return $this;
+        }
+
+        /**
+         * Set hero current available mana
+         *
+         * @param  int  $mana  hero current available mana
+         *
+         * @return  self
+         */ 
+        public function setMana(int $mana) {
+                $this->mana = $mana;
+
+                return $this;
+        }
+
+        /**
+         * Set hero total mana at turn start
+         *
+         * @param  int  $totalmana  hero total mana at turn start
+         *
+         * @return  self
+         */ 
+        public function setTotalmana(int $totalmana) {
+                $this->totalmana = $totalmana;
+
+                return $this;
+        }
+
+        /**
+         * Set hero current faction
+         *
+         * @param  string  $faction  hero current faction
+         *
+         * @return  self
+         */ 
+        public function setFaction(string $faction) {
+                $this->faction = $faction;
+
+                return $this;
+        }
+
+        /**
+         * Set hero current deck
+         *
+         * @param  Deck  $deck  hero current deck
+         *
+         * @return  self
+         */ 
+        public function setDeck(Deck $deck) {
+                $this->deck = $deck;
+
+                return $this;
+        }
+
+        /**
+         * Set hero current hand
+         *
+         * @param  Hand  $hand  hero current hand
+         *
+         * @return  self
+         */ 
+        public function setHand(Hand $hand) {
+                $this->hand = $hand;
+
+                return $this;
         }
     }
