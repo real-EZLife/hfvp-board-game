@@ -3,119 +3,123 @@
         public function __construct() {
 
         }
-        private $currentHp;
-        private $maxHp;
-        private $currentMana;
-        private $totalMana;
+        private $id;
+        /**
+         * hero current life pool
+         *
+         * @var int
+        */
+        private $lp;
+        /**
+         * hero name
+         *
+         * @var string
+        */
+        private $name;
+        /**
+         * hero maximum life pool
+         *
+         * @var int 
+        */
+        private $Lp;
+        /**
+         * hero current available mana
+         *
+         * @var int
+        */
+        private $mana;
+        /**
+         * hero total mana at turn start
+         *
+         * @var int
+        */
+        private $totalmana;
+        /**
+         * hero current faction
+         * 
+         * @var string
+        */
         private $faction;
+        /**
+         * hero current deck
+         * 
+         * @var Deck
+        */
         private $deck;
+        /**
+         * hero current hand
+         * 
+         * @var Hand
+        */
         private $hand;
 
         /**
-         * Get the value of currentHp
+         * Get the value of id
          */ 
-        public function getCurrentHp() : int {
-                return $this->currentHp;
+        public function getId() {
+                return $this->id;
         }
 
         /**
-         * Set the value of currentHp
+         * Get hero current life pool
          *
-         * @return  self
+         * @return  int
          */ 
-        public function setCurrentHp(Int $currentHp) : self {
-                $this->currentHp = $currentHp;
-
-                return $this;
+        public function getLp() {
+                return $this->lp;
         }
 
         /**
-         * Get the value of maxHp
-         */ 
-        public function getMaxHp() : int {
-                return $this->maxHp;
-        }
-
-        /**
-         * Set the value of maxHp
+         * Get hero name
          *
-         * @return  self
+         * @return  string
          */ 
-        public function setMaxHp(Int $maxHp) : self {
-                $this->maxHp = $maxHp;
-
-                return $this;
+        public function getName() {
+                return $this->name;
         }
 
         /**
-         * Get the value of currentMana
-         */ 
-        public function getCurrentMana() : int {
-                return $this->currentMana;
-        }
-
-        /**
-         * Set the value of currentMana
+         * Get hero maximum life pool
          *
-         * @return  self
+         * @return  int
          */ 
-        public function setCurrentMana(Int $currentMana) : self {
-                $this->currentMana = $currentMana;
-
-                return $this;
+        public function getMaxLp() {
+                return $this->maxLp;
         }
 
         /**
-         * Get the value of totalMana
+         * Get hero total mana at turn start
+         *
+         * @return  int
          */ 
-        public function getTotalMana() : int {
+        public function getTotalmana() {
                 return $this->totalMana;
         }
 
         /**
-         * Set the value of totalMana
+         * Get hero current faction
          *
-         * @return  self
+         * @return  string
          */ 
-        public function setTotalMana(Int $totalMana) : self{
-                $this->totalMana = $totalMana;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of faction
-         */ 
-        public function getFaction() : string {
+        public function getFaction() {
                 return $this->faction;
         }
 
         /**
-         * Set the value of faction
+         * Get hero current deck
          *
-         * @return  self
+         * @return  Deck
          */ 
-        public function setFaction(string $faction) : self{
-                $this->faction = $faction;
-
-                return $this;
+        public function getDeck() {
+                return $this->deck;
         }
 
         /**
-         * Get the value of hand
+         * Get hero current hand
+         *
+         * @return  Hand
          */ 
-        public function getHand() : hand {
+        public function getHand() {
                 return $this->hand;
-        }
-
-        /**
-         * Set the value of hand
-         *
-         * @return  self
-         */ 
-        public function setHand(Hand $hand) : self {
-                $this->hand = $hand;
-
-                return $this;
         }
     }
