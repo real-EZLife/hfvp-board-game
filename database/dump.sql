@@ -12,3 +12,8 @@ INSERT INTO `user` VALUES ('epicadmin','Admin','EZLife','enterprise.ezlife@gmail
 -- Création de l'utilisateur 'Designer'
 
 INSERT INTO `user` VALUES ('epicdesign', 'Design', 'EZLife', 'enterprise.ezlife@gmail.com','design-my-life','',2);
+
+-- Création des factions
+
+INSERT INTO `faction`(`fac_name`) VALUES ('heroic');
+INSERT INTO `faction`(`fac_name`) VALUES ('politic');
