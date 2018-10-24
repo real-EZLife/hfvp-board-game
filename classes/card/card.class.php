@@ -2,47 +2,51 @@
     /**
      * Card est une classe permettant de créer un modèle de Carte
     */
-    class Card {
-        public function __construct(  String $cardName = 'defaultTitle', String $cardImg = './defaultImg.jpeg', String $cardDesc = 'defaultDesc', Int $cardManaCost = 0, 
-                        String $cardType = '', $cardSpecial = false) {
+    abstract class Card {
+        public function __construct(  array $datas ) {
                             
-            $this->setName($cardName);
-            $this->setImg($cardImg);
-            $this->setDesc($cardDesc);
-            $this->setManaCost($cardManaCost);
-            $this->setType($cardType);
-            $this->setSpecial($cardSpecial);
+            $this->hydrate($datas);
         }
+        /**
+         * Holds the card name
+         * @var int
+        */
+        protected $id;
         /**
          * Holds the card name
          * @var string
         */
-        private $name;
+        protected $name;
         /**
          * Holds the card image path
          * @var string
         */
-        private $img;
+        protected $img;
         /**
          * Holds the card description
          * @var string
         */
-        private $desc;
+        protected $desc;
         /**
          * Holds the card mana cost
          * @var int
         */
-        private $manaCost;
+        protected $mana;
         /**
          * Holds the card type
          * @var string
         */
-        private $type;
+        protected $fx;
+        /**
+         * Holds the card type
+         * @var string
+        */
+        protected $type;
         /**
          * Holds the card special type
          * @var string
         */
-        private $special;
+        protected $special;
         /**
          * 
          * ------------------
@@ -56,57 +60,75 @@
          * setSpecial
          * 
          * @param mixed pass a string with special keyword or false
-         * @return void
+         * @return self
         */
-        public function setSpecial($value) : void {
+        public function setSpecial($value) : self {
             $this->special = $value;
+            return $this;
         }
         /**
          * setName
          * 
          * @param int
-         * @return void
+         * @return self
         */
-        public function setName(string $value) : void {
+        public function setName(string $value) : self {
             $this->name = $value;
+            return $this;
         }
         /**
          * setImg
          * 
          * @param int
-         * @return void
+         * @return self
         */
-        public function setImg(string $value) : void {
+        public function setImg(string $value) : self {
             $this->img = $value;
+            return $this;
         }
         /**
          * setDesc
          * 
          * @param int
-         * @return void
+         * @return self
         */
-        public function setDesc(string $value) : void {
+        public function setDesc(string $value) : self {
             $this->desc = $value;
+            return $this;
         }
         /**
-         * setManaCost
+         * setMana
          * 
          * @param int
-         * @return void
+         * @return self
         */
-        public function setManaCost(int $value) : void {
-            $this->manaCost = $value;
+        public function setMana(int $value) : self {
+            $this->mana = $value;
+            return $this;
         }
         /**
          * setType
          * 
          * @param int
-         * @return void
+         * @return self
         */
-        public function setType(string $value) : void {
+        public function setType(string $value) : self {
             $this->type = $value;
+            return $this;
         }
 
+        /**
+         * Set $id
+         *
+         * @param  int  $id  Holds the card name
+         *
+         * @return  self
+         */ 
+        public function setId(int $id) {
+            $this->id = $id;
+
+            return $this;
+        }
         /**
          * 
          * ------------------------
@@ -148,12 +170,12 @@
             return $this->desc;
         }
         /**
-         * getManaCost
+         * getMana
          * 
          * @return int
         */
-        public function getManaCost() : int {
-            return $this->manaCost;
+        public function getMana() : int {
+            return $this->mana;
         }
         /**
          * getType
@@ -164,6 +186,14 @@
             return $this->type;
         }
         /**
+         * Get $id
+         *
+         * @return  int
+         */ 
+        public function getId() {
+            return $this->id;
+        }
+        /**
          * getCardInfo
          * 
          * return all the Card properties as an assoc. array
@@ -172,14 +202,22 @@
          * @return array
         */
         public function getCardInfo() : array {
-            $card = [
-                'name' => $this->getName(),
-                'img' => $this->getImg(),
-                'desc' => $this->getDesc(),
-                'manaCost' => $this->getManaCost(),
-                'type' => $this->getType(),
-                'special' => $this->getSpecial()
-            ];
-            return $card;
+            return get_object_vars($this);
+        }
+
+        /**
+         * ----------------------------------------
+         * METHODS
+         * ----------------------------------------
+         */
+        public function hydrate(array $datas) {
+            if(!empty($datas)) {
+                foreach($datas as $key => $value) {
+                    $methodName = 'set' . ucfirst($key);
+                    if(method_exists($this, $methodName)) {
+                        $this->$methodName($value);
+                    }
+                }
+            }
         }
     }
