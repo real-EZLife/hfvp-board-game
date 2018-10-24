@@ -11,7 +11,7 @@
  * @package heroic fantaisy vs politic
  * @subpackage user
  * @copyright 2018 EZlife - all rights reserved
- * @author Christophe Roussin<adrsse mail pro>
+ * @author Christophe Roussin<adresse mail pro>
  */
 class User
 {
@@ -21,48 +21,47 @@ class User
 
     /**
      * Identifiant d'utilisateur
-     *
      * @var string
      */
-    private $_pseudo;
+    private $pseudo;
     /**
      * Mot de passe de l'utilisateur
-     *
      * @var string
      */
-    private $_password;
+    private $password;
     /**
      * Nom de l'utilisateur
-     *
      * @var string
      */
-    private $_surname;
+    private $surname;
     /**
      * Prénom de l'utilisateur
-     *
      * @var string
      */
-    private $_name;
+    private $name;
     /**
      * Email de l'utilisateur
-     *
      * @var string
      */
-    private $_email;
+    private $email;
     /**
      * Rôle de l'utilisateur
-     *
      * @var integer
      */
-    private $_role = 3;
+    private $role = 3;
     /**
      * Date d'inscription de l'utilisateur
-     *
      * @var string
      */
-    private $_signup;
+    private $signup;
 
     /* ----------------------------------------------------
+                        CONSTANTS
+    ---------------------------------------------------- */
+
+    const PARAM_CRYPT = PASSWORD_BCRYPT;
+
+     /* ----------------------------------------------------
                         CONSTRUCTEUR
     ---------------------------------------------------- */
 
@@ -91,8 +90,8 @@ class User
         foreach ($data as $key => $value) {
             $key = str_replace('user_', '', $key);
             $key = str_replace('_id', '', $key);
-            $methodName = 'set_' . $key;
-            if (method_exists($this, $methodName)) {
+            $methodName = 'set' . $key;
+            if (method_exists($this, ucfirst($methodName))) {
                 $this->$methodName($value);
             }
         }
@@ -107,63 +106,63 @@ class User
      *
      * @return  string
      */
-    public function get_pseudo()
+    public function getPseudo()
     {
-        return $this->_pseudo;
+        return $this->pseudo;
     }
     /**
      * Get mot de passe de l'utilisateur
      *
      * @return  string
      */
-    public function get_password()
+    public function getPassword()
     {
-        return $this->_password;
+        return $this->password;
     }
     /**
      * Get nom de l'utilisateur
      *
      * @return  string
      */
-    public function get_surname()
+    public function getSurname()
     {
-        return $this->_surname;
+        return $this->surname;
     }
     /**
      * Get prénom de l'utilisateur
      *
      * @return  string
      */
-    public function get_name()
+    public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
     /**
      * Get email de l'utilisateur
      *
      * @return  string
      */
-    public function get_email()
+    public function getEmail()
     {
-        return $this->_email;
+        return $this->email;
     }
     /**
      * Get rôle de l'utilisateur
      *
      * @return  integer
      */
-    public function get_role()
+    public function getRole()
     {
-        return $this->_role;
+        return $this->role;
     }
     /**
      * Get date inscription de l'utilisateur
      *
      * @return  string
      */
-    public function get_signup()
+    public function getSignup()
     {
-        return $this->_signup;
+        return $this->signup;
     }
 
     /* ----------------------------------------------------
@@ -177,9 +176,9 @@ class User
      *
      * @return  self
      */
-    public function set_pseudo(string $_pseudo)
+    public function setPseudo(string $pseudo)
     {
-        $this->_pseudo = $_pseudo;
+        $this->pseudo = $pseudo;
 
         return $this;
     }
@@ -190,9 +189,9 @@ class User
      *
      * @return  self
      */
-    public function set_password(string $_password)
+    public function setPassword(string $password)
     {
-        $this->_password = $_password;
+        $this->password = $password;
 
         return $this;
     }
@@ -203,9 +202,9 @@ class User
      *
      * @return  self
      */
-    public function set_surname(string $_surname)
+    public function setSurname(string $surname)
     {
-        $this->_surname = $_surname;
+        $this->surname = $surname;
 
         return $this;
     }
@@ -216,9 +215,9 @@ class User
      *
      * @return  self
      */
-    public function set_name(string $_name)
+    public function setName(string $name)
     {
-        $this->_name = $_name;
+        $this->name = $name;
 
         return $this;
     }
@@ -229,9 +228,11 @@ class User
      *
      * @return  self
      */
-    public function set_email(string $_email)
+    public function setEmail(string $email)
     {
-        $this->_email = $_email;
+        if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $this->email = strtolower($email);
+        }
 
         return $this;
     }
@@ -242,10 +243,10 @@ class User
      *
      * @return  self
      */
-    public function set_role($_role)
+    public function setRole($role)
     {
         if (ctype_digit($_role)) {
-            $this->_role = $_role;
+            $this->role = $role;
         }
 
         return $this;
@@ -257,10 +258,57 @@ class User
      *
      * @return  self
      */ 
-    public function set_signup(string $_signup)
+    public function setSignup(string $signup)
     {
-        $this->_signup = $_signup;
+        $this->signup = $signup;
 
         return $this;
     }
+
+     /* ----------------------------------------------------
+                        STATIC METHODS
+    ---------------------------------------------------- */
+
+    /**
+     * betterCost - Determine the better cost for hashing passwords
+     *
+     * @param [type] $crypt
+     * @param float $timeTarget
+     * @return
+     */
+    public static function betterCost( $crypt = self::PARAM_CRYPT, $timeTarget = 0.05 ) {
+       $cost = 8;
+       
+       do {
+           $cost++;
+           $start = microtime(TRUE);
+           password_hash('test', $crypt, array('cost'=>$cost));
+           $end = microtime(true);
+       } while( ($end - $start)<=$timeTarget);
+
+       return $cost;
+    }
+
+    /**
+     * passwordHash - Generates a hashed password
+     * @param string $password
+     * @param array $hashOptions [optional]
+     * @return
+     */
+    public static function passwordHash( $password, $hashOptions = array('cost'=>8, 'crypt'=>self::PARAM_CRYPT) ) {
+        $options = array('cost'=>$hashOptions['cost']);
+        return password_hash($password, $hashOptions['crypt'], $options);
+    }
+
+    /**
+     * passwordVerify - Checkes a hashed password
+     *
+     * @param string $entered
+     * @param string $stored
+     * @return
+     */
+    public static function passwordVerify($entered, $stored) {
+        return password_verify($entered, $stored);
+    }
+
 }

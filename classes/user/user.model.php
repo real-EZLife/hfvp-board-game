@@ -11,7 +11,7 @@
  * @package heroic fantaisy vs politic
  * @subpackage user
  * @copyright 2018 EZlife - all rights reserved
- * @author Christophe Roussin<adrsse mail pro>
+ * @author Christophe Roussin<adresse mail pro>
  */
 
 class UserModel {
@@ -55,8 +55,7 @@ class UserModel {
     public function create(string $email, string $name, string $surname, string $pseudo, string $password) : bool
     {
         try {
-            if (($req = $this->getDb()->prepare('INSERT INTO `user` (`user_pseudo`,`user_email`, `user_name`, `user_surname`,`user_password`) 
-                                                 VALUES (?,?,?,?,?)')) !== false) 
+            if (($req = $this->getDb()->prepare('INSERT INTO `user` (`user_pseudo`,`user_email`, `user_name`, `user_surname`,`user_password`) VALUES (?,?,?,?,?)')) !== false) 
             {
                 if ($req->bindValue(1, $pseudo, PDO::PARAM_STR) &&
                     $req->bindValue(2, $email, PDO::PARAM_STR) &&
@@ -84,9 +83,9 @@ class UserModel {
      * 
      * @throws Exception if an error occured
      * 
-     * @return array The data of one or more player
+     * @return mixed (array|bool)
      */
-    public function read(string $pseudo = null) : array
+    public function read(string $pseudo = null)
     {
         try {
             if (is_null($pseudo)) {
@@ -124,35 +123,27 @@ class UserModel {
      * 
      * @throws Exception if an error occured
      * 
-     * @return integer The number of rows affected
+     * @return mixed (array|bool)
      */
-    public function update(string $pseudo, string $email = '', string $name ='', string $surname = '', string $password = '') : int
+    public function update(string $pseudo, string $email = '', string $name ='', string $surname = '', string $password = '')
     {
         try {
-            //recupère les champs 
-            // regadrer ce que renvoie ma fonction
-            if(($user = read($pseudo)) != null) {
+            if (($req = $this->getDb()->prepare('UPDATE `user` SET `user_email`=?, `user_name`=?, `user_surname`=?, `user_password`=? WHERE `user_pseudo`=?')) !== false) {
 
-                if (($req = $this->getDb()->prepare('UPDATE `user` SET `user_email`=:email, `user_name`=:name, `user_surname`=:surname, `user_password`=:pwd WHERE `user_pseudo`=:pseudo')) !== false) {
-                    
-                    if (!empty($email)) {
-                        $req->bindValue(1, $email);
+                if ($req->bindValue(1, $email) && 
+                    $req->bindValue(2, $name) && 
+                    $req->bindValue(3, $surname) && 
+                    $req->bindValue(4, $password) && 
+                    $req->bindValue(5, $pseudo)) 
+                {
+                    if ($req->execute()) {
+                        var_dump($req);
+                        // $res = $req->rowCount();
+                        $req->closeCursor();
+                        return true;
+                        
                     }
-                    if (!empty($name)) {
-                        $query .= '`, user_name`=' . $name;
-                    }
-                    if ($req->bindValue(1, $email) && 
-                        $req->bindValue(2, $name) && 
-                        $req->bindValue(3, $surname) && 
-                        $req->bindValue(4, $password) && 
-                        $req->bindValue(5, $pseudo)) 
-                    {
-                        if ($req->execute()) {
-                            $res = $req->rowCount();
-                            $req->closeCursor();
-                            return $res;
-                        }
-                    }
+
                 }
             }
             return false;
@@ -168,9 +159,9 @@ class UserModel {
      * 
      * @throws Exception if an error occured
      * 
-     * @return integer The number of rows affected
+     * @return mixed (array|bool)
      */
-    public function delete(string $pseudo) : int
+    public function delete(string $pseudo)
     {
         try {
             if (($req = $this->getDb()->prepare('DELETE FROM `user` WHERE `user_pseudo`=?')) !== false) {
@@ -193,7 +184,7 @@ class UserModel {
      * login the user
      *
      * @param string $login
-     * @return void
+     * @return mixed (array|bool)
      */
     public function signin(string $login)
     {
@@ -214,22 +205,53 @@ class UserModel {
         }
     }
 
+    /**
+     * Select all rank in database
+     *
+     * @param string $pseudo from user
+     * 
+     * @throws Exception if an error occured
+     * 
+     * @return mixed (array|bool)
+     */
+    public function autorisationRank(string $pseudo)
+    {
+        try {
+            if (($req = $this->getDb()->prepare('SELECT `user`.*, `role`.* FROM `user` JOIN `role` ON `user`.`role_id`=`role`.`role_id` WHERE `user_pseudo`=?')) !== false) {
+                if ($req->bindValue(1, $pseudo)) {
+                    if ($req->execute()) {
+                        $res = $req->fetch(PDO::FETCH_ASSOC);
+                        $req->closeCursor();
+                        return $res;
+                    }
+                }
+            }
+            return false;
+        } catch (PDOException $e) {
+            throw new Exception('Can not read the database', 16, $e);
+        }
+    }
+
 }
 
 /**
  * TEST DES METHODES
+ * mysql -h 127.0.0.1 -u objectif3w_epicassembly -p 
+    -EK,[YK4IQc* 
+    use objectif3w_epicassembly
  */
 
-require_once('D:\www\HFVSP-GIT\hfvp-board-game\conf\db_conf.php');
-$test = new UserModel($epic_db);
+// require_once('D:\www\HFVSP-GIT\hfvp-board-game\conf\db_conf.php');
+// $test = new UserModel($epic_db);
 
-// $t = $test->read('testPseudo4'); /* TEST OK pour montrer un user de la bdd*/
+// $t = $test->autorisationRank('testPseudo'); /* TEST OK */
+// $t = $test->read('testPseudo'); /* TEST OK pour montrer un user de la bdd*/
 // $t = $test->read(); /* TEST OK pour montrer tous les user de la bdd*/
 // $t = $test->signin('testPseudo4'); /* TEST OK */
-// $t = $test->create('test.test@test.com','test','TEST','testPseudo4','1234'); /* TEST OK */
-// $t = $test->delete('testPseudo2'); /* TEST OK */
-$t = $test->update('testPseudo','christophe','roussin');
+// $t = $test->create('test.test@test.com','test','TEST','testPseudo','1234'); /* TEST OK */
+// $t = $test->delete('testPseudo'); /* TEST OK */
+// $t = $test->update('testPseudo', 'chris.rou@sss.dd','chris','rou','1234') ; /* TEST OK */
 
-var_dump($t);
+// var_dump($t);
 
 // var_dump(func_get_args());
