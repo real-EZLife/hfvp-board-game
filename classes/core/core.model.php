@@ -2,7 +2,8 @@
     abstract class CoreModel {
         
         const className = '';
-        const db_prefix = '';
+        
+        const db_prefix = '';//should be without the '_'
 
         /**
          * PDO Object
@@ -62,7 +63,7 @@
                     $vals = '(';
                     foreach($values as $key => $value) {
                         if($key != 'id' && !is_numeric($key)) {
-                            $fields .= '`' . static::db_prefix . $key . '`, ';
+                            $fields .= '`' . static::db_prefix . '_' . $key . '`, ';
                             $vals .= '"' . $value . '", ';
                         }
                     }
@@ -89,6 +90,7 @@
         */
         public function read($id = null) {
             try {
+                //if $id is null the query return all tables rows
                 if($id === null) {
                     if(($req = $this->getDb()->query('SELECT * FROM ' . static::className . ';' )) != false) {
                         if(($res = $req->fetchAll(PDO::FETCH_ASSOC)) != null)
@@ -102,7 +104,8 @@
                     }
                     return false;
                 }else {
-                    if(ctype_digit($id)) {
+                    //if $id is numeric then return the selected row or false if empty
+                    if(ctype_digit($id) && is_numeric($id)) {
                         if(($req = $this->getDb()->prepare('SELECT * FROM ' . static::className . ' WHERE `' . static::db_prefix . '_id`=?;' )) != false) {
                             if($req->bindValue(1, $id, PDO::PARAM_INT)) {
                                 if($req->execute()) {
@@ -114,6 +117,7 @@
                             }
                         }
                         return false;
+                    //else $id is regular string, read() will look for the table row name and return the row or false
                     }else {
                         if(($req = $this->getDb()->prepare('SELECT * FROM ' . static::className . ' WHERE `' . static::db_prefix . '_name`=?;' )) != false) {
                             if($req->bindValue(1, $id, PDO::PARAM_STR)) {
@@ -228,9 +232,9 @@
                                 foreach($values as $key => $value) {
                                     var_dump($key);
                                     if(!is_numeric($key)) {
-                                        $selected .= " `" . static::db_prefix . "$key`, ";
+                                        $selected .= " `" . static::db_prefix . '_' ."$key`, ";
                                     }else {
-                                        $selected .= " `" . static::db_prefix . "$value`, ";
+                                        $selected .= " `" . static::db_prefix . '_' ."$value`, ";
                                     }
                                 }
                                 $selected = substr($selected, 0, -2);
@@ -255,7 +259,7 @@
                                 $query = '';
                                 foreach($values as $key => $value) {
                                     if($key != 'id' && !is_numeric($key)) {
-                                        $fields .= "`" . static::db_prefix . "$key`, ";
+                                        $fields .= "`" . static::db_prefix . '_' . "$key`, ";
                                         $inserts .= "`" . "$value`, ";
                                     }
                                 }
@@ -274,11 +278,11 @@
                                     $query = '';
                                     foreach($values as $key => $value) {
                                         if($key != 'id' && !is_numeric($key)) {
-                                            $fields .= "`" . static::db_prefix . "$key`='$value', ";
+                                            $fields .= "`" . static::db_prefix . '_' . "$key`='$value', ";
                                         }
                                     }
                                     $fields = substr($fields, 0, -2);
-                                    $query = $keyword . ' `' . static::className ."` SET $fields". ' WHERE `' . static::db_prefix . 'id`=' . $values['id'] . ';';
+                                    $query = $keyword . ' `' . static::className ."` SET $fields". ' WHERE `' . static::db_prefix . '_' . 'id`=' . $values['id'] . ';';
                                     if(($req = $this->getDb()->query($query)) !== false ) {
                                         return true;
                                     }else {
@@ -288,7 +292,7 @@
                                 break;
                             case 'DELETE':
                                 if($values['id']) {
-                                    $query = $keyword . ' FROM `' . static::className ."` ". 'WHERE `' . static::db_prefix . 'id`=' . $values['id'] . ';';
+                                    $query = $keyword . ' FROM `' . static::className ."` ". 'WHERE `' . static::db_prefix . '_' . 'id`=' . $values['id'] . ';';
                                     if(($req = $this->getDb()->query($query)) !== false ) {
                                         return true;
                                     }else {

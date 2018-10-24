@@ -159,7 +159,12 @@ class UserModel {
      * 
      * @throws Exception if an error occured
      * 
+<<<<<<< HEAD
      * @return mixed (array|bool)
+=======
+     * @return mixed int ||
+     *  bool  The number of rows affected
+>>>>>>> c0e43e43642b159d7aab3559679a9bff5f4937c7
      */
     public function delete(string $pseudo)
     {
