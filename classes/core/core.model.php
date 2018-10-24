@@ -2,7 +2,8 @@
     abstract class CoreModel {
         
         const className = '';
-        const db_prefix = '';
+        
+        const db_prefix = '';//should be without the '_'
 
         /**
          * PDO Object
@@ -231,9 +232,9 @@
                                 foreach($values as $key => $value) {
                                     var_dump($key);
                                     if(!is_numeric($key)) {
-                                        $selected .= " `" . static::db_prefix . "$key`, ";
+                                        $selected .= " `" . static::db_prefix . '_' ."$key`, ";
                                     }else {
-                                        $selected .= " `" . static::db_prefix . "$value`, ";
+                                        $selected .= " `" . static::db_prefix . '_' ."$value`, ";
                                     }
                                 }
                                 $selected = substr($selected, 0, -2);
@@ -258,7 +259,7 @@
                                 $query = '';
                                 foreach($values as $key => $value) {
                                     if($key != 'id' && !is_numeric($key)) {
-                                        $fields .= "`" . static::db_prefix . "$key`, ";
+                                        $fields .= "`" . static::db_prefix . '_' . "$key`, ";
                                         $inserts .= "`" . "$value`, ";
                                     }
                                 }
@@ -277,11 +278,11 @@
                                     $query = '';
                                     foreach($values as $key => $value) {
                                         if($key != 'id' && !is_numeric($key)) {
-                                            $fields .= "`" . static::db_prefix . "$key`='$value', ";
+                                            $fields .= "`" . static::db_prefix . '_' . "$key`='$value', ";
                                         }
                                     }
                                     $fields = substr($fields, 0, -2);
-                                    $query = $keyword . ' `' . static::className ."` SET $fields". ' WHERE `' . static::db_prefix . 'id`=' . $values['id'] . ';';
+                                    $query = $keyword . ' `' . static::className ."` SET $fields". ' WHERE `' . static::db_prefix . '_' . 'id`=' . $values['id'] . ';';
                                     if(($req = $this->getDb()->query($query)) !== false ) {
                                         return true;
                                     }else {
@@ -291,7 +292,7 @@
                                 break;
                             case 'DELETE':
                                 if($values['id']) {
-                                    $query = $keyword . ' FROM `' . static::className ."` ". 'WHERE `' . static::db_prefix . 'id`=' . $values['id'] . ';';
+                                    $query = $keyword . ' FROM `' . static::className ."` ". 'WHERE `' . static::db_prefix . '_' . 'id`=' . $values['id'] . ';';
                                     if(($req = $this->getDb()->query($query)) !== false ) {
                                         return true;
                                     }else {
