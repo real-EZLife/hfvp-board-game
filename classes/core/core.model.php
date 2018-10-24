@@ -62,7 +62,7 @@
                     $vals = '(';
                     foreach($values as $key => $value) {
                         if($key != 'id' && !is_numeric($key)) {
-                            $fields .= '`' . static::db_prefix . $key . '`, ';
+                            $fields .= '`' . static::db_prefix . '_' . $key . '`, ';
                             $vals .= '"' . $value . '", ';
                         }
                     }
@@ -89,6 +89,7 @@
         */
         public function read($id = null) {
             try {
+                //if $id is null the query return all tables rows
                 if($id === null) {
                     if(($req = $this->getDb()->query('SELECT * FROM ' . static::className . ';' )) != false) {
                         if(($res = $req->fetchAll(PDO::FETCH_ASSOC)) != null)
@@ -102,7 +103,8 @@
                     }
                     return false;
                 }else {
-                    if(ctype_digit($id)) {
+                    //if $id is numeric then return the selected row or false if empty
+                    if(ctype_digit($id) && is_numeric($id)) {
                         if(($req = $this->getDb()->prepare('SELECT * FROM ' . static::className . ' WHERE `' . static::db_prefix . '_id`=?;' )) != false) {
                             if($req->bindValue(1, $id, PDO::PARAM_INT)) {
                                 if($req->execute()) {
@@ -114,6 +116,7 @@
                             }
                         }
                         return false;
+                    //else $id is regular string, read() will look for the table row name and return the row or false
                     }else {
                         if(($req = $this->getDb()->prepare('SELECT * FROM ' . static::className . ' WHERE `' . static::db_prefix . '_name`=?;' )) != false) {
                             if($req->bindValue(1, $id, PDO::PARAM_STR)) {

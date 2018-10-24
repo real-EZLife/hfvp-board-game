@@ -168,9 +168,10 @@ class UserModel {
      * 
      * @throws Exception if an error occured
      * 
-     * @return integer The number of rows affected
+     * @return mixed int ||
+     *  bool  The number of rows affected
      */
-    public function delete(string $pseudo) : int
+    public function delete(string $pseudo)
     {
         try {
             if (($req = $this->getDb()->prepare('DELETE FROM `user` WHERE `user_pseudo`=?')) !== false) {

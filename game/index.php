@@ -2,10 +2,11 @@
 
     session_start();
 
-    require_once(dirname(__DIR__) . '/hfvp-board-game/conf/defines.php');
+    require_once(dirname(__DIR__) . '/conf/defines.php');
+
     require_once(ROOT_PATH . 'helpers/conversion.php');
 
-    require('game/game.php');
+    require('game.php');
 ?>
 
 
