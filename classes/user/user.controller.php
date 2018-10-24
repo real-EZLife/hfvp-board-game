@@ -11,7 +11,7 @@
  * @package heroic fantaisy vs politic
  * @subpackage user
  * @copyright 2018 EZlife - all rights reserved
- * @author Christophe Roussin<adrsse mail pro>
+ * @author Christophe Roussin<adresse mail pro>
  */
 
 class UserController
