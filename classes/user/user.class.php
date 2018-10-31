@@ -49,10 +49,20 @@ class User extends Core {
      */
     private $role = 3;
     /**
+     * Libelle du role de l'utilisateur
+     * @var string
+     */
+    private $rolename;
+    /**
      * Date d'inscription de l'utilisateur
      * @var string
      */
     private $signup;
+    /**
+     * Pouvoir de l'utilisateur
+     * @var string
+     */
+    private $power;
 
     /* ----------------------------------------------------
                         CONSTANTS
@@ -86,7 +96,6 @@ class User extends Core {
     {
         foreach ($data as $key => $value) {
             $key = str_replace('user_', '', $key);
-            $key = str_replace('_id', '', $key);
             $methodName = 'set' . $key;
             if (method_exists($this, ucfirst($methodName))) {
                 $this->$methodName($value);
@@ -162,6 +171,23 @@ class User extends Core {
         return $this->signup;
     }
 
+    /**
+     * Get pouvoir de l'utilisateur
+     *
+     * @return  string
+     */ 
+    public function getPower() {
+        return $this->power;
+    }
+
+    /**
+     * Get libelle du role de l'utilisateur
+     *
+     * @return  string
+     */ 
+    public function getRolename() {
+        return $this->rolename;
+    }
     /* ----------------------------------------------------
                         SETTERS
     ---------------------------------------------------- */
@@ -240,9 +266,8 @@ class User extends Core {
      *
      * @return  self
      */
-    public function setRole($role)
-    {
-        if (ctype_digit($_role)) {
+    public function setRole(int $role) {
+        if (ctype_digit($role)) {
             $this->role = $role;
         }
 
@@ -262,6 +287,31 @@ class User extends Core {
         return $this;
     }
 
+    /**
+     * Set pouvoir de l'utilisateur
+     *
+     * @param  string  $power  Pouvoir de l'utilisateur
+     *
+     * @return  self
+     */ 
+    public function setPower(string $power) {
+        $this->power = $power;
+
+        return $this;
+    }
+
+    /**
+     * Set libelle du role de l'utilisateur
+     *
+     * @param  string  $rolename  Libelle du role de l'utilisateur
+     *
+     * @return  self
+     */ 
+    public function setRolename(string $rolename) {
+        $this->rolename = $rolename;
+
+        return $this;
+    }
      /* ----------------------------------------------------
                         STATIC METHODS
     ---------------------------------------------------- */
@@ -307,5 +357,16 @@ class User extends Core {
     public static function passwordVerify($entered, $stored) {
         return password_verify($entered, $stored);
     }
+        /**
+         * getObjectInfos
+         * 
+         * return all the object properties as an associative array
+         * 
+         * @return array
+        */
+        public function getObjectInfo() : array {
+            return get_object_vars($this);
+        }
+
 
 }

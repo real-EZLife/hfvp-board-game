@@ -1,5 +1,6 @@
 <?php 
     abstract class Core {
+        //possible utilisation trait pour getobjectinfo
         public function __construct(array $datas) {
             $this->hydrate($datas);
         }
@@ -20,7 +21,6 @@
          * 
          * return all the object properties as an associative array
          * 
-         * @param int
          * @return array
         */
         public function getObjectInfo() : array {

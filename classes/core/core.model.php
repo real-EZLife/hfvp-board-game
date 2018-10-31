@@ -3,7 +3,7 @@
         
         const className = '';
         
-        const db_prefix = '';//should be without the '_'
+        const db_prefix = '';//should be WITHOUT the '_'
 
         /**
          * PDO Object

@@ -69,7 +69,6 @@ class UserModel {
                     }
                 }
             }
-
             return false;
         } catch (PDOException $e) {
             throw new Exception('Can not insert into the database', 12, $e);
@@ -89,18 +88,29 @@ class UserModel {
     {
         try {
             if (is_null($pseudo)) {
-                if (($req = $this->getDb()->query('SELECT * FROM `user` ORDER BY `user_pseudo` ASC')) !== false) {
+                if (($req = $this->getDb()->query('SELECT `user`.*,
+                                                    `user`.`role_id` AS `user_role`,
+                                                    `role`.`role_name` AS `user_rolename`,
+                                                    `role`.`role_power` AS `user_power`
+                                                     FROM `user` LEFT JOIN `role` ON `user`.`role_id`=`role`.`role_id` ORDER BY `user_pseudo` ASC')) !== false) {
                     $res = $req->fetchAll(PDO::FETCH_ASSOC);
                     $req->closeCursor();
                     return $res;
                 }
             } else {
-                if (($req = $this->getDb()->prepare('SELECT * FROM `user` WHERE `user_pseudo`=?')) !== false) {
+                if (($req = $this->getDb()->prepare('SELECT `user`.*,
+                                                    `user`.`role_id` AS `user_role`,
+                                                    `user`.`user_signup_date` AS `user_signup`,
+                                                    `role`.`role_name` AS `user_rolename`,
+                                                    `role`.`role_power` AS `user_power`
+                                                    FROM `user` LEFT JOIN `role` ON `user`.`role_id`=`role`.`role_id` WHERE `user_pseudo`=?')) !== false) {
                     if ($req->bindValue(1, $pseudo)) {
                         if ($req->execute()) {
-                            $res = $req->fetchAll(PDO::FETCH_ASSOC);
+                            $res = $req->fetch(PDO::FETCH_ASSOC);
                             $req->closeCursor();
-                            return $res;
+                            if(!empty($res))
+                                return $res;
+                            return false;
                         }
                     }
                 }
@@ -159,12 +169,8 @@ class UserModel {
      * 
      * @throws Exception if an error occured
      * 
-<<<<<<< HEAD
-     * @return mixed (array|bool)
-=======
      * @return mixed int ||
      *  bool  The number of rows affected
->>>>>>> c0e43e43642b159d7aab3559679a9bff5f4937c7
      */
     public function delete(string $pseudo)
     {
