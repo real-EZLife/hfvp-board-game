@@ -13,8 +13,7 @@
  * @copyright 2018 EZlife - all rights reserved
  * @author Christophe Roussin<adresse mail pro>
  */
-class User
-{
+class User extends Core {
     /* ----------------------------------------------------
                         ATTRIBUTS
     ---------------------------------------------------- */
@@ -69,9 +68,9 @@ class User
      * Constructeur
      * @param array $data
      */
-    public function __construct(array $data) {
-        $this->hydrate($data);
-    }
+    // public function __construct(array $data) {
+    //     $this->hydrate($data);
+    // }
 
      /* ----------------------------------------------------
                         HYDRATATION

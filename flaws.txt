@@ -1,0 +1,10 @@
+Fail dans le design du jeu:
+
+- Manque un moyen de déterminer qui commence, à qui est-ce le 
+  tour de jouer
+	Solution: Ajouter un champ dans la table `game`
+		  ex game_who_turn: 0: Non commencé
+			            1: Tour joueur A
+				    2: tour joueur B
+			            100: Partie terminée		
+- 

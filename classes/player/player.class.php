@@ -7,242 +7,59 @@
      * 
      * @return Player
     */
-    class Player {
-        public function __construct( User $user, Deck $deck, Hand $hand ) {
-            //Attribue un objet deck, crée préalablement, à la nouvelle instance de Player
-            $this->deck = $deck;
-            //Attribue un objet main, crée préalablement, à la nouvelle instance de Player
-            $this->hand = $hand;
-            //Le nom de la nouvelle instance de Player découle de l'utilisateur
-            $this->playername = $user->getDisplayedUserName();
-            //initialise le pool de point de vie du joueur
-            $this->hp = self::BASEHP;
-        }
+    class Player extends Core {
+        // public function __construct( User $user, Deck $deck, Hand $hand ) {
+        //     //Attribue un objet deck, crée préalablement, à la nouvelle instance de Player
+        //     $this->deck = $deck;
+        //     //Attribue un objet main, crée préalablement, à la nouvelle instance de Player
+        //     $this->hand = $hand;
+        //     //Le nom de la nouvelle instance de Player découle de l'utilisateur
+        //     $this->name = $user->getDisplayedUserName();
+        //     $this->id = $user->getId();
+        //     //initialise le pool de point de vie du joueur
+        //     $this->hp = self::BASEHP;
+        // }
         const BASEHP = 20;
         const MAXIMUMMANA = 10;
         /**
+         * Player Id
+         * 
+         * @var 
+        */
+        private $id = '';
+        /**
+         * Player name
+         * 
          * @var string
         */
-        private $playername = '';
-        /**
-         * @var int
-        */
-        private $hp;
-        /**
-         * @var int
-        */
-        private $totalMana = 0;
-        /**
-         * @var int
-        */
-        private $currentMana = 0;
+        private $name = '';
         /**
          * @var int
         */
         private $turns = 0;
         /**
-         * @var bool
-        */
-        private $isAlive = true;
-        /**
+         * 
          * @var bool
         */
         private $isPlayerTurn = false;
         /**
-         * @var string
+         * Currently Played Hero
+         *
+         * @var Hero
         */
-        private $faction = 'not defined';
+        private $hero;
         /**
+         * Current Player's Hand object
+         * 
          * @var Hand
         */
         private $hand;
         /**
+         * Current Player's Deck object
+         * 
          * @var Deck
         */
         private $deck;
-        //Player Setters
-        /**
-         * setCurrentMana 
-         * 
-         * @param int
-         * @return self
-        */
-        public function setCurrentMana( Int $value ) : self {
-            $this->currentMana = $value;
-            return $this;
-        }
-        /**
-         * setTotalMana
-         * 
-         * @param int
-         * @return self
-        */
-        public function setTotalMana( Int $value ) : self {
-            $this->totalMana = $value;
-            return $this;
-        }
-        /**
-         * setPlayerName
-         * 
-         * @param string
-         * @return self
-        */
-        public function setPlayerName( String $value ) : self {
-            $this->playername = $value;
-            return $this;
-        }
-        /**
-         * setHp
-         * 
-         * @param int
-         * @return self
-        */
-        public function setHp( Int $value ) : self {
-            //$hp must always be <= self::BASEHP
-            if( $value + $this->hp >= self::BASEHP ) {
-                $this->hp = self::BASEHP;
-            }else {
-                $this->hp = $value;
-            }
-            return $this;
-        }
-        /**
-         * setTurns
-         * 
-         * @param int
-         * @return self
-        */
-        public function setTurns( Int $value ) : self {
-            $this->turns = $value;
-            return $this;
-        }
-        /**
-         * setAliveStatus
-         * 
-         * @param bool
-         * @return self
-        */
-        public function setAliveStatus( Bool $value ) : self {
-            $this->isAlive = $value;
-            return $this;
-        }
-        /**
-         * setPlayerTurnStatus
-         * 
-         * @param bool
-         * @return self
-        */
-        public function setPlayerTurnStatus( Bool $value ) : self {
-            $this->isPlayerTurn = $value;
-            return $this;
-        }
-        /**
-         * setFaction
-         * 
-         * @param string
-         * @return self
-        */
-        public function setFaction( String $value ) : self {
-            $this->faction = $value;
-            return $this;
-        }
-        /**
-         * setPlayerDeck
-         * 
-         * @param Deck
-         * @return self
-        */
-        public function setPlayerDeck( Deck $value ) : self {
-            $this->deck = $value;
-            return $this;
-        }
-        /**
-         * setPlayerHand
-         * 
-         * @param Hand
-         * @return self
-        */
-        public function setPlayerHand( Hand $value ) : self {
-            $this->hand = $value;
-            return $this;
-        }
-        //Player Getters
-        /**
-         * getCurrentMana
-         * 
-         * return Player->currentMana
-         * 
-         * @return int
-        */
-        public function getCurrentMana() : int {
-            return $this->currentMana;
-        }
-        /**
-         * getTotalMana
-         * 
-         * return Player->totalMana
-         * 
-         * @return int
-        */
-        public function getTotalMana() : int {
-            return $this->totalMana;
-        }
-        /**
-         * getPlayerName
-         * 
-         * @return string
-        */
-        public function getPlayerName() : string {
-            return $this->playername;
-        }
-        /**
-         * getHp
-         * 
-         * @return int
-        */
-        public function getHp() : int {
-            return $this->hp;
-        }
-        /**
-         * getTurns
-         * 
-         * @return int
-        */
-        public function getTurns() : int {
-            return $this->turns;
-        }
-        /**
-         * getAliveStatus
-         * 
-         * @return bool
-        */
-        public function getAliveStatus() : bool {
-            return $this->isAlive;
-        }
-        /**
-         * getPlayerTurnStatus
-         * 
-         * @return bool
-        */
-        public function getPlayerTurnStatus() : bool {
-            return $this->isPlayerTurn;
-        }
-        /**
-         * getFaction
-         * 
-         * @return string
-        */
-        public function getFaction() : string {
-            return $this->faction;
-        }
-        /**
-         * getPlayerDeck
-         * 
-         * @return array
-        */
-        public function getPlayerDeck() : array {
-            return $this->deck->getDeckList();
-        }
         /**
          * getPlayerHandCard
          * 
@@ -363,52 +180,36 @@
             return $this->deck->getCardCount();
         }
         /**
-         * takeDamage
-         * 
-         * Reduce Player->hp value by $n then run Player->checkHpPool();
-         * 
-         * @param int $n
-         * @return void
-        */
-        public function takeDamage( Int $n ) : void {
-            $this->hp -= $n;
-            $this->checkHpPool();
-        }
-        /**
-         * CheckHpPool
-         * 
-         * Compare Player->hp to 0 and modify Player->isAlive value accordingly
-         * 
-         * @param int $n
-         * @return void
-        */
-        public function checkHpPool() : void {
-            if( $this->hp <= 0 ) {
-                $this->isAlive = false;
-            }
-        }
-        /**
-         * addOneTotalMana
-         * 
-         * Check Player->totalMana value is lesser than self::MAXIMUMMANA value and update Player->totalmana accordingly
-         * 
-         * @return void
-        */
-        public function addOneTotalMana() : void {
-            if( $this->totalMana < self::MAXIMUMMANA) {
-                $this->totalMana += 1;
-            }
-        }
-        /**
          * exportPlayer
          * 
          * Return a new object containing current Player instance properties
          * 
          * @return object
         */
-        public function exportPlayer() : object {
-            //create a new php object which will contain Player instance properties
-            $playerObject = new stdClass();
+        
+
+        /**
+         * Get currently Played Hero
+         *
+         * @return  Hero
+         */ 
+        public function getHero() {
+            return $this->hero;
+        }
+
+        /**
+         * Set currently Played Hero
+         *
+         * @param  Hero  $hero  Currently Played Hero
+         *
+         * @return  self
+         */ 
+        public function setHero(Hero $hero) {
+            $this->hero = $hero;
+
+            return $this;
+        }
+        public function getPlayer() : array {
 
             //initialize two array, hand and deck, which will contain Player->hand and Player->deck respectively
             $hand = []; $deck = [];
@@ -432,20 +233,14 @@
             /**
              * @var string
              */
-            $playerObject->playername = $this->getPlayerName();
-            $playerObject->hp = $this->getHp();
-            $playerObject->totalMana = $this->getTotalMana();
-            $playerObject->currentMana = $this->getCurrentMana();
-            $playerObject->isAlive = $this->getAliveStatus();
-            $playerObject->isPlayerTurn = $this->getPlayerTurnStatus();
-            $playerObject->turns = $this->getTurns();
-            $playerObject->faction = $this->getFaction();
-            $playerObject->hand = $hand;
-            $playerObject->deck = $deck;
+            $player = get_object_vars($this);
+            $player['hero'] = getHero()->getHero();
+            $player['hand'] = $hand;
+            $player['deck'] = $deck;
 
             
 
-            return $playerObject;
+            return $player;
         }
 
 

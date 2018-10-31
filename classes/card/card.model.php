@@ -33,11 +33,15 @@
                 
                 if($id == null) {
 
+                    return $datas;
                     
-
                 }elseif(ctype_digit($id)) {
-
+                    
+                    return $datas;
+                    
                 }else {
+                    
+                    return $datas;
 
                 }
 
@@ -48,3 +52,5 @@
     }
 
     $cm = new CardModel($epic_db);
+
+    var_dump($cm->read());

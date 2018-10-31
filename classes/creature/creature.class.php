@@ -8,32 +8,24 @@
      * @return Creature
     */
     class Creature extends Card {
-        public function __construct(  String $cardName = 'defaultTitle', String $cardImg = './defaultImg.jpeg', String $cardDesc = 'defaultDesc', 
-                            Int $cardManaCost = 0, $cardSpecial = false, Int $cardAtk = 0, Int $cardHp = 0  ) {
-
-            parent::__construct( $cardName, $cardImg, $cardDesc, $cardManaCost, $cardType = 'creature', $cardSpecial );
-            $this->setAtk($cardAtk);
-            $this->setHp($cardHp);
-            $this->setCanAttack(false);
-        }
         /**
          * Holds card atk value
          * 
          * @var int
         */
-        private $atk;
+        protected $atk;
         /**
          * Holds card hp value
          * 
          * @var int
         */
-        private $hp;
+        protected $hp;
         /**
          * Holds card attack status
          * 
          * @var bool
         */
-        private $canAttack = false;
+        protected $canAttack = false;
         /**
          * changeAttackState
          * 
@@ -116,19 +108,5 @@
         */
         public function getCanAttack() : bool {
             return $this->canAttack;
-        }
-        /**
-         * getCardInfo
-         * 
-         * return all the Creature properties as an assoc. array
-         * 
-         * @param int
-         * @return array
-        */
-        public function getCardInfo() : array {
-            //extends Card->getCardInfo() function adding atk and hp identifiers to the array
-            $card = parent::getCardInfo();
-            $card = array_merge($card, array('atk' => $this->getAtk(), 'hp' => $this->getHp() ));
-            return $card;
         }
     }

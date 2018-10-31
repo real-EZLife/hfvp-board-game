@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <style>
+        @font-face {
+            font-family: 'FTYSKRADJHUWNNCV3';
+            src: url('../../game/assets/fonts/FTY_SKRADJHUWN/FTY_SKRADJHUWN_NCV_3.ttf');
+        }
+        .card-view {
+            height: 0;
+            padding-bottom: 590px;
+            width: 400px;
+            box-shadow: 0 0 2px 1px #121212;
+            position: relative;
+            --default-white-color: rgb(255, 255, 255);
+            --default-red-color:rgb(209, 34, 41);
+            --default-orange-color: rgb(203, 101, 39);
+            --default-blue-color: rgb(0, 173, 239);
+            --secondary-blue-color: rgb(45, 193, 221);
+            --transparent-blue-color: rgba(45, 193, 221, 0.4);
+            --default-violet-color: rgb(114, 119, 168);
+        }
+        .card-view * {
+            color: var(--default-white-color);
+            font-family: 'FTYSKRADJHUWNNCV3', cursive;
+            font-smooth: auto;
+        }
+        .card-inner, .card-layer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            user-select: none;
+        }
+        .card-inner {
+
+        }
+        .card-layer.background-layer {
+            background: var(--default-violet-color);
+        }
+        .card-layer.image-layer {
+            padding: 3rem 1rem;
+        }
+        .card-layer.image-layer img{
+            /* border: 1px solid #000; */
+            height: auto;
+            max-width: 100% ;
+            width: 100%;
+        }
+        .icons-layer .card-icon {
+            position: absolute;
+            height: 5rem;
+            width: 5rem;
+        }
+        .icons-layer .card-icon.card-atk {
+            top: 6rem;
+            left: 0;
+        }
+        .icons-layer .card-icon.card-cost {
+            top: 0;
+            right: 0;
+        }
+        .icons-layer .card-icon.card-hp {
+            top: 0;
+            left: 0;
+        }
+        .icons-layer .card-icon span {
+            display: block;
+            height: inherit;
+            line-height: 5rem;
+            position: absolute;
+            text-align: center;
+            width: inherit;
+        }
+        .icons-layer .card-icon .icon {
+            z-index: 0;
+        }
+        .icons-layer .card-icon.card-cost .icon {
+            background: url('../../game/assets/icons/mana.svg')  center / cover;
+        }
+        .icons-layer .card-icon.card-hp .icon {
+            background: url('../../game/assets/icons/heart.svg')  center / cover;
+        }
+        .icons-layer .card-icon.card-atk .icon {
+            background: url('../../game/assets/icons/sword.svg')  center / cover;
+            transform: rotate(0.125turn);
+        }
+        .icons-layer .card-icon .value {
+            font-size: 1.4rem;
+        }
+        .icons-layer .card-icon.card-cost .value {
+            text-shadow: 0 0 2px var(--default-blue-color);
+        }
+        .icons-layer .card-icon.card-hp .value {
+            text-shadow: 0 0 2px var(--default-red-color);
+        }
+        .icons-layer .card-icon.card-atk .value {
+            text-shadow: 0 0 2px var(--default-orange-color);
+        }
+        .card-layer.text-layer {
+            top: auto;
+            bottom: 10%;
+            padding: .2vmin 0 .4vmin;
+            text-shadow: 0 0 1px #ccc;
+        }
+        .text-layer .card-desc, .text-layer .card-title, .text-layer .card-type {
+            text-align: center;
+            z-index: 1;
+        }
+        .text-layer .card-desc, .text-layer .card-title {
+            background: var(--transparent-blue-color);
+            max-width: 85%;
+            position: relative;
+            margin-left: 15%;
+        } 
+        .text-layer .card-title {
+            font-size: 1.2rem;
+            padding-bottom: .3vmin;
+        }
+        .text-layer .card-desc {
+            padding: 0 .5vmin
+        }
+        .text-layer .card-type {
+            font-size: 1.4rem;
+            position: absolute;
+            left: .8rem;
+            top: 0; bottom: 0; 
+            transform: rotate(-0.25turn);
+        }
+        /******
+
+            Media Queries
+
+        *******/
+    </style>
+
+    <div class="card-view">
+        <div class="card-inner">
+            <div class="card-layer background-layer"></div>
+            <div class="card-layer image-layer">
+                <picture src="" alt="" sizes="" srcset="">
+                    <img src='../../game/assets/characters/elfie_aux_grandes_oreilles.svg' alt="" class="fallback">
+                </picture>
+            </div>
+            <div class="card-layer icons-layer">
+                <div class="card-icon card-cost">
+                    <span class="icon"></span>
+                    <span class='value'>10</span>
+                </div>
+                <div class="card-icon card-atk">
+                    <span class="icon"></span>
+                    <span class='value'>10</span>
+                </div>
+                <div class="card-icon card-hp">
+                    <span class="icon"></span>
+                    <span class='value'>10</span>
+                </div>
+            </div>
+            <div class="card-layer text-layer">
+                <div class="card-type">Creature</div>
+                <div class="card-title">Nom de la carte</div>
+                <div class="card-desc">rigolote parce qu’on est rigolos des fois puis ça dévoile la créature de manière
+                    un peu Ici ça raconte un peu comment la carte marche </div>
+            </div>
+            <div class="card-layer foreground-layer">
+                <div class="card-fx"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

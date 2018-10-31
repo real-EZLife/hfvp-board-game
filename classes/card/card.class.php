@@ -2,11 +2,7 @@
     /**
      * Card est une classe permettant de créer un modèle de Carte
     */
-    abstract class Card {
-        public function __construct(  array $datas ) {
-                            
-            $this->hydrate($datas);
-        }
+    abstract class Card extends Core {
         /**
          * Holds the card name
          * @var int
@@ -193,31 +189,10 @@
         public function getId() {
             return $this->id;
         }
-        /**
-         * getCardInfo
-         * 
-         * return all the Card properties as an assoc. array
-         * 
-         * @param int
-         * @return array
-        */
-        public function getCardInfo() : array {
-            return get_object_vars($this);
-        }
 
         /**
          * ----------------------------------------
          * METHODS
          * ----------------------------------------
          */
-        public function hydrate(array $datas) {
-            if(!empty($datas)) {
-                foreach($datas as $key => $value) {
-                    $methodName = 'set' . ucfirst($key);
-                    if(method_exists($this, $methodName)) {
-                        $this->$methodName($value);
-                    }
-                }
-            }
-        }
     }

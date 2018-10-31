@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Calque_1" width="500" height="500"
+ version="1">
+	<style>
+		.st36,
+		.st39,
+		.st30 {
+			fill-rule: evenodd;
+			clip-rule: evenodd;
+			fill: #dbeefa
+		}
+
+		.st36,
+		.st39 {
+			fill: #fbd5d8
+		}
+
+		.st39 {
+			fill: #00badf
+		}
+	</style>
+	<defs>
+		<path id="SVGID_1_" d="M-957 43h415v415h-415z" />
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use overflow="visible" xlink:href="#SVGID_1_" />
+	</clipPath>
+	<g clip-path="url(#SVGID_2_)">
+		<defs>
+			<path id="SVGID_3_" d="M-969 31h437v438h-437z" />
+		</defs>
+		<clipPath id="SVGID_4_">
+			<use overflow="visible" xlink:href="#SVGID_3_" />
+		</clipPath>
+		<g clip-path="url(#SVGID_4_)">
+			<path fill="#a41f22" fill-rule="evenodd" d="M-750 448c-20-8-35-23-51-36-37-30-68-66-94-105-24-37-44-75-53-118-4-22-6-44 4-64 26 8 50 21 75 33l9 22 93 225c6 14 15 27 17 43z"
+			 clip-rule="evenodd" />
+			<path fill="#e0686e" fill-rule="evenodd" d="M-551 123c7 15 9 31 7 47-7 55-31 103-62 147-38 53-83 99-139 133v-5l61-143 60-146c25-10 49-21 73-33z"
+			 clip-rule="evenodd" />
+			<path fill="#d72e3c" fill-rule="evenodd" d="M-624 156l-60 146-61 143v5c-2 0-4 1-5-2 5-4 2-9 2-14l1-302v1l44 8c26 5 51 11 77 14l2 1z"
+			 clip-rule="evenodd" />
+			<path fill="#f59ba6" fill-rule="evenodd" d="M-869 158c-25-12-49-25-75-33 8-21 25-32 42-43 27-16 55-24 85-11 1 6-4 10-7 15l-45 69v3z"
+			 clip-rule="evenodd" />
+			<path d="M-624 156l-2-1c0-6-5-10-7-14-15-24-33-45-45-70 17-9 35-8 53-3 29 8 54 24 72 49l2 6c-24 12-48 23-73 33z"
+			 class="st36" />
+			<path fill="#f48e96" fill-rule="evenodd" d="M-678 71c12 25 30 46 45 70 2 4 7 8 7 14-26-3-51-9-77-14l-44-8-1-3 21-25c13-16 29-28 49-34z"
+			 clip-rule="evenodd" />
+			<path fill="#dc7787" fill-rule="evenodd" d="M-748 130l1 3v-1l-33 7c-29 5-59 12-89 16l45-69c3-5 8-9 7-15 28 7 46 27 62 49l7 10z"
+			 clip-rule="evenodd" />
+			<path d="M-869 155c30-4 60-11 89-16l33-7-1 302c0 5 3 10-2 14-2-16-11-29-17-43l-93-225-9-22v-3z" class="st36" />
+		</g>
+	</g>
+	<g fill-rule="evenodd" clip-rule="evenodd">
+		<path fill="#c28040" d="M-252 15l38 29c8 7 13 16 12 27-1 30 0 59-2 89l-5 98c-2 23 0 46-4 69-1 7 2 9 9 9l54-1c11 0 22 4 24 13 4 10 5 22-2 33-4 5-10 7-17 7h-107V15z" />
+		<path fill="#fbb250" d="M-252 15v373h-102c-11 1-20-6-22-17-3-20 1-37 26-36h54c6 0 10-1 6-8v-5c1-27-2-53-3-80-1-34-2-68-5-101-2-23 1-46-3-69-2-7 1-16 8-22l41-35z" />
+		<path fill="#875c2c" d="M-252 388h35l-1 62c0 18-17 35-34 35v-97z" />
+		<path fill="#98795d" d="M-252 388v97c-17-1-32-17-32-33v-64h32z" />
+	</g>
+	<path fill="#55c7e0" fill-rule="evenodd" d="M375 119c5-1 7 3 9 7l42 83c2 4 2 6-2 8-6 0-11 4-17 7l-99 55-12-16c-3-27-12-52-25-75v-4c15-8 30-15 43-24 20-14 45-21 61-41z"
+	 clip-rule="evenodd" />
+	<path fill="#59c9ea" fill-rule="evenodd" d="M76 192c-9-7 1-10 4-14l53-52 67-72c5-4 8-12 17-10v8l7 42c5 28 12 55-11 79-9 9-15 20-22 30-5 8-10 9-20 7l-90-18h-5z"
+	 clip-rule="evenodd" />
+	<path fill="#00aadf" fill-rule="evenodd" d="M308 279l99-55c6-3 11-7 17-7L298 403l-30 43c-5 7-8 14-18 8 0-34 0-67 4-101l54-74z"
+	 clip-rule="evenodd" />
+	<path d="M254 353c-4 34-4 67-4 101-20-7-25-27-35-43L80 201l3-3c14 9 27 20 42 28 23 13 42 33 67 42 5 18 20 30 30 45 11 13 19 29 32 40z"
+	 class="st39" />
+	<path fill="#9fdaef" fill-rule="evenodd" d="M217 52v-8c54 22 107 47 158 75-16 20-41 27-61 41-13 9-28 16-43 24-17-44-33-89-54-132z"
+	 clip-rule="evenodd" />
+	<path d="M76 192h5l2 6-3 3c-4-1-3-5-4-9z" class="st39" />
+	<path d="M83 198l-2-6 90 18c10 2 15 1 20-7 7-10 13-21 22-30 23-24 16-51 11-79l-7-42c21 43 37 88 54 132v4c-28 26-56 51-79 80-25-9-44-29-67-42-15-8-28-19-42-28z"
+	 class="st30" />
+	<path fill="#5dc9e9" fill-rule="evenodd" d="M192 268c23-29 51-54 79-80 13 23 22 48 25 75l-74 50c-10-15-25-27-30-45z"
+	 clip-rule="evenodd" />
+	<path d="M222 313l74-50 12 16-54 74c-13-11-21-27-32-40z" class="st30" />
+</svg>

@@ -44,8 +44,7 @@ class Hand
      *
      * @return integer
      */
-    public function getCardCount() : int
-    {
+    public function getCardCount() : int {
         if ($this->cardList !== null) {
             return count($this->cardList);
         } else {
@@ -58,8 +57,7 @@ class Hand
      * @param int $pos
      * @return Card
      */
-    public function getCard(Int $pos) : Card
-    {
+    public function getCard(Int $pos) : Card {
         return $this->cardList[$pos];
     }
     /**
@@ -67,8 +65,7 @@ class Hand
      *
      * @return  $cardList
      */ 
-    public function getCardList() : array
-    {
+    public function getCardList() : array {
         return $this->cardList;
     }
 
@@ -79,8 +76,7 @@ class Hand
      *
      * @return  self
      */ 
-    public function setCardList(Array $cardList) : self
-    {
+    public function setCardList(Array $cardList) : self {
         $this->cardList = $cardList;
 
         return $this;

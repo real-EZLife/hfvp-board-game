@@ -29,6 +29,11 @@
         const MAX_MANA = 10;
         private $id;
         /**
+         * @var bool
+        */
+        private $isAlive = true;
+
+        /**
          * hero current life pool
          *
          * @var int
@@ -46,11 +51,13 @@
          * @var int 
         */
         private $maxlp;
+        
         /**
          * hero current available mana
          *
          * @var int
         */
+        
         private $mana;
         /**
          * hero total mana at turn start
@@ -115,6 +122,14 @@
                 return $this->maxLp;
         }
 
+        /**
+         * Get hero current available mana
+         *
+         * @return  int
+         */ 
+        public function getMana() {
+                return $this->mana;
+        }
         /**
          * Get hero total mana at turn start
          *
@@ -266,13 +281,5 @@
                 return $this;
         }
 
-        /**
-         * Get hero current available mana
-         *
-         * @return  int
-         */ 
-        public function getMana()
-        {
-                return $this->mana;
-        }
+
     }
