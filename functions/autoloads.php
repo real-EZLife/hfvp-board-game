@@ -1,6 +1,12 @@
 <?php
     function LoadAll(string $classname) : void {
         $classname = strtolower($classname);
+        if($pos = strpos($classname, 'singleton')) {
+            $classname = substr($classname, 0, $pos);
+            if (file_exists(ROOT_PATH . "classes/singleton/$classname.singleton.php")) {
+                require_once(ROOT_PATH . "classes/singleton/$classname.singleton.php");
+            }
+        }
         if ($pos = strpos($classname, 'model')) {
             $classname = substr($classname, 0, $pos);
             if (file_exists(ROOT_PATH . "classes/$classname/$classname.model.php")) {

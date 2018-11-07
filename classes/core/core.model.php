@@ -44,8 +44,8 @@
          *
          * @return  self
          */ 
-        private function setDb(PDO $db) {
-            $this->db = $db;
+        private function setDb() {
+            $this->db = PDOSingleton::getInstance();
 
             return $this;
         }
