@@ -1,5 +1,4 @@
 <?php
-    require_once(ROOT_PATH . '/classModels/Cards/Card.php');
     /**
      * Creature est une classe hérité de la class Card
      * 
@@ -20,6 +19,12 @@
          * @var int
         */
         protected $hp;
+        /**
+         * Holds card talent keyword
+         * 
+         * @var string
+        */
+        protected $talent = 'none';
         /**
          * Holds card attack status
          * 
@@ -75,7 +80,18 @@
         public function setCanAttack( bool $value) : self {
             $this->canAttack = $value;
             return $this;
-        }
+        }        /**
+        * Set card talent keyword
+        *
+        * @param  string  $talent  Holds card talent keyword
+        *
+        * @return  self
+        */ 
+       public function setTalent(string $talent) {
+            $this->talent = $talent;
+
+            return $this;
+       }
         /**
          * 
          * ------------------
@@ -109,4 +125,13 @@
         public function getCanAttack() : bool {
             return $this->canAttack;
         }
+        /**
+         * Get holds card talent keyword
+         *
+         * @return  string
+         */ 
+        public function getTalent() {
+            return $this->talent;
+        }
+
     }

@@ -195,4 +195,14 @@
          * METHODS
          * ----------------------------------------
          */
+        /**
+         * getCardData
+         * 
+         * return all the User instance properties as an associative array except password
+         * 
+         * @return array
+        */
+        public function getCardData() : array {
+            return $this->getObjectInfo($this);
+        }
     }

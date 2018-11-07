@@ -233,7 +233,7 @@
             /**
              * @var string
              */
-            $player = get_object_vars($this);
+            $player = $this->getObjectInfo($this);
             $player['hero'] = getHero()->getHero();
             $player['hand'] = $hand;
             $player['deck'] = $deck;

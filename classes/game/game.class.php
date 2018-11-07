@@ -205,4 +205,16 @@
 
             return $this;
         }
+
+        /**
+         * getGameInfo
+         * 
+         * return all the Game instance properties as an associative array except password
+         * 
+         * @return array
+        */
+        public function getGameInfo() : array {
+            $vars = $this->getObjectInfo($this);
+            return $vars;            
+        }
     }

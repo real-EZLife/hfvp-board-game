@@ -1,13 +1,8 @@
 <?php
-    require_once(ROOT_PATH . 'classModels/Cards/Creature.php');
-    require_once(ROOT_PATH . 'classModels/Cards/Creature/Shield.php');
-    require_once(ROOT_PATH . 'classModels/Cards/Spell.php');
-    require_once(ROOT_PATH . 'classModels/Cards/Special.php');
-
     /**
      * Deck class is used to create a new Deck instance
      */
-    class Deck {
+    class Deck extends Core {
         public function __construct( Array $deckFormat = [] ) {
             $this->format = $deckFormat;
         }

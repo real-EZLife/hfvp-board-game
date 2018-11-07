@@ -357,16 +357,19 @@ class User extends Core {
     public static function passwordVerify($entered, $stored) {
         return password_verify($entered, $stored);
     }
-        /**
-         * getObjectInfos
-         * 
-         * return all the object properties as an associative array
-         * 
-         * @return array
-        */
-        public function getObjectInfo() : array {
-            return get_object_vars($this);
-        }
+    /**
+     * getUserInfo
+     * 
+     * return all the User instance properties as an associative array except password
+     * 
+     * @return array
+    */
+    public function getUserInfo() : array {
+        $vars = get_object_vars($this);
+        if(isset($vars['password']))
+            unset($vars['password']);
+        return $vars;            
+    }
 
 
 }

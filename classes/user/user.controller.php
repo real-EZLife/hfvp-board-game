@@ -98,7 +98,7 @@ class UserController extends CoreController {
                     if(User::passwordVerify($post['password'], $data['user_password'])) {
                         $user = new User($data);
                         $user->setPassword('erased');
-                        $_SESSION['hfvp']['user'] = $user->getObjectInfo();
+                        $_SESSION['hfvp']['user'] = $user->getUserInfo();
                         if($user->getPower() >= 20) {
                             header('Location: ../?login=ok');
                         }else {

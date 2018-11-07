@@ -281,5 +281,16 @@
                 return $this;
         }
 
+        /**
+         * getHeroInfo
+         * 
+         * return all the Hero instance properties as an associative array
+         * 
+         * @return array
+        */
+        public function getHeroInfo() : array {
+                $vars = $this->getObjectInfo($this);
+                return $vars;            
+        }
 
     }
