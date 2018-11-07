@@ -22,17 +22,20 @@ class PDOSingleton {
     }
     
     /**
-        * Crée et retourne l'objet SPDO
-        *
-        * @access public
-        * @static
-        * @param void
-        * @return PDOSingleton $instance
-        */
+    * Crée et retourne l'objet SPDO
+    *
+    * @access public
+    * @static
+    * @param void
+    * @return PDOSingleton $instance
+    */
     public static function getInstance() {  
         if(is_null(self::$instance)) {
             self::$instance = new PDOSingleton();
         }
         return self::$instance;
+    }
+    public function getDB() {
+        return $this->PDOInstance;
     }
 }

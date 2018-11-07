@@ -26,7 +26,7 @@
          * @return  PDO
         */ 
         protected function getDb() {
-            return $this->db;
+            return $this->db::getInstance()->getDb();
         }
         /**
          * 
@@ -71,6 +71,7 @@
                     $vals = substr($vals, 0, -2) . ')';
 
                     $query .= $fields . ' VALUES '. $vals . ';';
+                    var_dump($this->getDb());
                     if(($req = $this->getDb()->query($query)) != false) {
                         return $this->getDb()->lastInsertId();
                     }else {
@@ -310,8 +311,8 @@
                 return $e->getMessage();
             }
         }
-        public function __construct( PDO $db ) {
-            $this->setDb($db);
+        public function __construct() {
+            $this->setDb();
         }
         
     }

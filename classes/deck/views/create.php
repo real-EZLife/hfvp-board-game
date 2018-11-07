@@ -1,5 +1,5 @@
 <h1>Création d'un deck</h1>
-<form action="?c=deck&a=composing" method='post'>
+<form action="?c=deck&a=creating" method='post'>
     <label for="name">
         Nom du Deck
         <input type="text" name="name" id="name">

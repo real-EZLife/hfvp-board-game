@@ -10,8 +10,9 @@ class DeckModel extends CoreModel {
         $deck= ['name' => $values['name']];
 
         if(($id = parent::create($deck)) != false )
-            $this->query('INSERT INTO `compose` (`deck_id`, `user_pseudo`) VALUES (' . $id . ', ' . $_SESSION['user']['pseudo'] .');');
-
+            var_dump($this->query('INSERT INTO `compose` (`deck_id`, `user_pseudo`) VALUES (' . $id . ', ' . $_SESSION['user']['pseudo'] .');'));
+        else
+            return false;
     }
 
 }

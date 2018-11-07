@@ -5,8 +5,14 @@ class DeckController extends CoreController {
     public function createAction() {
         $this->render('create');
     }
-    public function creatingAction($post) {
+    public function creatingAction(array $post) {
+        
+        if(empty($post['name'])) {
+            header('Location: .?c=deck&a=create&err=required');
+        }
         $this->setModel();
+        $this->getModel()->create($post);
+
     }
     public function composeAction() {
         $this->render('compose');

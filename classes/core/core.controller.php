@@ -46,12 +46,12 @@
          *
          * @return  self
          */ 
-        public function setModel($db) {
+        public function setModel() {
 
             $path = ROOT_PATH . DS . 'classes' . DS . static::className . DS . static::className . '.model.php';
             if(file_exists($path)) {
                 $model = static::className . 'Model';
-                $this->_model = new $model($db);
+                $this->_model = new $model();
             }
             return $this;
         }
