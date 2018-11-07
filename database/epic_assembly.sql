@@ -35,6 +35,15 @@ CREATE TABLE `faction`(
     PRIMARY KEY (`fac_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+#------------------------------------------------------------
+# Table: TYPE
+#------------------------------------------------------------
+
+CREATE TABLE `type`(
+    `type_id` INT AUTO_INCREMENT NOT NULL,
+    `type_name` VARCHAR (60) NOT NULL,
+    PRIMARY KEY (`type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #------------------------------------------------------------
 # Table: CARD
@@ -53,7 +62,8 @@ CREATE TABLE `card`(
     `card_img` LONGTEXT NOT NULL,
     `card_fac_id` INT,
     PRIMARY KEY (`card_id`),
-    CONSTRAINT `card_faction_fk` FOREIGN KEY (`card_fac_id`) REFERENCES `faction`(`fac_id`)
+    CONSTRAINT `card_faction_fk` FOREIGN KEY (`card_fac_id`) REFERENCES `faction`(`fac_id`);
+    CONSTRAINT `card_type_fk` FOREIGN KEY (`card_type`) REFERENCES `type`(`type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

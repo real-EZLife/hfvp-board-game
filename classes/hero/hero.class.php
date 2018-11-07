@@ -1,296 +1,153 @@
 <?php
-    class Hero {
-        public function __construct(array $caracts, Deck $deck = null, Hand $hand = null) {
-                $this->hydrate($caracts);
-                if(!is_null($deck) && get_class($deck) == 'Deck') {
-                        $this->setDeck($deck);
-                }
-                if(!is_null($hand) && get_class($hand) == 'Hand') {
-                        $this->setHand($hand);
-                }
+class Hero {
+// --------------------
+// ATTRIBUTES
+// --------------------
+/**
+ * Hero ID
+ * @var int 
+ */
+protected $_id;
+/**
+ * Hero name
+ * @var string
+ */
+protected $_name;
+/**
+ * Mana of the hero
+ * @var int
+ */
+protected $_mana;
+/**
+ * Life of the hero
+ * @var int
+ */
+protected $_lp;
+/**
+ * Faction of the hero
+ * @var int
+ */
+protected $_faction;
+/**
+ * IMG of the hero
+ * @var string
+ */
+protected $_img;
+
+// --------------------
+// GETTERS
+// --------------------
+/**
+ * Get the value of _id
+ */ 
+public function get_id() {
+return $this->_id;
+}
+/**
+ * Get the value of _name
+ */ 
+public function get_name() {
+return $this->_name;
+}
+/**
+ * Get the value of _mana
+ */ 
+ public function get_mana() {
+    return $this->_mana;
+}
+/**
+ * Get the value of _lp
+ */ 
+public function get_lp() {
+    return $this->_lp;
+}
+/**
+ * Get the value of _faction
+ */ 
+public function get_faction() {
+    return $this->_faction;
+}
+/**
+ * Get the value of _img
+ */ 
+ public function get_img() {
+    return $this->_img;
+}
+
+// --------------------
+// SETTERS
+// --------------------
+/**
+ * Set the value of _id
+ * @return  self
+ */ 
+public function set_id(int $_id) {
+$this->_id = $_id;
+return $this;
+}
+/**
+ * Set the value of _name
+ * @return  self
+ */ 
+public function set_name(string $_name) {
+$this->_name = $_name;
+return $this;
+}
+/**
+ * Set the value of _mana
+ * @return  self
+ */ 
+ public function set_mana(string $_mana) {
+    $this->_mana = $_mana;
+    return $this;
+}
+/**
+ * Set the value of _lp
+ * @return  self
+ */ 
+public function set_lp(string $_lp) {
+    $this->_lp = $_lp;
+    return $this;
+}
+/**
+ * Set the value of _faction
+ * @return  self
+ */ 
+public function set_faction(string $_faction) {
+    $this->_faction = $_faction;
+    return $this;
+}
+/**
+ * Set the value of _img
+ * @return  self
+ */ 
+ public function set_img(string $_img) {
+    $this->_img = $_img;
+    return $this;
+}
+
+// --------------------
+// METHODS
+// -------------------
+
+/**
+ * Construction
+ * @param array $datas
+ */
+public function __construct(array $datas) {
+    $this->hydrate($datas);
+}
+/**
+ * Hydratation
+ * @param array $datas
+ * @return void
+ */
+protected function hydrate(array $datas) {
+    foreach ($datas as $key => $value) {
+    $method = 'set'. substr($key, 4);        
+    if (method_exists($this, $method)) {
+        $this->$method($value);
         }
-        private function hydrate(array $array) {
-                var_dump($array);
-                if(!is_null($array)) {
-                        foreach($array as $key => $value) {
-                                $methodName = 'set';
-                                $key = str_replace('hero_', '', $key);
-                                $key = str_replace('_fk', '', $key);
-                                $key = ucfirst($key);
-                                $methodName = $methodName . $key;
-                                var_dump($methodName);
-                                if(method_exists($this, $methodName))
-                                        $this->$methodName($value);
-                        }
-                        return $this;
-                }
-                return false;
-        }
-        const MAX_MANA = 10;
-        private $id;
-        /**
-         * @var bool
-        */
-        private $isAlive = true;
-
-        /**
-         * hero current life pool
-         *
-         * @var int
-        */
-        private $lp;
-        /**
-         * hero name
-         *
-         * @var string
-        */
-        private $name;
-        /**
-         * hero maximum life pool
-         *
-         * @var int 
-        */
-        private $maxlp;
-        
-        /**
-         * hero current available mana
-         *
-         * @var int
-        */
-        
-        private $mana;
-        /**
-         * hero total mana at turn start
-         *
-         * @var int
-        */
-        private $totalmana;
-        /**
-         * hero current faction
-         * 
-         * @var string
-        */
-        private $faction;
-        /**
-         * hero current deck
-         * 
-         * @var Deck
-        */
-        private $deck;
-        /**
-         * hero current hand
-         * 
-         * @var Hand
-        */
-        private $hand;
-
-        public function getHero() : array {
-                return get_object_vars($this);
-        }
-
-        /**
-         * Get the value of id
-         */ 
-        public function getId() {
-                return $this->id;
-        }
-
-        /**
-         * Get hero current life pool
-         *
-         * @return  int
-         */ 
-        public function getLp() {
-                return $this->lp;
-        }
-
-        /**
-         * Get hero name
-         *
-         * @return  string
-         */ 
-        public function getName() {
-                return $this->name;
-        }
-
-        /**
-         * Get hero maximum life pool
-         *
-         * @return  int
-         */ 
-        public function getMaxlp() {
-                return $this->maxLp;
-        }
-
-        /**
-         * Get hero current available mana
-         *
-         * @return  int
-         */ 
-        public function getMana() {
-                return $this->mana;
-        }
-        /**
-         * Get hero total mana at turn start
-         *
-         * @return  int
-         */ 
-        public function getTotalmana() {
-                return $this->totalMana;
-        }
-
-        /**
-         * Get hero current faction
-         *
-         * @return  string
-         */ 
-        public function getFaction() {
-                return $this->faction;
-        }
-
-        /**
-         * Get hero current deck
-         *
-         * @return  Deck
-         */ 
-        public function getDeck() {
-                return $this->deck;
-        }
-
-        /**
-         * Get hero current hand
-         *
-         * @return  Hand
-         */ 
-        public function getHand() {
-                return $this->hand;
-        }
-
-        /**
-         * Set the value of id
-         *
-         * @return  self
-         */ 
-        public function setId($id) {
-                $this->id = $id;
-
-                return $this;
-        }
-
-        /**
-         * Set hero current life pool
-         *
-         * @param  int  $lp  hero current life pool
-         *
-         * @return  self
-         */ 
-        public function setLp(int $lp) {
-                $this->lp = $lp;
-
-                return $this;
-        }
-
-        /**
-         * Set hero name
-         *
-         * @param  string  $name  hero name
-         *
-         * @return  self
-         */ 
-        public function setName(string $name) {
-                $this->name = $name;
-
-                return $this;
-        }
-
-        /**
-         * Set hero maximum life pool
-         *
-         * @param  int  $maxlp  hero maximum life pool
-         *
-         * @return  self
-         */ 
-        public function setMaxlp(int $maxlp) {
-                $this->maxlp = $maxlp;
-
-                return $this;
-        }
-
-        /**
-         * Set hero current available mana
-         *
-         * @param  int  $mana  hero current available mana
-         *
-         * @return  self
-         */ 
-        public function setMana(int $mana) {
-                $this->mana = $mana;
-
-                return $this;
-        }
-
-        /**
-         * Set hero total mana at turn start
-         *
-         * @param  int  $totalmana  hero total mana at turn start
-         *
-         * @return  self
-         */ 
-        public function setTotalmana(int $totalmana) {
-                $this->totalmana = $totalmana;
-
-                return $this;
-        }
-
-        /**
-         * Set hero current faction
-         *
-         * @param  string  $faction  hero current faction
-         *
-         * @return  self
-         */ 
-        public function setFaction(string $faction) {
-                $this->faction = $faction;
-
-                return $this;
-        }
-
-        /**
-         * Set hero current deck
-         *
-         * @param  Deck  $deck  hero current deck
-         *
-         * @return  self
-         */ 
-        public function setDeck(Deck $deck) {
-                $this->deck = $deck;
-
-                return $this;
-        }
-
-        /**
-         * Set hero current hand
-         *
-         * @param  Hand  $hand  hero current hand
-         *
-         * @return  self
-         */ 
-        public function setHand(Hand $hand) {
-                $this->hand = $hand;
-
-                return $this;
-        }
-
-        /**
-         * getHeroInfo
-         * 
-         * return all the Hero instance properties as an associative array
-         * 
-         * @return array
-        */
-        public function getHeroInfo() : array {
-                $vars = $this->getObjectInfo($this);
-                return $vars;            
-        }
-
     }
+}
+}

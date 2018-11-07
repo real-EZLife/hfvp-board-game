@@ -1,0 +1,13 @@
+.f-view {
+    font-family: 'Calibri';
+
+    font-size: 2rem;
+}
+
+.f-id {
+    display: inline-block;
+}
+
+.f-name {
+    text-decoration: none;
+}

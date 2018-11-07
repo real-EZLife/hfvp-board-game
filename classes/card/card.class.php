@@ -1,208 +1,270 @@
 <?php
-    /**
-     * Card est une classe permettant de créer un modèle de Carte
-    */
-    abstract class Card extends Core {
-        /**
-         * Holds the card name
-         * @var int
-        */
-        protected $id;
-        /**
-         * Holds the card name
-         * @var string
-        */
-        protected $name;
-        /**
-         * Holds the card image path
-         * @var string
-        */
-        protected $img;
-        /**
-         * Holds the card description
-         * @var string
-        */
-        protected $desc;
-        /**
-         * Holds the card mana cost
-         * @var int
-        */
-        protected $mana;
-        /**
-         * Holds the card type
-         * @var string
-        */
-        protected $fx;
-        /**
-         * Holds the card type
-         * @var string
-        */
-        protected $type;
-        /**
-         * Holds the card special type
-         * @var string
-        */
-        protected $special;
-        /**
-         * 
-         * ------------------
-         * 
-         * SETTTERS
-         * 
-         * ------------------
-         * 
-         */
-        /**
-         * setSpecial
-         * 
-         * @param mixed pass a string with special keyword or false
-         * @return self
-        */
-        public function setSpecial($value) : self {
-            $this->special = $value;
-            return $this;
-        }
-        /**
-         * setName
-         * 
-         * @param int
-         * @return self
-        */
-        public function setName(string $value) : self {
-            $this->name = $value;
-            return $this;
-        }
-        /**
-         * setImg
-         * 
-         * @param int
-         * @return self
-        */
-        public function setImg(string $value) : self {
-            $this->img = $value;
-            return $this;
-        }
-        /**
-         * setDesc
-         * 
-         * @param int
-         * @return self
-        */
-        public function setDesc(string $value) : self {
-            $this->desc = $value;
-            return $this;
-        }
-        /**
-         * setMana
-         * 
-         * @param int
-         * @return self
-        */
-        public function setMana(int $value) : self {
-            $this->mana = $value;
-            return $this;
-        }
-        /**
-         * setType
-         * 
-         * @param int
-         * @return self
-        */
-        public function setType(string $value) : self {
-            $this->type = $value;
-            return $this;
-        }
+class Card {
+// --------------------
+// ATTRIBUTES
+// --------------------
+/**
+ * Card ID
+ * @var string 
+ */
+protected $_id;
+/**
+ * Name's card 
+ * @var string
+ */
+protected $_name;
+/**
+ * Mana
+ * @var int
+ */
+protected $_mana;
+/**
+ * Life's card
+ * @var int
+ */
+protected $_pv;
+/**
+ * Attck's card
+ * @var int
+ */
+protected $_atk;
+/**
+ * A short description about the card
+ * @var string
+ */
+protected $_desc;
+/**
+ * Type of the card : Monster, Spell, Shield, Special
+ * @var int
+ */
+protected $_type;
+/**
+ * Special FX if there's one
+ * @var string
+ */
+protected $_fx;
+/**
+ * This is a special card ? TRUE or FALSE
+ * @var int
+ */
+protected $_special;
+/**
+ * Path picture, w/o extension name
+ * @var string
+ */
+protected $_img;
+/**
+ * Faction
+ * @var int
+ */
+protected $_faction;
+/**
+ * Undocumented variable
+ * @var [type]
+ */
+protected $_cardtype;
+// --------------------
+// GETTERS
+// --------------------
+/**
+ * Get the value of _id
+ */ 
+public function get_id() {
+return $this->_id;
+}
+/**
+ * Get the value of _name
+ */ 
+public function get_name() {
+return $this->_name;
+}
+/**
+ * Get the value of _mana
+ */ 
+public function get_mana() {
+return $this->_mana;
+}
+/**
+ * Get the value of _pv
+ */ 
+public function get_pv() {
+return $this->_pv;
+}
+/**
+ * Get the value of _atk
+ */ 
+public function get_atk() {
+return $this->_atk;
+}
+/**
+ * Get the value of _desc
+ */ 
+public function get_desc() {
+return $this->_desc;
+}
+/**
+ * Get the value of _type
+ */ 
+public function get_type() {
+return $this->_type;
+}
+/**
+ * Get the value of _fx
+ */ 
+public function get_fx() {
+return $this->_fx;
+}
+/**
+ * Get the value of _special
+ */ 
+public function get_special() {
+return $this->_special;
+}
+/**
+ * Get the value of _img
+ */ 
+public function get_img() {
+return $this->_img;
+}
+/**
+ * Get faction
+ *
+ * @return  string
+ */ 
+public function get_faction() {
+return $this->_faction;
+}
+/**
+ * Get undocumented variable
+ * @return  [type]
+ */ 
+public function get_cardtype() {
+return $this->_cardtype;
+}
 
-        /**
-         * Set $id
-         *
-         * @param  int  $id  Holds the card name
-         *
-         * @return  self
-         */ 
-        public function setId(int $id) {
-            $this->id = $id;
+// --------------------
+// SETTERS
+// --------------------
+/**
+ * Set the value of _id
+ * @return  self
+ */ 
+public function set_id(int $_id) {
+$this->_id = $_id;
+return $this;
+}
+/**
+ * Set the value of _name
+ * @return  self
+ */ 
+public function set_name(string $_name) {
+$this->_name = $_name;
+return $this;
+}
+/**
+ * Set the value of _mana
+ * @return  self
+ */ 
+public function set_mana(int $_mana) {
+$this->_mana = $_mana;
+return $this;
+}
+/**
+ * Set the value of _pv
+ * @return  self
+ */ 
+public function set_pv(int $_pv) {
+$this->_pv = $_pv;
+return $this;
+}
+/**
+ * Set the value of _atk
+ * @return  self
+ */ 
+public function set_atk(int $_atk) {
+$this->_atk = $_atk;
+return $this;
+}
+/**
+ * Set the value of _desc
+ * @return  self
+ */ 
+public function set_desc(string $_desc) {
+$this->_desc = $_desc;
+return $this;
+}
+/**
+ * Set the value of _type
+ * @return  self
+ */ 
+public function set_type(int $_type) {
+$this->_type = $_type;
+return $this;
+}
+/**
+ * Set the value of _fx
+ * @return  self
+ */ 
+public function set_fx(string $_fx) {
+$this->_fx = $_fx;
+return $this;
+}
+/**
+ * Set the value of _special
+ * @return  self
+ */ 
+public function set_special(int $_special) {
+$this->_special = $_special;
+return $this;
+}
+/**
+ * Set the value of _img
+ * @return  self
+ */ 
+public function set_img(string $_img) {
+$this->_img = $_img;
+return $this;
+}
+/**
+ * Set faction
+ * @param  string  $_faction  Faction
+ * @return  self
+ */ 
+public function set_faction(int $_faction) {
+$this->_faction = $_faction;
+return $this;
+}
+/**
+ * 
+ */
+public function set_cardtype($_cardtype) {
+$this->_cardtype = $_cardtype;
 
-            return $this;
-        }
-        /**
-         * 
-         * ------------------------
-         * 
-         * GETTERS
-         * 
-         * ------------------------
-         */
-        /**
-         * getSpecial
-         * 
-         * @return mixed false, if not set string otherwise
-        */
-        public function getSpecial() {
-            return $this->special;
-        }
-        /**
-         * getName
-         * 
-         * @return int
-        */
-        public function getName() : string {
-            return $this->name;
-        }
-        /**
-         * getImg
-         * 
-         * @return int
-        */
-        public function getImg() : string {
-            return $this->img;
-        }
-        /**
-         * getDesc
-         * 
-         * @return int
-        */
-        public function getDesc() : string {
-            return $this->desc;
-        }
-        /**
-         * getMana
-         * 
-         * @return int
-        */
-        public function getMana() : int {
-            return $this->mana;
-        }
-        /**
-         * getType
-         * 
-         * @return int
-        */
-        public function getType() : string {
-            return $this->type;
-        }
-        /**
-         * Get $id
-         *
-         * @return  int
-         */ 
-        public function getId() {
-            return $this->id;
-        }
+return $this;
+}
 
-        /**
-         * ----------------------------------------
-         * METHODS
-         * ----------------------------------------
-         */
-        /**
-         * getCardData
-         * 
-         * return all the User instance properties as an associative array except password
-         * 
-         * @return array
-        */
-        public function getCardData() : array {
-            return $this->getObjectInfo($this);
+// --------------------
+// METHODS
+// -------------------
+
+/**
+ * Construction
+ * @param array $datas
+ */
+public function __construct(array $datas) {
+    $this->hydrate($datas);
+}
+/**
+ * Hydratation
+ * @param array $datas
+ * @return void
+ */
+protected function hydrate(array $datas) {
+    foreach ($datas as $key => $value) {
+    $method = 'set'. substr($key, 4);        
+    if (method_exists($this, $method)) {
+        $this->$method($value);
         }
     }
+}
+}

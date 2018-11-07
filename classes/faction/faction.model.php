@@ -2,7 +2,7 @@
 /**
  * CRUD
  */
-class HeroModel {
+class FactionModel {
 // ------------
 // ATTRIBUTES
 // ------------
@@ -31,35 +31,35 @@ class HeroModel {
   }
 
     /**
-     * [CREATE] a hero
+     * [CREATE] a faction
      */
-    public function create($name, $mana, $lp, $faction, $img) {
-      try {
-        if(($req = $this->db->prepare('INSERT INTO `hero`(`hero_name`, `hero_mana`, `hero_lp`, `fac_id`, `hero_img`) 
-                                       VALUES (:name, :mana, :lp, :faction, :img);'))!==false) {                                          
-          $img = $_FILES['img']['name'];
-          if($req->bindValue('name', $name) && $req->bindValue('mana', $mana) && $req->bindValue('lp', $lp) && $req->bindValue('faction', $faction) && $req->bindValue('img', $img));
-            $req->closeCursor();  
-            return $req->execute();
-            }
-          return false;
-        } catch(PDOException $e) {
-            throw new Exception($e->getMessage(), $e->getCode(), $e);
-      }
-    }
+    // public function create($name, $mana, $pv, $atk, $desc, $type, $fx, $special, $img, $faction) {
+    //   try {
+    //     if(($req = $this->db->prepare('INSERT INTO `faction`(`fac_name`) VALUES (:name);'))!==false) {                                          
+    //       if($req->bindValue('name', $name));
+    //         $req->closeCursor();  
+    //         return $req->execute();
+    //         }
+    //       return false;
+    //     } catch(PDOException $e) {
+    //         throw new Exception($e->getMessage(), $e->getCode(), $e);
+    //   }
+    // }
 
     /**
      * [READ] a faction
      */
     public function read(int $id) {
       try {
-        if(($this->req = $this->db->prepare('SELECT `hero_id`, `hero_name`, `hero_mana`, `hero_lp`, `fac_id` AS `hero_faction`, `hero_img`
-                                            FROM `hero` WHERE `hero_id`=?
+        if(($this->req = $this->db->prepare('SELECT `card_id`, `card_name`, `card_mana`, `card_pv`, `card_atk`, `card_desc`, `card_type`, `card_fx`, `card_special`, `card_img`, `card_fac_id` AS `fact_faction`, `type_id` AS `type_type`, `type_name` AS `type_cardtype`
+                                            FROM `card`
+                                            JOIN `type` ON `card_type`=`type_id`
+                                            WHERE `card_id`=?
                                             '))!==false) {
         if($this->req->bindValue(1, $id, PDO::PARAM_INT)) {
           if($this->req->execute()) {
             $datas = $this->req->fetch(PDO::FETCH_ASSOC);
-            return new Hero($datas);
+            return new Card($datas);
           }
           $req->closeCursor();
         }
@@ -76,13 +76,13 @@ class HeroModel {
      */
     public function readAll() {
         try {
-          if(($this->req = $this->db->query('SELECT `hero_id`, `hero_name`, `hero_mana`, `hero_lp`, `fac_id` AS `hero_faction`, `hero_img` FROM `hero`'))!==false) {
-            $heroes = array();
+          if(($this->req = $this->db->query('SELECT `fac_id`, `fac_name` FROM `faction`'))!==false) {
+            $cards = array();
             while(($datas = $this->req->fetch(PDO::FETCH_ASSOC))!==false) {
-              $heroes[] = new Hero($datas);
+              $factions[] = new Faction($datas);
             }
             $this->req->closeCursor();
-            return $heroes;
+            return $factions;
           }
             return false;
         } catch(PDOException $e) {

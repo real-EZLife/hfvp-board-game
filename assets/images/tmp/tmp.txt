@@ -1,0 +1,2 @@
+<img class="thumbail" src='./assets/pic/'. <?php echo $card->get_faction() ?>.'/' .<?php echo $card->get_type() ?>.'/' .<?php echo $card->get_img() ?>' alt="" class="fallback">
+                <img class="thumbail" src="./assets/pic/' .<?php echo $faction ?>. '/' .<?php echo $type ?>. '/' .<?php echo $name ?>" alt="" class="fallback">

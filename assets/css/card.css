@@ -1,0 +1,191 @@
+@font-face {
+    font-family: 'FTY3';
+    src: url('./FTY_SKRADJHUWN_NCV_3.ttf');
+}
+
+@font-face {
+    font-family: 'FTY';
+    src: url('./FTY_SKORZHEN_NCV.ttf');
+}
+
+.big-card-contener {
+    font-family: 'FTY';
+    /* margin: 0 auto; */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 0.2em;
+    background-color: rgba(36, 158, 228, 0.178);
+}
+
+.big-card-contener-update {
+    /* margin: 0 auto; */
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-column-gap: 0.5em;
+    background-color: rgba(36, 158, 228, 0.178);
+}
+
+/* .wrapper {
+    margin-right: -150px;
+} */
+
+.card-view {
+    font-family: 'FTY';
+
+    margin: 0.2em;
+    height: 0;
+    padding-bottom: 300px;
+    width: 200px;
+    position: relative;
+    --default-black-color: #000000;
+    --default-white-color: rgb(255, 255, 255);
+    --default-red-color:rgb(209, 34, 41);
+    --default-orange-color: rgb(203, 101, 39);
+    --default-blue-color: rgb(0, 173, 239);
+    --secondary-blue-color: rgb(45, 193, 221);
+    --transparent-blue-color: rgba(88, 88, 88, 0.705);
+    --default-violet-color: rgb(114, 119, 168);
+}
+
+.back-pic {
+    position: absolute;
+    max-width: 100%;
+    border-radius: 7px;
+    box-shadow: 0 0 4px 0 #121212;
+    border: 1px solid rgba(0, 0, 0, 0.658);
+}
+
+.card-view * {
+    color: var(--default-white-color);
+    text-shadow: rgb(0, 0, 0) 0 0 5px;
+    /* font-smooth: auto; */
+}
+.card-inner, .card-layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    user-select: none;
+}
+
+.card-layer.background-layer {
+    background: var(--default-violet-color);
+}
+
+.card-layer.image-layer img{
+    height: auto;
+    max-width: 100% ;
+    width: 100%;
+}
+.icons-layer .card-icon {
+    position: absolute;
+    height: 5rem;
+    width: 5rem;
+}
+.icons-layer .card-icon.card-atk {
+    top: 6rem;
+    left: 0;
+}
+.icons-layer .card-icon.card-cost {
+    top: 0;
+    right: 0;
+}
+
+.icons-layer .card-icon.card-hp {
+    top: 0;
+    left: 0;
+}
+.icons-layer .card-icon span {
+    display: block;
+    height: inherit;
+    line-height: 5rem;
+    position: absolute;
+    text-align: center;
+    width: inherit;
+}
+.icons-layer .card-icon .icon {
+    z-index: 0;
+}
+.icons-layer .card-icon.card-cost .icon {
+    background: url('../.././assets/images/card-icons/mana.svg')  center / cover;
+}
+.icons-layer .card-icon.card-hp .icon {
+    background: url('../.././assets/images/card-icons/heart.svg')  center / cover;
+}
+.icons-layer .card-icon.card-atk .icon {
+    background: url('../.././assets/images/card-icons/sword.svg')  center / cover;
+    transform: rotate(0.125turn);
+}
+.icons-layer .card-icon .value {
+    font-family: 'FTY';
+    font-size: 2rem;
+}
+.icons-layer .card-icon.card-cost .value {
+    text-shadow: rgb(0, 22, 122) 0 0 5px;
+}
+.icons-layer .card-icon.card-hp .value {
+    text-shadow: rgb(80, 0, 0) 0 0 5px;
+}
+.icons-layer .card-icon.card-atk .value {
+    text-shadow: rgb(122, 56, 1) 0 0 5px;
+}
+.card-layer.text-layer {
+    top: auto;
+    bottom: 12%;
+    height: 5em;
+    text-shadow: 0 0 1px #ccc;
+    background: var(--transparent-blue-color);
+}
+.text-layer .card-desc, .text-layer .card-title, .text-layer .card-type {
+    text-align: center;
+    z-index: 1;
+}
+.text-layer .card-desc, .text-layer .card-title {
+    padding-top: .2em;
+    max-width: 100%;
+    font-size: 0.8em;
+    /* position: relative; */
+    margin-left: 15%;
+} 
+.text-layer .card-title {
+    font-size: 1.6rem;
+    padding-bottom: .3vmin;
+}
+
+/* .text-layer .card-desc {
+    padding: 0 .5vmin
+} */
+
+.text-layer .card-type {
+    font-size: 1.4rem;
+    position: absolute;
+    left: 1rem;
+    top: 0; bottom: 0;
+    width: 5em;
+    transform: rotate(-0.25turn);
+}
+
+.card-faction {
+    position: absolute;
+    bottom: -1.2em;
+    left: 15%;
+}
+ 
+.link-cont {
+    margin: 0 auto;
+    position: absolute;
+    top: 94%;
+} 
+
+.link-cont a {
+    margin: 0 1.2em;
+    text-decoration: none;
+    text-shadow: rgb(255, 0, 0) 0 0 7px;
+    transition-duration: 0.3s;
+}
+
+.link-cont a:hover {
+    color: rgb(83, 83, 83);
+    text-shadow: rgb(255, 0, 0) 0 0 7px;
+}

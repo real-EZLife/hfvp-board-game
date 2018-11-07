@@ -1,0 +1,111 @@
+.big-hero-contener {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 0.2em;
+    background-color: rgba(36, 158, 228, 0.178);
+}
+
+.hero-view {
+    font-family: 'FTY';
+    margin: 0.2em;
+    height: 0;
+    padding-bottom: 300px;
+    width: 200px;
+    position: relative;
+    --default-black-color: #000000;
+    --default-white-color: rgb(255, 255, 255);
+    --default-red-color:rgb(209, 34, 41);
+    --default-orange-color: rgb(203, 101, 39);
+    --default-blue-color: rgb(0, 173, 239);
+    --secondary-blue-color: rgb(45, 193, 221);
+    --transparent-blue-color: rgba(88, 88, 88, 0.705);
+    --default-violet-color: rgb(114, 119, 168);
+}
+
+.hero-img {
+    position: absolute;
+    max-width: 100%;
+    border-radius: 100%;
+    box-shadow: 0 0 4px 0 #121212;
+    border: 1px solid rgba(0, 0, 0, 0.658);
+}
+
+.hero-life .icon {
+    background: url('../.././assets/images/card-icons/heart.svg')  center / cover;
+}
+
+.hero-layer.image-layer img{
+    height: auto;
+    max-width: 100% ;
+    width: 100%;
+}
+.icons-layer .hero-icon {
+    position: absolute;
+    height: 5rem;
+    width: 5rem;
+}
+
+.icons-layer .hero-icon.hero-mana {
+    bottom: 30%;
+    right: 0;
+}
+
+.icons-layer .hero-icon.hero-life {
+    bottom: 30%;
+    left: 0;
+}
+.icons-layer .hero-icon span {
+    display: block;
+    height: inherit;
+    line-height: 5rem;
+    position: absolute;
+    text-align: center;
+    width: inherit;
+}
+.icons-layer .hero-icon .icon {
+    z-index: 0;
+}
+.icons-layer .hero-icon.hero-mana .icon {
+    background: url('../.././assets/images/card-icons/mana.svg')  center / cover;
+}
+.icons-layer .hero-icon.hero-life .icon {
+    background: url('../.././assets/images/card-icons/heart.svg')  center / cover;
+}
+
+.icons-layer .hero-icon .value {
+    font-family: 'FTY';
+    font-size: 2rem;
+}
+.icons-layer .hero-icon.hero-cost .value {
+    text-shadow: rgb(0, 22, 122) 0 0 5px;
+}
+.icons-layer .hero-icon.hero-hp .value {
+    text-shadow: rgb(80, 0, 0) 0 0 5px;
+}
+
+.title {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.fac-name {
+    font-size: 2.5rem;
+    position: relative;
+    margin-top: 500px;
+}
+
+.hero-faction {
+    font-size: 1.5rem;
+    position: absolute;
+    bottom: 15%;
+}
+
+.hero-text {
+    text-align: center;
+    margin: 200px auto 0 auto;
+}
+
+.form-hero {
+    font-size: 1.5rem;
+    font-family: 'Calibri';
+}

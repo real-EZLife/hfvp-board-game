@@ -17,3 +17,10 @@ INSERT INTO `user` VALUES ('epicdesign', 'Design', 'EZLife', 'enterprise.ezlife@
 
 INSERT INTO `faction`(`fac_name`) VALUES ('heroic');
 INSERT INTO `faction`(`fac_name`) VALUES ('politic');
+
+-- Création des types
+
+INSERT INTO `type`(`type_name`) VALUES ('creature');
+INSERT INTO `type`(`type_name`) VALUES ('spell');
+INSERT INTO `type`(`type_name`) VALUES ('shield');
+INSERT INTO `type`(`type_name`) VALUES ('special');

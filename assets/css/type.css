@@ -1,0 +1,12 @@
+.t-view {
+    font-family: 'Calibri';
+    font-size: 2rem;
+}
+
+.t-id {
+    display: inline-block;
+}
+
+.t-name {
+    text-decoration: none;
+}

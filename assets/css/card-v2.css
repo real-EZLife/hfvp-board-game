@@ -1,0 +1,45 @@
+.big-card-contener {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 0.2em;
+    background-color: rgba(36, 158, 228, 0.178);
+}
+
+.card-cont {
+    background-color: rgba(199, 224, 71, 0.178);
+
+}
+
+.back-pic {
+    border: 1px solid black;
+    border-radius: 30px;
+    position: absolute;
+    height: 400px;
+}
+
+.icons {
+    width: 100%; */
+    position: relative;
+}
+
+.value {
+    
+}
+
+.icon-mana .vlue {
+    background: url('../assets/img/card/mana.svg')  center / cover;
+    height: 5em;
+    width: 5em;
+    position: absolute;
+}
+.icons-life {
+    background: url('../assets/img/card/heart.svg')  center / cover;
+    height: 5em;
+    position: absolute
+}
+.icons-atk {
+    background: url('../assets/img/card/sword.svg')  center / cover;
+    height: 5em;
+    position: absolute
+    transform: rotate(0.125turn);
+}
