@@ -14,30 +14,30 @@
  * @author Christophe Roussin<adresse mail pro>
  */
 
-class UserModel {
+class UserModel extends CoreModel {
 
-    public function __construct(PDO $db) {
-        $this->setDB($db);
-    }
+    // public function __construct(PDO $db) {
+    //     $this->setDB($db);
+    // }
 
-    private $db;
+    // private $db;
 
     /**
      * Get db de la connection
      *
      * @return string
      */
-    private function getDb() {
-        return $this->db;
-    }
+    // private function getDb() {
+    //     return $this->db;
+    // }
 
-    /**
-     * Set db de la connection
-     */
-    private function setDb(PDO $db) {
-        $this->db = $db;
-        return $this;
-    }
+    // /**
+    //  * Set db de la connection
+    //  */
+    // private function setDb(PDO $db) {
+    //     $this->db = $db;
+    //     return $this;
+    // }
 
     /**
      * Creates a user in the database
@@ -52,8 +52,9 @@ class UserModel {
      * 
      * @return bool The last inserted is true or false
      */
-    public function create(string $email, string $name, string $surname, string $pseudo, string $password) : bool
+    public function create(array $data) : bool
     {
+        extract($data);
         try {
             if (($req = $this->getDb()->prepare('INSERT INTO `user` (`user_pseudo`,`user_email`, `user_name`, `user_surname`,`user_password`) VALUES (?,?,?,?,?)')) !== false) 
             {
@@ -84,7 +85,7 @@ class UserModel {
      * 
      * @return mixed (array|bool)
      */
-    public function read(string $pseudo = null)
+    public function read($pseudo = null)
     {
         try {
             if (is_null($pseudo)) {
@@ -135,8 +136,9 @@ class UserModel {
      * 
      * @return mixed (array|bool)
      */
-    public function update(string $pseudo, string $email = '', string $name ='', string $surname = '', string $password = '')
+    public function update(array $data)
     {
+        extract($data);
         try {
             if (($req = $this->getDb()->prepare('UPDATE `user` SET `user_email`=?, `user_name`=?, `user_surname`=?, `user_password`=? WHERE `user_pseudo`=?')) !== false) {
 
@@ -172,7 +174,7 @@ class UserModel {
      * @return mixed int ||
      *  bool  The number of rows affected
      */
-    public function delete(string $pseudo)
+    public function delete($pseudo)
     {
         try {
             if (($req = $this->getDb()->prepare('DELETE FROM `user` WHERE `user_pseudo`=?')) !== false) {

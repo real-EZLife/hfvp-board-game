@@ -55,7 +55,7 @@ class UserController extends CoreController {
                                     $post['password'] = User::passwordHash($post['password']);
 
                                     if($this->getModel()->read($post['pseudo']) == false) {
-                                        if(($req = $this->getModel()->create( $post['email'], $post['name'], $post['surname'], strtolower($post['pseudo']), $post['password']) != false )) {
+                                        if(($req = $this->getModel()->create( $post ) != false )) {
                                             header('Location: .?msg=login');
                                         }
                                     }else {

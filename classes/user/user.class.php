@@ -96,8 +96,8 @@ class User extends Core {
     {
         foreach ($data as $key => $value) {
             $key = str_replace('user_', '', $key);
-            $methodName = 'set' . $key;
-            if (method_exists($this, ucfirst($methodName))) {
+            $methodName = 'set' . ucfirst($key);
+            if (method_exists($this, $methodName)) {
                 $this->$methodName($value);
             }
         }
