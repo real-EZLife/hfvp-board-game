@@ -21,14 +21,14 @@ $typeModel = new TypeModel;
 $heroModel = new HeroModel;
 if(isset($_GET['a'])) {
     if($_GET['a'] == 'create') {
-        $res = $cardModel->create($_POST['name'], $_POST['mana'], $_POST['pv'], $_POST['atk'], $_POST['desc'], $_POST['type'], $_POST['fx'], $_POST['special'], $_POST['img'], $_POST['faction']);
+        $res = $cardModel->create($_POST);
         if($res) $res = 'La carte "' . $_POST['name'] . '" a bien été ajoutée !';
     } elseif($_GET['a'] == 'delete') {
         // include('confirm.php')
         $res = $cardModel->delete($_GET['id']);
         if($res) $res = 'La carte "' . $_GET['name'] . '" a bien été supprimée !';
     } elseif($_GET['a'] == 'update') {
-        $res = $cardModel->update($_POST['name'], $_POST['mana'], $_POST['pv'], $_POST['atk'], $_POST['desc'], $_POST['type'], $_POST['fx'], $_POST['special'], $_POST['faction'], $_GET['id']);
+        $res = $cardModel->update($_POST);
         if($res) $res = 'La carte "' . $_POST['name'] . '" a bien été modifiée !';
     } 
 }

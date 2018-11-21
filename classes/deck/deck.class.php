@@ -3,51 +3,48 @@
      * Deck class is used to create a new Deck instance
      */
     class Deck extends Core {
-        public function __construct( Array $deckFormat = [] ) {
-            $this->format = $deckFormat;
+        public function __construct(array $datas) {
+            if(isset($datas['cards'])) $cards = $datas['cards'];
+            else $cards = [];
+
+            parent::__construct($datas);
+
+            $this->setDeckListFromArray($cards);
+
         }
         /**
          * @var Card[]
         */
-        private $deckList = [];
-        /**
-         * @var array
-         */
-        private $format = [];
 
-        public function setDeckList() : void {
-            foreach( $this->format as $card ) {
-                switch( $card['type'] ) {
-                    case 'creature':
-                    for($i = 0; $i < $card['nb']; $i++) {
-                        $this->deckList[] = new Creature();
-                    }
-                    break;
-                    case 'spell':
-                    for($i = 0; $i < $card['nb']; $i++) {
-                        $this->deckList[] = new Spell();
-                    }
-                    break;
-                    case 'shield':
-                    for($i = 0; $i < $card['nb']; $i++) {
-                        $this->deckList[] = new Shield();
-                    }
-                    break;
-                    case 'special':
-                    for($i = 0; $i < $card['nb']; $i++) {
-                        $this->deckList[] = new Special();
-                    }
-                    break;
-                }
-            }
-        }
+
+        /**
+         * deck name
+         *
+         * @var string
+        */
+        protected $name;
+
+        /**
+         * deck id
+         *
+         * @var int
+        */
+        protected $id = null;
+
+        private $deckList = [];
+
         /**
          * pass an array of Card or Card child instances to store
          * 
          * @param Card[]
          * @return self
         */
-        public function setDeckListFromArray( Array $array ) : self {
+        public function setDeckListFromArray( array $array ) : self {
+            foreach($array as $pos => $card) {
+                if(!is_subclass_of($card, 'Card', false) && get_class($card) != 'Card') {
+                    array_splice($array, $pos, 1);
+                }
+            }
             $this->deckList = $array;
             return $this;
         }
@@ -83,7 +80,50 @@
          * @return array
         */
         public function getDeckList() : array {
-            $deck = $this->deckList;
-            return $deck;
+            return $this->deckList;
+        }
+
+        /**
+         * Get deck id
+         *
+         * @return  int
+         */ 
+        public function getId() {
+            return $this->id;
+        }
+
+        /**
+         * Set deck id
+         *
+         * @param  int  $id  deck id
+         *
+         * @return  self
+         */ 
+        public function setId(int $id) {
+            $this->id = $id;
+
+            return $this;
+        }
+
+        /**
+         * Get deck name
+         *
+         * @return  string
+         */ 
+        public function getName() {
+            return $this->name;
+        }
+
+        /**
+         * Set deck name
+         *
+         * @param  string  $name  deck name
+         *
+         * @return  self
+         */ 
+        public function setName(string $name) {
+            $this->name = $name;
+
+            return $this;
         }
     }

@@ -18,7 +18,7 @@ require_once('classes/card/card.model.php');
 $cardModel = new CardModel;
 
 if(!empty($_POST['name'])) {
-    $res = $cardModel->create($_POST['name'], $_POST['mana'], $_POST['pv'], $_POST['atk'], $_POST['desc'], $_POST['type'], $_POST['fx'], $_POST['special'], $_FILES['img'], $_POST['faction']);
+    $res = $cardModel->create($_POST);
     if($res) $res = 'La carte "' . $_POST['name'] . '" a bien été ajoutée !';
 }
 $repertoireDestination = dirname(__FILE__)."/assets/pic/" . $_POST['faction'] . "/" . $_POST['type'] . "/";

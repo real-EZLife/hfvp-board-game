@@ -8,7 +8,7 @@
  * @since 1.0.0
  * 
  * @category PHP
- * @package heroic fantaisy vs politic
+ * @package heroic fantasy vs politic
  * @subpackage user
  * @copyright 2018 EZlife - all rights reserved
  * @author Christophe Roussin<adresse mail pro>

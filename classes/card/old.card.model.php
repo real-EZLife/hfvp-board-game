@@ -1,6 +1,4 @@
 <?php 
-    require_once('C:\_xampp\htdocs\www\hfvp-board-game\conf\db_conf.php');
-    require_once('C:\_xampp\htdocs\www\hfvp-board-game\classes\core\core.model.php');
     class CardModel extends CoreModel {
         
         const className = 'card';
@@ -46,6 +44,7 @@
                 }
 
             }
+            return false;
 
         }        
 

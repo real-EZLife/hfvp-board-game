@@ -1,5 +1,6 @@
 <?php
-class Card {
+class Card extends Core {
+
 // --------------------
 // ATTRIBUTES
 // --------------------
@@ -7,238 +8,238 @@ class Card {
  * Card ID
  * @var string 
  */
-protected $_id;
+protected $id;
 /**
  * Name's card 
  * @var string
  */
-protected $_name;
+protected $name;
 /**
  * Mana
  * @var int
  */
-protected $_mana;
+protected $mana;
 /**
  * Life's card
  * @var int
  */
-protected $_pv;
+protected $pv;
 /**
  * Attck's card
  * @var int
  */
-protected $_atk;
+protected $atk;
 /**
  * A short description about the card
  * @var string
  */
-protected $_desc;
+protected $desc;
 /**
  * Type of the card : Monster, Spell, Shield, Special
  * @var int
  */
-protected $_type;
+protected $type;
 /**
  * Special FX if there's one
  * @var string
  */
-protected $_fx;
+protected $fx;
 /**
  * This is a special card ? TRUE or FALSE
  * @var int
  */
-protected $_special;
+protected $special;
 /**
  * Path picture, w/o extension name
  * @var string
  */
-protected $_img;
+protected $img;
 /**
  * Faction
  * @var int
  */
-protected $_faction;
+protected $faction;
 /**
  * Undocumented variable
  * @var [type]
  */
-protected $_cardtype;
+protected $cardtype;
 // --------------------
 // GETTERS
 // --------------------
 /**
- * Get the value of _id
+ * Get the value of id
  */ 
-public function get_id() {
-return $this->_id;
+public function getId() {
+return $this->id;
 }
 /**
- * Get the value of _name
+ * Get the value of name
  */ 
-public function get_name() {
-return $this->_name;
+public function getName() {
+return $this->name;
 }
 /**
- * Get the value of _mana
+ * Get the value of mana
  */ 
-public function get_mana() {
-return $this->_mana;
+public function getMana() {
+return $this->mana;
 }
 /**
- * Get the value of _pv
+ * Get the value of pv
  */ 
-public function get_pv() {
-return $this->_pv;
+public function getPv() {
+return $this->pv;
 }
 /**
- * Get the value of _atk
+ * Get the value of atk
  */ 
-public function get_atk() {
-return $this->_atk;
+public function getAtk() {
+return $this->atk;
 }
 /**
- * Get the value of _desc
+ * Get the value of desc
  */ 
-public function get_desc() {
-return $this->_desc;
+public function getDesc() {
+return $this->desc;
 }
 /**
- * Get the value of _type
+ * Get the value of type
  */ 
-public function get_type() {
-return $this->_type;
+public function getType() {
+return $this->type;
 }
 /**
- * Get the value of _fx
+ * Get the value of fx
  */ 
-public function get_fx() {
-return $this->_fx;
+public function getFx() {
+return $this->fx;
 }
 /**
- * Get the value of _special
+ * Get the value of special
  */ 
-public function get_special() {
-return $this->_special;
+public function getSpecial() {
+return $this->special;
 }
 /**
- * Get the value of _img
+ * Get the value of img
  */ 
-public function get_img() {
-return $this->_img;
+public function getImg() {
+return $this->img;
 }
 /**
  * Get faction
  *
  * @return  string
  */ 
-public function get_faction() {
-return $this->_faction;
+public function getFaction() {
+return $this->faction;
 }
 /**
  * Get undocumented variable
  * @return  [type]
  */ 
-public function get_cardtype() {
-return $this->_cardtype;
+public function getCardtype() {
+return $this->cardtype;
 }
 
 // --------------------
 // SETTERS
 // --------------------
 /**
- * Set the value of _id
+ * Set the value of id
  * @return  self
  */ 
-public function set_id(int $_id) {
-$this->_id = $_id;
+public function setId(int $id) {
+$this->id = $id;
 return $this;
 }
 /**
- * Set the value of _name
+ * Set the value of name
  * @return  self
  */ 
-public function set_name(string $_name) {
-$this->_name = $_name;
+public function setName(string $name) {
+$this->name = $name;
 return $this;
 }
 /**
- * Set the value of _mana
+ * Set the value of mana
  * @return  self
  */ 
-public function set_mana(int $_mana) {
-$this->_mana = $_mana;
+public function setMana(int $mana) {
+$this->mana = $mana;
 return $this;
 }
 /**
- * Set the value of _pv
+ * Set the value of pv
  * @return  self
  */ 
-public function set_pv(int $_pv) {
-$this->_pv = $_pv;
+public function setPv(int $pv) {
+$this->pv = $pv;
 return $this;
 }
 /**
- * Set the value of _atk
+ * Set the value of atk
  * @return  self
  */ 
-public function set_atk(int $_atk) {
-$this->_atk = $_atk;
+public function setAtk(int $atk) {
+$this->atk = $atk;
 return $this;
 }
 /**
- * Set the value of _desc
+ * Set the value of desc
  * @return  self
  */ 
-public function set_desc(string $_desc) {
-$this->_desc = $_desc;
+public function setDesc(string $desc) {
+$this->desc = $desc;
 return $this;
 }
 /**
- * Set the value of _type
+ * Set the value of type
  * @return  self
  */ 
-public function set_type(int $_type) {
-$this->_type = $_type;
+public function setType(int $type) {
+$this->type = $type;
 return $this;
 }
 /**
- * Set the value of _fx
+ * Set the value of fx
  * @return  self
  */ 
-public function set_fx(string $_fx) {
-$this->_fx = $_fx;
+public function setFx(string $fx) {
+$this->fx = $fx;
 return $this;
 }
 /**
- * Set the value of _special
+ * Set the value of special
  * @return  self
  */ 
-public function set_special(int $_special) {
-$this->_special = $_special;
+public function setSpecial(int $special) {
+$this->special = $special;
 return $this;
 }
 /**
- * Set the value of _img
+ * Set the value of img
  * @return  self
  */ 
-public function set_img(string $_img) {
-$this->_img = $_img;
+public function setImg(string $img) {
+$this->img = $img;
 return $this;
 }
 /**
  * Set faction
- * @param  string  $_faction  Faction
+ * @param  string  $faction  Faction
  * @return  self
  */ 
-public function set_faction(int $_faction) {
-$this->_faction = $_faction;
+public function setFaction(int $faction) {
+$this->faction = $faction;
 return $this;
 }
 /**
  * 
  */
-public function set_cardtype($_cardtype) {
-$this->_cardtype = $_cardtype;
+public function setCardtype($cardtype) {
+$this->cardtype = $cardtype;
 
 return $this;
 }
@@ -251,20 +252,21 @@ return $this;
  * Construction
  * @param array $datas
  */
-public function __construct(array $datas) {
-    $this->hydrate($datas);
-}
+// public function __construct(array $datas) {
+//     $this->hydrate($datas);
+// }
 /**
  * Hydratation
  * @param array $datas
  * @return void
  */
-protected function hydrate(array $datas) {
-    foreach ($datas as $key => $value) {
-    $method = 'set'. substr($key, 4);        
-    if (method_exists($this, $method)) {
-        $this->$method($value);
-        }
-    }
-}
+// public function hydrate(array $datas) {
+//     var_dump($datas);
+//     foreach ($datas as $key => $value) {
+//     $method = 'set'. substr($key, 4);        
+//     if (method_exists($this, $method)) {
+//         $this->$method($value);
+//         }
+//     }
+// }
 }

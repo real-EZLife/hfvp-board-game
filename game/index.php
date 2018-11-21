@@ -12,7 +12,6 @@ if(!$_SESSION['hfvp']['user']) {
 $user = $_SESSION['hfvp']['user'];
 
 
-var_dump($_GET);
 $controller = new GameController;
 if(isset($_GET['c']) && !empty($_GET['c'])) {
     $controllerName = ucfirst($_GET['c']) . 'Controller';
@@ -22,7 +21,6 @@ if(isset($_GET['c']) && !empty($_GET['c'])) {
         header('HTTP/1.1 404 Not Found');
     }
 }
-var_dump($controller);
 $controller->setModel($epic_db);
 if(isset($_GET['a']) && !empty($_GET['a'])) {
     $actionName = strtolower($_GET['a']) . 'Action';

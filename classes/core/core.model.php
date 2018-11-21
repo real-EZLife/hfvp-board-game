@@ -71,7 +71,6 @@
                     $vals = substr($vals, 0, -2) . ')';
 
                     $query .= $fields . ' VALUES '. $vals . ';';
-                    var_dump($this->getDb());
                     if(($req = $this->getDb()->query($query)) != false) {
                         return $this->getDb()->lastInsertId();
                     }else {
@@ -173,10 +172,10 @@
          * @param int $id id of the record to delete
          * @return mixed
         */
-        public function delete(int $id) {
+        public function delete($id) {
             try {
                 if(is_numeric($id)) {
-                    $query = 'DELETE FROM `' . static::className . '` WHERE `' . static::db_prefix . 'id`=' . $id . ';';
+                    $query = 'DELETE FROM `' . static::className . '` WHERE `' . static::db_prefix . '_id`=' . $id . ';';
                     if(($req = $this->getDb()->query($query)) != false) {
                         return true;
                     }else {
@@ -308,7 +307,7 @@
                 }
                 return false;
             }catch(PDOException $e) {
-                return $e->getMessage();
+                var_dump($e->getMessage());
             }
         }
         public function __construct() {
